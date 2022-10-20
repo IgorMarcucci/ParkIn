@@ -59,8 +59,9 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                   children: [
                     Center(
                       child: Text(
-                        '  Insira a nova senha.',
+                        'Insira a nova senha.',
                         style: tema.textstylesTitle,
+                        textAlign: TextAlign.center,
                       ),
                     ),
                     const InputPasswordArea(),

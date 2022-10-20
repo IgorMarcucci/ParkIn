@@ -54,10 +54,12 @@ class PasswordResetPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Center(
-                      child: Text(
-                    '  Insira seu email cadastrado no App para a recuperação de senha. Enviaremos um código para seu email para realizar a troca de senha.',
-                    style: tema.textstylesTitle,
-                  )),
+                    child: Text(
+                      'Insira seu email cadastrado no app para a recuperação de senha. Enviaremos um código para seu email para realizar a troca de senha.',
+                      style: tema.textstylesTitle,
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
                   const ResetArea(),
                   MainButton(
                     height: 50,

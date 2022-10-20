@@ -54,8 +54,9 @@ class _ValidatorEmailPageState extends State<ValidatorEmailPage> {
                 children: [
                   Center(
                     child: Text(
-                      '  Insira o código de autênticação que enviamos para seu email.',
+                      'Insira o código de autênticação que enviamos para seu email.',
                       style: tema.textstylesTitle,
+                      textAlign: TextAlign.center,
                     ),
                   ),
                   const Verification(),
