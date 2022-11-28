@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_app/App/Models/controller_data_model.dart';
-import 'package:flutter_app/Pages/Cliente/ClienteInterface/cliente_interface.dart';
+import 'package:flutter_app/App/controllers/firebase_controllers.dart';
 import 'package:flutter_app/Pages/Cliente/Widgets/input_area_login.dart';
 import 'package:flutter_app/Pages/Cliente/cliente_page.dart';
 import 'package:flutter_app/Widgets/line_title_page.dart';
@@ -13,12 +13,16 @@ import 'package:flutter_app/App/theme/custom_theme.dart';
 import 'package:flutter_app/main.dart';
 import 'package:provider/provider.dart';
 
-class LoginPageCliente extends StatelessWidget {
+class LoginPageCliente extends StatefulWidget {
   const LoginPageCliente({super.key});
 
   @override
+  State<LoginPageCliente> createState() => _LoginPageClienteState();
+}
+
+class _LoginPageClienteState extends State<LoginPageCliente> {
+  @override
   Widget build(BuildContext context) {
-    
     ControllerDataModel controllerDataModel =
         context.read<ControllerDataModel>();
     log('Login page cliente - Build');
@@ -67,12 +71,8 @@ class LoginPageCliente extends StatelessWidget {
                       text: 'Fazer login',
                       callback: () {
                         if (formKey.currentState!.validate()) {
-                          Future.microtask(() => Navigator.of(context)
-                              .pushAndRemoveUntil(
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const ClienteInterface()),
-                                  (route) => false));
+                          controllerDataModel.setDataFromControllers();
+                          FirebaseFunctions().loginCliente(context, controllerDataModel.email, controllerDataModel.password);
                         }
                       },
                     ),

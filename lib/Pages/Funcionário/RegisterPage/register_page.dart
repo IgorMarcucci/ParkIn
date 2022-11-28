@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_app/App/Models/controller_data_model.dart';
-import 'package:flutter_app/Pages/Funcion%C3%A1rio/FuncionarioInterface/func_interface.dart';
+import 'package:flutter_app/App/controllers/firebase_controllers.dart';
 import 'package:flutter_app/Pages/Funcion%C3%A1rio/Widgets/input_area_register.dart';
 import 'package:flutter_app/Pages/Funcion%C3%A1rio/funcionario_page.dart';
 import 'package:flutter_app/Widgets/line_title_page.dart';
@@ -13,9 +13,14 @@ import 'package:flutter_app/App/theme/custom_theme.dart';
 import 'package:flutter_app/main.dart';
 import 'package:provider/provider.dart';
 
-class RegisterPageFuncionario extends StatelessWidget {
+class RegisterPageFuncionario extends StatefulWidget {
   const RegisterPageFuncionario({Key? key}) : super(key: key);
 
+  @override
+  State<RegisterPageFuncionario> createState() => _RegisterPageFuncionarioState();
+}
+
+class _RegisterPageFuncionarioState extends State<RegisterPageFuncionario> {
   @override
   Widget build(BuildContext context) {
     
@@ -67,12 +72,8 @@ class RegisterPageFuncionario extends StatelessWidget {
                       text: 'Cadastrar',
                       callback: () {
                         if (formKey.currentState!.validate()) {
-                          Future.microtask(() => Navigator.of(context)
-                              .pushAndRemoveUntil(
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const FuncInterface()),
-                                  (route) => false));
+                          controllerDataModel.setDataFromControllers();
+                          FirebaseFunctions().criarContaFuncionario(context, controllerDataModel.email, controllerDataModel.password, controllerDataModel.name, controllerDataModel.cpf);
                         }
                       },
                     ),

@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "377996188370",
+    "project_id": "parkin-c62bb",
+    "storage_bucket": "parkin-c62bb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:377996188370:android:fce69e957f751940792b0b",
+        "android_client_info": {
+          "package_name": "com.example.flutter_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "377996188370-vo67jalu32vqh3cgct0mdtc55092j35n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDkYfFyWDFV6VsWYLnO27NeQkRn1PAZtr8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "377996188370-vo67jalu32vqh3cgct0mdtc55092j35n.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "377996188370-c2db790iugge00g3lenop9982qngi7dg.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.flutterApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

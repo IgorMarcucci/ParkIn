@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_app/App/Models/controller_data_model.dart';
-import 'package:flutter_app/Pages/Cliente/ClienteInterface/cliente_interface.dart';
+import 'package:flutter_app/App/controllers/firebase_controllers.dart';
 import 'package:flutter_app/Pages/Cliente/Widgets/input_area_register.dart';
 import 'package:flutter_app/Pages/Cliente/cliente_page.dart';
 import 'package:flutter_app/Widgets/line_title_page.dart';
@@ -13,12 +13,16 @@ import 'package:flutter_app/App/theme/custom_theme.dart';
 import 'package:flutter_app/main.dart';
 import 'package:provider/provider.dart';
 
-class RegisterPageCliente extends StatelessWidget {
+class RegisterPageCliente extends StatefulWidget {
   const RegisterPageCliente({Key? key}) : super(key: key);
 
   @override
+  State<RegisterPageCliente> createState() => _RegisterPageClienteState();
+}
+
+class _RegisterPageClienteState extends State<RegisterPageCliente> {
+  @override
   Widget build(BuildContext context) {
-    
     ControllerDataModel controllerDataModel =
         context.read<ControllerDataModel>();
     log('Register page cliente - Build');
@@ -68,12 +72,8 @@ class RegisterPageCliente extends StatelessWidget {
                       text: 'Cadastrar',
                       callback: () {
                         if (formKey.currentState!.validate()) {
-                          Future.microtask(() => Navigator.of(context)
-                              .pushAndRemoveUntil(
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const ClienteInterface()),
-                                  (route) => false));
+                          controllerDataModel.setDataFromControllers();
+                          FirebaseFunctions().criarContaCliente(context, controllerDataModel.email, controllerDataModel.password, controllerDataModel.name);
                         }
                       },
                     ),

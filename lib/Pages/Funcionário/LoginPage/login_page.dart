@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_app/App/Models/controller_data_model.dart';
-import 'package:flutter_app/Pages/Funcion%C3%A1rio/FuncionarioInterface/func_interface.dart';
+import 'package:flutter_app/App/controllers/firebase_controllers.dart';
 import 'package:flutter_app/Pages/Funcion%C3%A1rio/Widgets/input_area_login.dart';
 import 'package:flutter_app/Pages/Funcion%C3%A1rio/funcionario_page.dart';
 import 'package:flutter_app/Widgets/line_title_page.dart';
@@ -13,9 +13,14 @@ import 'package:flutter_app/App/theme/custom_theme.dart';
 import 'package:flutter_app/main.dart';
 import 'package:provider/provider.dart';
 
-class LoginPageFuncionario extends StatelessWidget {
+class LoginPageFuncionario extends StatefulWidget {
   const LoginPageFuncionario({super.key});
 
+  @override
+  State<LoginPageFuncionario> createState() => _LoginPageFuncionarioState();
+}
+
+class _LoginPageFuncionarioState extends State<LoginPageFuncionario> {
   @override
   Widget build(BuildContext context) {
     
@@ -67,12 +72,8 @@ class LoginPageFuncionario extends StatelessWidget {
                       text: 'Fazer Login',
                       callback: () {
                         if (formKey.currentState!.validate()) {
-                          Future.microtask(() => Navigator.of(context)
-                              .pushAndRemoveUntil(
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const FuncInterface()),
-                                  (route) => false));
+                          controllerDataModel.setDataFromControllers();
+                          FirebaseFunctions().loginFuncionario(context, controllerDataModel.email, controllerDataModel.password);
                         }
                       },
                     ),

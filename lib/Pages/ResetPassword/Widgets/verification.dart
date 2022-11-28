@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable
+
 import 'package:flutter/material.dart';
 import 'package:flutter_app/App/theme/custom_theme.dart';
 import 'package:flutter_verification_code/flutter_verification_code.dart';
@@ -14,7 +16,9 @@ class VerificationState extends State<Verification> {
   @override
   Widget build(BuildContext context) {
     final CustomTheme tema = Theme.of(context).extension<CustomTheme>()!;
+    // ignore: no_leading_underscores_for_local_identifiers
     bool _onEditing = true;
+    // ignore: no_leading_underscores_for_local_identifiers
     String? _code;
     return Column(
       children: [

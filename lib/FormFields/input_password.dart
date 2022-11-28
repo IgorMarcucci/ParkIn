@@ -3,11 +3,12 @@ import 'package:flutter_app/App/Validators/password_validator.dart';
 import 'package:flutter_app/App/theme/custom_theme.dart';
 
 class PasswordInput extends StatefulWidget {
-  const PasswordInput({Key? key, required this.icon, required this.input})
+  const PasswordInput({Key? key, required this.icon, required this.input, required this.passwordController})
       : super(key: key);
 
   final Icon icon;
   final String input;
+  final TextEditingController passwordController;
 
   @override
   State<PasswordInput> createState() => _PasswordInputState();
@@ -40,6 +41,7 @@ class _PasswordInputState extends State<PasswordInput> {
               Icon(passEnable == true ? Icons.remove_red_eye : Icons.password),
         ),
       ),
+      controller: widget.passwordController,
       validator: (value) => validatePassword(value!),
     );
   }

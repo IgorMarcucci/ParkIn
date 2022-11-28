@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/App/Models/controller_data_model.dart';
 import 'package:flutter_app/App/Validators/email_validator.dart';
 import 'package:flutter_app/App/theme/custom_theme.dart';
-import 'package:provider/provider.dart';
 
 class InputEmail extends StatefulWidget {
-  const InputEmail({Key? key, required this.icon, required this.text})
+  const InputEmail({Key? key, required this.icon, required this.text, required this.emailController})
       : super(key: key);
 
   final Icon icon;
   final String text;
+  final TextEditingController emailController;
 
   @override
   State<InputEmail> createState() => InputEmailState();
@@ -19,8 +18,6 @@ class InputEmailState extends State<InputEmail> {
   @override
   Widget build(BuildContext context) {
     final CustomTheme tema = Theme.of(context).extension<CustomTheme>()!;
-    ControllerDataModel controllerDataModel =
-        context.read<ControllerDataModel>();
     return TextFormField(
       keyboardType: TextInputType.emailAddress,
       decoration: InputDecoration(
@@ -29,7 +26,7 @@ class InputEmailState extends State<InputEmail> {
       ),
       style: tema.textstyles,
       validator: (value) => validateEmail(value!),
-      controller: controllerDataModel.emailController,
+      controller: widget.emailController,
     );
   }
 }

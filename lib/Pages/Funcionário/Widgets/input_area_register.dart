@@ -1,46 +1,57 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/App/Models/controller_data_model.dart';
 import 'package:flutter_app/FormFields/input_cpf.dart';
 import 'package:flutter_app/FormFields/input_email.dart';
 import 'package:flutter_app/FormFields/input_name.dart';
 import 'package:flutter_app/FormFields/input_password.dart';
+import 'package:provider/provider.dart';
 
 class InputAreaRegisterFunc extends StatelessWidget {
   const InputAreaRegisterFunc({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    ControllerDataModel controllerDataModel = context.read<ControllerDataModel>();
     return Container(
       padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
       child: Column(
         children: [
-          const InputName(
-            icon: Icon(Icons.person),
+          InputName(
+            icon: const Icon(Icons.person),
             text: 'Informe seu nome',
+            nameController: controllerDataModel.nameController,
           ),
           SizedBox(
-            height: MediaQuery.of(context).size.height * 0.025,
+            height: MediaQuery.of(context).size.height * 0.016,
           ),
           const InputCpf(
             icon: Icon(Icons.perm_identity),
             text: 'Informe o seu CPF',
           ),
           SizedBox(
-            height: MediaQuery.of(context).size.height * 0.025,
+            height: MediaQuery.of(context).size.height * 0.016,
           ),
-          const InputEmail(
-            icon: Icon(Icons.email),
+          InputEmail(
+            icon: const Icon(Icons.email),
             text: "Informe seu email",
+            emailController: controllerDataModel.emailController,
           ),
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.008,
           ),
-          const PasswordInput(
-              icon: Icon(Icons.password), input: 'Informe sua senha'),
+          PasswordInput(
+            icon: const Icon(Icons.password),
+            input: 'Informe sua senha',
+            passwordController: controllerDataModel.passwordController,
+          ),
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.008,
           ),
-          const PasswordInput(
-              icon: Icon(Icons.password), input: 'Repita sua senha'),
+          PasswordInput(
+            icon: const Icon(Icons.password),
+            input: 'Repita sua senha',
+            passwordController: controllerDataModel.passwordConfirmController,
+          ),
         ],
       ),
     );

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_app/App/Models/controller_data_model.dart';
+import 'package:flutter_app/App/controllers/firebase_controllers.dart';
 import 'package:flutter_app/App/theme/custom_theme.dart';
+import 'package:flutter_app/FormFields/input_email.dart';
 import 'package:flutter_app/Pages/Home/homepage.dart';
-import 'package:flutter_app/Pages/ResetPassword/Widgets/reset_area_input.dart';
-import 'package:flutter_app/Pages/ResetPassword/TokenValidatorPage/token_validator.dart';
 import 'package:flutter_app/Widgets/main_button.dart';
 import 'package:flutter_app/Widgets/park_in_area_register.dart';
 import 'package:provider/provider.dart';
@@ -60,20 +60,19 @@ class PasswordResetPage extends StatelessWidget {
                       textAlign: TextAlign.center,
                     ),
                   ),
-                  const ResetArea(),
+                  InputEmail(
+                    icon: const Icon(Icons.email),
+                    text: "Insira o email da sua conta",
+                    emailController: controllerDataModel.emailController,
+                  ),
                   MainButton(
                     height: 50,
                     width: MediaQuery.of(context).size.width * 0.7,
                     text: 'Recuperar Senha',
                     callback: () {
-                      Future.microtask(() {
-                        controllerDataModel.clearControllers();
-                        Navigator.of(context).pushAndRemoveUntil(
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    const ValidatorEmailPage()),
-                            (route) => false);
-                      });
+                      controllerDataModel.setDataFromControllers();
+                      FirebaseFunctions().esqueceuSenha(context, controllerDataModel.email);
+                      controllerDataModel.clearControllers();
                     }
                   ),
                 ],

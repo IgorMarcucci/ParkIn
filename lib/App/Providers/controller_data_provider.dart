@@ -6,7 +6,9 @@ ChangeNotifierProvider controllerDataModelProvider =
     ChangeNotifierProvider<ControllerDataModel>(
   create: (context) => ControllerDataModel(
     emailController: TextEditingController(),
-    cpfController: TextEditingController(),
+    passwordController: TextEditingController(),
     nameController: TextEditingController(),
+    passwordConfirmController: TextEditingController(),
+    cpfController: TextEditingController(),
   ),
 );

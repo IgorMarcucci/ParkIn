@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/App/theme/custom_theme.dart';
 import 'package:flutter_app/Pages/Home/homepage.dart';
 import 'package:flutter_app/Pages/ResetPassword/TokenValidatorPage/token_validator.dart';
-import 'package:flutter_app/Pages/ResetPassword/Widgets/input_password_area.dart';
 import 'package:flutter_app/Widgets/main_button.dart';
 import 'package:flutter_app/Widgets/park_in_area_register.dart';
 import 'package:flutter_app/main.dart';
@@ -64,7 +63,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                         textAlign: TextAlign.center,
                       ),
                     ),
-                    const InputPasswordArea(),
+                    // const InputPasswordArea(),
                     MainButton(
                       height: 50,
                       width: MediaQuery.of(context).size.width * 0.7,

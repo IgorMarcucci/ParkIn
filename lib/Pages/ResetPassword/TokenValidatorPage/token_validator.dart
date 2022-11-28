@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/App/theme/custom_theme.dart';
-import 'package:flutter_app/Pages/ResetPassword/ChangePasswordPage/change_password_page.dart';
 import 'package:flutter_app/Pages/ResetPassword/Widgets/verification.dart';
 import 'package:flutter_app/Pages/ResetPassword/SendEmailPage/send_email_reset.dart';
 import 'package:flutter_app/Widgets/main_button.dart';
@@ -65,13 +64,13 @@ class _ValidatorEmailPageState extends State<ValidatorEmailPage> {
                     width: MediaQuery.of(context).size.width * 0.7,
                     text: 'Continuar',
                     callback: () {
-                      Future.microtask(() {
-                        Navigator.of(context).pushAndRemoveUntil(
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    const ChangePasswordPage()),
-                            (route) => false);
-                      });
+                      // Future.microtask(() {
+                      //   Navigator.of(context).pushAndRemoveUntil(
+                      //       MaterialPageRoute(
+                      //           builder: (context) =>
+                      //               const ChangePasswordPage()),
+                      //       (route) => false);
+                      // });
                     },
                   ),
                 ],
