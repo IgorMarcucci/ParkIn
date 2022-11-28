@@ -4,7 +4,7 @@ import 'package:flutter_app/Pages/Cliente/InfoPage/Widgets/separators_info.dart'
 import 'package:flutter_app/App/theme/custom_theme.dart';
 import 'package:provider/provider.dart';
 
-import '../../../App/Models/controller_data_model.dart';
+import '../../../App/Models/login_controller.dart';
 
 class InfoPage extends StatelessWidget {
   const InfoPage({super.key});
@@ -12,8 +12,8 @@ class InfoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final CustomTheme tema = Theme.of(context).extension<CustomTheme>()!;
-    ControllerDataModel controllerDataModel =
-        context.read<ControllerDataModel>();
+    LoginController loginController =
+        context.read<LoginController>();
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -63,7 +63,7 @@ class InfoPage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Nome: ${controllerDataModel.name}',
+                        'Nome: ${loginController.name}',
                         style: tema.textstyles,
                       ),
                       SizedBox(
@@ -72,7 +72,7 @@ class InfoPage extends StatelessWidget {
                       SizedBox(
                           height: MediaQuery.of(context).size.height * 0.03),
                       Text(
-                        'Email: ${controllerDataModel.email}',
+                        'Email: ${loginController.email}',
                         style: tema.textstyles,
                       ),
                       SizedBox(

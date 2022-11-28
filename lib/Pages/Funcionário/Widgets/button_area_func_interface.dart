@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 
 import 'package:flutter_app/App/Models/func_interface_model.dart';
@@ -33,16 +31,8 @@ class ButtonAreaFuncInterface extends StatelessWidget {
                   return InsertVeiculo(
                     callback: () {
                       if (formKey.currentState!.validate()) {
-                          log('test vagas ocup');
                           interfaceModel.incrementVagasOcup();
-                          log('test vagas ocup - SUCESS');
-                          log('test list add');
-                          interfaceModel.addListObject();
-                          log('test list add - SUCESS');
-                          log('test clear controllers');
-                          interfaceModel.clearControllers();
-                          log('test clear controllers - SUCESS');
-                          Navigator.pop(context);
+                          interfaceModel.adicionar(context);
                       }
                     },
                     callbackButtonBack: () {

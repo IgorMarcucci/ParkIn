@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 
-import 'package:flutter_app/App/Models/controller_data_model.dart';
+import 'package:flutter_app/App/Models/login_controller.dart';
 import 'package:flutter_app/App/controllers/firebase_controllers.dart';
 import 'package:flutter_app/Pages/Cliente/Widgets/input_area_register.dart';
 import 'package:flutter_app/Pages/Cliente/cliente_page.dart';
@@ -23,11 +23,11 @@ class RegisterPageCliente extends StatefulWidget {
 class _RegisterPageClienteState extends State<RegisterPageCliente> {
   @override
   Widget build(BuildContext context) {
-    ControllerDataModel controllerDataModel =
-        context.read<ControllerDataModel>();
+    LoginController loginController =
+        context.read<LoginController>();
     log('Register page cliente - Build');
     final CustomTheme tema = Theme.of(context).extension<CustomTheme>()!;
-    // ControllerDataModel controllerDataModel = context.read<ControllerDataModel>();
+    // LoginController LoginController = context.read<LoginController>();
     return Scaffold(
       resizeToAvoidBottomInset: true,
       body: Container(
@@ -46,7 +46,7 @@ class _RegisterPageClienteState extends State<RegisterPageCliente> {
                     textInput: 'Cadastro',
                     callback: () {
                       Future.microtask(() {
-                        controllerDataModel.clearControllers();
+                        loginController.clearControllers();
                         Navigator.of(context).pushAndRemoveUntil(
                             MaterialPageRoute(
                                 builder: (context) => const ClientePage()),
@@ -72,8 +72,8 @@ class _RegisterPageClienteState extends State<RegisterPageCliente> {
                       text: 'Cadastrar',
                       callback: () {
                         if (formKey.currentState!.validate()) {
-                          controllerDataModel.setDataFromControllers();
-                          FirebaseFunctions().criarContaCliente(context, controllerDataModel.email, controllerDataModel.password, controllerDataModel.name);
+                          loginController.setDataFromControllers();
+                          FirebaseFunctions().criarContaCliente(context, loginController.email, loginController.password, loginController.name);
                         }
                       },
                     ),

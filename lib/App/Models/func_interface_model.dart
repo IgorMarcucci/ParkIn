@@ -1,4 +1,19 @@
+import 'dart:convert';
+import 'dart:developer';
+import 'dart:math';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:crypto/crypto.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/Widgets/scaffold_messages.dart';
+
+String md5RandomString() {
+  final randomNumber = Random().nextDouble();
+  final randomBytes = utf8.encode(randomNumber.toString());
+  final randomString = md5.convert(randomBytes).toString();
+  return randomString;
+}
 
 class FuncInterfaceModel extends ChangeNotifier {
   int vagasTotais = 0;
@@ -27,6 +42,12 @@ class FuncInterfaceModel extends ChangeNotifier {
     notf();
   }
 
+  addListObject() {
+    placa.add(placaController.text);
+    marca.add(marcaController.text);
+    modelo.add(modeloController.text);
+  }
+
   bool incrementVagasDisp() {
     if (vagasOcupadas > 0) {
       vagasOcupadas--;
@@ -47,12 +68,6 @@ class FuncInterfaceModel extends ChangeNotifier {
     return vagasTotais - vagasOcupadas;
   }
 
-  addListObject() {
-    placa.add(placaController.text);
-    marca.add(marcaController.text);
-    modelo.add(modeloController.text);
-  }
-
   removeListObject(int index) {
     placa.removeAt(index);
     marca.removeAt(index);
@@ -60,13 +75,36 @@ class FuncInterfaceModel extends ChangeNotifier {
     notf();
   }
 
-  // clearVeiculosController() {
-  //   marcaController.clear();
-  //   modeloController.clear();
-  //   placaController.clear();
-  //   vagasController.clear();
-  //   notf();
-  // }
+  adicionar(context) async{
+    var uid = FirebaseAuth.instance.currentUser!.uid;
+    FirebaseFirestore.instance.collection('estacionamentos').doc(placaController.text.toString()).set(
+        {
+          'marca': marcaController.text,
+          'modelo': modeloController.text,
+          'placa': placaController.text,
+          'uid': uid,
+        },
+      ).then((value) {
+        sucesso(context, 'Veículo adicionado com sucesso.');
+        addListObject();
+        Navigator.pop(context);
+        clearControllers();
+      }
+    ).catchError((e){
+      erro(context, 'Operação não sucedida');
+      clearControllers();
+    });
+  }
+
+  void remover(context, index) {
+    FirebaseFirestore.instance.collection('estacionamentos').doc(placa[index].toString()).delete()
+    .then((res) {
+      sucesso(context, 'Veículo removido com sucesso');
+      removeListObject(index);
+    }).catchError((e){
+      erro(context, 'Operação não sucedida');
+    });
+  }
 
   clearControllers() {
     marcaController.clear();

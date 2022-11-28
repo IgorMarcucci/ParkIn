@@ -7,8 +7,16 @@ import 'package:flutter_app/Pages/Funcion%C3%A1rio/FuncionarioInterface/func_int
 import 'package:flutter_app/Pages/Funcion%C3%A1rio/Widgets/button_list.dart';
 import 'package:provider/provider.dart';
 
-class ListaVagasPage extends StatelessWidget {
+class ListaVagasPage extends StatefulWidget {
   const ListaVagasPage({Key? key}) : super(key: key);
+
+  @override
+  State<ListaVagasPage> createState() => _ListaVagasPageState();
+}
+
+class _ListaVagasPageState extends State<ListaVagasPage> {
+  
+
 
   @override
   Widget build(BuildContext context) {

@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_app/App/Models/controller_data_model.dart';
+import 'package:flutter_app/App/Models/login_controller.dart';
 import 'package:flutter_app/App/controllers/firebase_controllers.dart';
 import 'package:flutter_app/Pages/Cliente/ClienteInterface/Widgets/button_area_drawer.dart';
 import 'package:flutter_app/App/theme/custom_theme.dart';
@@ -28,9 +28,9 @@ class _ClienteInterfaceState extends State<ClienteInterface> {
   Widget build(BuildContext context) {
     final CustomTheme tema = Theme.of(context).extension<CustomTheme>()!;
     log('Cliente interface - Build');
-    ControllerDataModel controllerDataModel =
-        context.watch<ControllerDataModel>();
-    print(controllerDataModel.name);
+    LoginController loginController =
+        context.watch<LoginController>();
+    print(loginController.name);
     // GoogleMapController mapController;
     return Scaffold(
         appBar: AppBar(
@@ -48,13 +48,13 @@ class _ClienteInterfaceState extends State<ClienteInterface> {
                     decoration: tema.imageDrawer,
                     accountEmail: FittedBox(
                       child: Text(
-                        controllerDataModel.email.toString(),
+                        loginController.email.toString(),
                         style: tema.textDrawer,
                       ),
                     ),
                     accountName: FittedBox(
                       child: Text(
-                        controllerDataModel.name.toString(),
+                        loginController.name.toString(),
                         style: tema.textDrawer,
                       ),
                     ),

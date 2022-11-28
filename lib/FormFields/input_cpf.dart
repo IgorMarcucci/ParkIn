@@ -5,11 +5,12 @@ import 'package:flutter_app/App/Validators/cpf_validator.dart';
 import 'package:flutter_app/App/theme/custom_theme.dart';
 
 class InputCpf extends StatefulWidget {
-  const InputCpf({Key? key, required this.icon, required this.text})
+  const InputCpf({Key? key, required this.icon, required this.text, required this.cpfController})
       : super(key: key);
 
   final Icon icon;
   final String text;
+  final TextEditingController cpfController;
 
   @override
   State<InputCpf> createState() => InputCpfState();
@@ -19,8 +20,8 @@ class InputCpfState extends State<InputCpf> {
   @override
   Widget build(BuildContext context) {
     final CustomTheme tema = Theme.of(context).extension<CustomTheme>()!;
-    // ControllerDataModel controllerDataModel =
-    //     context.read<ControllerDataModel>();
+    // LoginController LoginController =
+    //     context.read<LoginController>();
     return TextFormField(
       inputFormatters: [
         FilteringTextInputFormatter.digitsOnly,
@@ -33,7 +34,7 @@ class InputCpfState extends State<InputCpf> {
       ),
       style: tema.textstyles,
       validator: (value) => validateCpf(value!),
-      // controller: controllerDataModel.cpfController,
+      controller: widget.cpfController,
     );
   }
 }

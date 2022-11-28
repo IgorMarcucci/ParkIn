@@ -4,5 +4,5 @@ import 'package:flutter_app/App/Providers/func_interface_provider.dart';
 
 List<SingleChildWidget> appProviders = [
   funcInterfaceModelProvider,
-  controllerDataModelProvider,
+  loginControllerProvider,
 ];

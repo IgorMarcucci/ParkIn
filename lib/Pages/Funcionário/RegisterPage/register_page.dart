@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 
-import 'package:flutter_app/App/Models/controller_data_model.dart';
+import 'package:flutter_app/App/Models/login_controller.dart';
 import 'package:flutter_app/App/controllers/firebase_controllers.dart';
 import 'package:flutter_app/Pages/Funcion%C3%A1rio/Widgets/input_area_register.dart';
 import 'package:flutter_app/Pages/Funcion%C3%A1rio/funcionario_page.dart';
@@ -26,8 +26,8 @@ class _RegisterPageFuncionarioState extends State<RegisterPageFuncionario> {
     
     log('Register page - Build');
     final CustomTheme tema = Theme.of(context).extension<CustomTheme>()!;
-    ControllerDataModel controllerDataModel =
-        context.read<ControllerDataModel>();
+    LoginController loginController =
+        context.read<LoginController>();
     return Scaffold(
       resizeToAvoidBottomInset: true,
       body: Container(
@@ -46,7 +46,7 @@ class _RegisterPageFuncionarioState extends State<RegisterPageFuncionario> {
                     textInput: 'Cadastro',
                     callback: () {
                       Future.microtask(() {
-                        controllerDataModel.clearControllers();
+                        loginController.clearControllers();
                         Navigator.of(context).pushAndRemoveUntil(
                             MaterialPageRoute(
                                 builder: (context) => const FuncionarioPage()),
@@ -72,8 +72,8 @@ class _RegisterPageFuncionarioState extends State<RegisterPageFuncionario> {
                       text: 'Cadastrar',
                       callback: () {
                         if (formKey.currentState!.validate()) {
-                          controllerDataModel.setDataFromControllers();
-                          FirebaseFunctions().criarContaFuncionario(context, controllerDataModel.email, controllerDataModel.password, controllerDataModel.name, controllerDataModel.cpf);
+                          loginController.setDataFromControllers();
+                          FirebaseFunctions().criarContaFuncionario(context, loginController.email, loginController.password, loginController.name, loginController.cpf);
                         }
                       },
                     ),

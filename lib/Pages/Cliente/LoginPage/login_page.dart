@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 
-import 'package:flutter_app/App/Models/controller_data_model.dart';
+import 'package:flutter_app/App/Models/login_controller.dart';
 import 'package:flutter_app/App/controllers/firebase_controllers.dart';
 import 'package:flutter_app/Pages/Cliente/Widgets/input_area_login.dart';
 import 'package:flutter_app/Pages/Cliente/cliente_page.dart';
@@ -23,8 +23,8 @@ class LoginPageCliente extends StatefulWidget {
 class _LoginPageClienteState extends State<LoginPageCliente> {
   @override
   Widget build(BuildContext context) {
-    ControllerDataModel controllerDataModel =
-        context.read<ControllerDataModel>();
+    LoginController loginController =
+        context.read<LoginController>();
     log('Login page cliente - Build');
     final CustomTheme tema = Theme.of(context).extension<CustomTheme>()!;
     return Scaffold(
@@ -45,7 +45,7 @@ class _LoginPageClienteState extends State<LoginPageCliente> {
                     textInput: 'Login',
                     callback: () {
                       Future.microtask(() {
-                        controllerDataModel.clearControllers();
+                        loginController.clearControllers();
                         Navigator.of(context).pushAndRemoveUntil(
                             MaterialPageRoute(
                                 builder: (context) => const ClientePage()),
@@ -71,8 +71,8 @@ class _LoginPageClienteState extends State<LoginPageCliente> {
                       text: 'Fazer login',
                       callback: () {
                         if (formKey.currentState!.validate()) {
-                          controllerDataModel.setDataFromControllers();
-                          FirebaseFunctions().loginCliente(context, controllerDataModel.email, controllerDataModel.password);
+                          loginController.setDataFromControllers();
+                          FirebaseFunctions().loginCliente(context, loginController.email, loginController.password);
                         }
                       },
                     ),

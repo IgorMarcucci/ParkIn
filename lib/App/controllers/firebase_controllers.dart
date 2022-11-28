@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/App/Models/controller_data_model.dart';
+import 'package:flutter_app/App/Models/login_controller.dart';
 import 'package:flutter_app/Pages/Home/homepage.dart';
-import 'package:flutter_app/Pages/ResetPassword/TokenValidatorPage/token_validator.dart';
 import 'package:flutter_app/Widgets/scaffold_messages.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -114,7 +113,7 @@ class FirebaseFunctions{
       FirebaseFirestore.instance.collection('funcionarios').add({
         "uid": res.user!.uid.toString(),
         "nome": name,
-        "cpf": cpf,
+        "cpf": cpf.toString(),
       });
       sucesso(context, 'Funcionário criado com sucesso.');
       Navigator.of(context)
@@ -142,7 +141,7 @@ class FirebaseFunctions{
   }
 
   Future<String> retornarUsuarioLogado(context) async {
-    ControllerDataModel controllerDataModel = context.watch<ControllerDataModel>();
+    LoginController loginController = context.watch<LoginController>();
     var uid = FirebaseAuth.instance.currentUser!.uid;
     // ignore: prefer_typing_uninitialized_variables
     var res;
@@ -159,10 +158,10 @@ class FirebaseFunctions{
         }
       },
     );
-    controllerDataModel.name = res.toString();
-    print(controllerDataModel.name);
-    controllerDataModel.notf();
-    print(controllerDataModel.name);
+    loginController.name = res.toString();
+    print(loginController.name);
+    loginController.notf();
+    print(loginController.name);
     return res;
   }
   Future<String> retornaFuncionarioLogado() async {

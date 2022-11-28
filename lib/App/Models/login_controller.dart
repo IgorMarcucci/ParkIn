@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class ControllerDataModel extends ChangeNotifier {
+class LoginController extends ChangeNotifier {
   // Informações de dados coletados login
   String? email;
   String? name;
@@ -14,7 +14,7 @@ class ControllerDataModel extends ChangeNotifier {
   late TextEditingController passwordConfirmController;
   late TextEditingController cpfController;
 
-  ControllerDataModel({
+  LoginController({
     this.password,
     this.name,
     this.email,

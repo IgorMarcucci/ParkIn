@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/App/Models/controller_data_model.dart';
+import 'package:flutter_app/App/Models/login_controller.dart';
 import 'package:flutter_app/Pages/Cliente/AboutPage/about_page.dart';
 import 'package:flutter_app/Pages/Cliente/InfoPage/info_page.dart';
 import 'package:flutter_app/Pages/Home/homepage.dart';
@@ -12,8 +12,8 @@ class ButtonAreaDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ControllerDataModel controllerDataModel =
-        context.read<ControllerDataModel>();
+    LoginController loginController =
+        context.read<LoginController>();
     return Column(
       children: [
         const SeparatorButtons(),
@@ -58,11 +58,11 @@ class ButtonAreaDrawer extends StatelessWidget {
           width: MediaQuery.of(context).size.width * 0.55,
           text: 'Sair',
           callback: () {
-            controllerDataModel.emailController.clear();
+            loginController.emailController.clear();
             Future.microtask(() => Navigator.of(context).pushAndRemoveUntil(
                 MaterialPageRoute(builder: (context) => const HomePage()),
                 (route) => false));
-            controllerDataModel.clearControllers();
+            loginController.clearControllers();
           },
         ),
         SizedBox(height: MediaQuery.of(context).size.height * 0.01),

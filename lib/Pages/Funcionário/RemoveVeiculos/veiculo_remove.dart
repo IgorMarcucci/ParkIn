@@ -39,11 +39,7 @@ class ListaVagasRemove extends StatelessWidget {
               color: Colors.red,
             ),
             onDismissed: (direction) {
-              // interfaceModel.removeListObject(index);
-              interfaceModel.placa.removeAt(index);
-              interfaceModel.modelo.removeAt(index);
-              interfaceModel.marca.removeAt(index);
-              interfaceModel.notf();
+              interfaceModel.remover(context, index);
               interfaceModel.incrementVagasDisp();
             },
             key: const Key('ola'),

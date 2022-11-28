@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter_app/App/Models/controller_data_model.dart';
+import 'package:flutter_app/App/Models/login_controller.dart';
 import 'package:flutter_app/App/controllers/firebase_controllers.dart';
 import 'package:flutter_app/App/theme/custom_theme.dart';
 import 'package:flutter_app/FormFields/input_email.dart';
@@ -14,8 +14,8 @@ class PasswordResetPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ControllerDataModel controllerDataModel =
-        context.read<ControllerDataModel>();
+    LoginController loginController =
+        context.read<LoginController>();
     final CustomTheme tema = Theme.of(context).extension<CustomTheme>()!;
     return Scaffold(
       resizeToAvoidBottomInset: true,
@@ -33,7 +33,7 @@ class PasswordResetPage extends StatelessWidget {
                   textInput: 'Recuperação',
                   callback: () {
                     Future.microtask(() {
-                      controllerDataModel.clearControllers();
+                      loginController.clearControllers();
                       Navigator.of(context).pushAndRemoveUntil(
                           MaterialPageRoute(
                               builder: (context) => const HomePage()),
@@ -63,16 +63,16 @@ class PasswordResetPage extends StatelessWidget {
                   InputEmail(
                     icon: const Icon(Icons.email),
                     text: "Insira o email da sua conta",
-                    emailController: controllerDataModel.emailController,
+                    emailController: loginController.emailController,
                   ),
                   MainButton(
                     height: 50,
                     width: MediaQuery.of(context).size.width * 0.7,
                     text: 'Recuperar Senha',
                     callback: () {
-                      controllerDataModel.setDataFromControllers();
-                      FirebaseFunctions().esqueceuSenha(context, controllerDataModel.email);
-                      controllerDataModel.clearControllers();
+                      loginController.setDataFromControllers();
+                      FirebaseFunctions().esqueceuSenha(context, loginController.email);
+                      loginController.clearControllers();
                     }
                   ),
                 ],

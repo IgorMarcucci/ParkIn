@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/App/Models/controller_data_model.dart';
-import 'package:flutter_app/FormFields/input_cpf.dart';
+import 'package:flutter_app/App/Models/login_controller.dart';
 import 'package:flutter_app/FormFields/input_email.dart';
 import 'package:flutter_app/FormFields/input_password.dart';
 import 'package:flutter_app/Widgets/password_reset_button.dart';
@@ -11,7 +10,7 @@ class InputAreaLoginFunc extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ControllerDataModel controllerDataModel = context.read<ControllerDataModel>();
+    LoginController loginController = context.read<LoginController>();
     return Container(
       padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
       child: Column(
@@ -19,7 +18,7 @@ class InputAreaLoginFunc extends StatelessWidget {
           InputEmail(
             icon: const Icon(Icons.email),
             text: "Insira seu email",
-            emailController: controllerDataModel.emailController,
+            emailController: loginController.emailController,
           ),
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.008,
@@ -27,7 +26,7 @@ class InputAreaLoginFunc extends StatelessWidget {
           PasswordInput(
             icon: const Icon(Icons.password),
             input: 'Insira sua senha',
-            passwordController: controllerDataModel.passwordController,
+            passwordController: loginController.passwordController,
           ),
           const PasswordResetButton(),
         ],
