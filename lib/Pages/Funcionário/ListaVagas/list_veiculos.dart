@@ -15,9 +15,6 @@ class ListaVagasPage extends StatefulWidget {
 }
 
 class _ListaVagasPageState extends State<ListaVagasPage> {
-  
-
-
   @override
   Widget build(BuildContext context) {
     log('Lista de veículos - Build');
@@ -30,9 +27,10 @@ class _ListaVagasPageState extends State<ListaVagasPage> {
         ),
         leading: IconButton(
           onPressed: () {
-            Future.microtask(() => Navigator.of(context).pushAndRemoveUntil(
-                MaterialPageRoute(builder: (context) => const FuncInterface()),
-                (route) => false));
+            Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(builder: (context) => const FuncInterface()),
+              ((route) => false),
+            );
           },
           icon: const Icon(
             Icons.arrow_back,
@@ -46,8 +44,11 @@ class _ListaVagasPageState extends State<ListaVagasPage> {
           return ButtonList(
             callback: () {
               Future.microtask(() => Navigator.of(context).pushAndRemoveUntil(
-                MaterialPageRoute(builder: (context) => CarroPage(index: index,)),
-                (route) => false));
+                  MaterialPageRoute(
+                      builder: (context) => CarroPage(
+                            index: index,
+                          )),
+                  (route) => false));
             },
             height: 130,
             width: MediaQuery.of(context).size.width * 0.7,

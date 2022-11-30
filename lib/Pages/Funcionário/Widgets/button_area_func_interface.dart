@@ -13,7 +13,6 @@ class ButtonAreaFuncInterface extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     FuncInterfaceModel interfaceModel = context.read<FuncInterfaceModel>();
     return Column(
       children: [
@@ -23,37 +22,36 @@ class ButtonAreaFuncInterface extends StatelessWidget {
           color: const Color.fromARGB(255, 13, 99, 10),
           text: '+ Adicionar veículo',
           callback: () {
-            if(interfaceModel.vagasTotais != 0){
+            if (interfaceModel.vagasTotais != 0) {
               showDialog<void>(
-                context: context,
-                barrierDismissible: false, // user must tap button!
-                builder: (BuildContext context) {
-                  return InsertVeiculo(
-                    callback: () {
-                      if (formKey.currentState!.validate()) {
-                          interfaceModel.incrementVagasOcup();
+                  context: context,
+                  barrierDismissible: false, // user must tap button!
+                  builder: (BuildContext context) {
+                    return InsertVeiculo(
+                      callback: () {
+                        if (formKey.currentState!.validate()) {
                           interfaceModel.adicionar(context);
-                      }
-                    },
-                    callbackButtonBack: () {
-                      interfaceModel.clearControllers();
-                      Navigator.pop(context);
-                    },
-                  );
-                }
-              );
+                        }
+                      },
+                      callbackButtonBack: () {
+                        interfaceModel.clearControllers();
+                        Navigator.of(context).pop();
+                      },
+                    );
+                  });
             } else {
-              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                content: FittedBox(
-                  child: Text(
-                    'Insira o Nº de vagas para continuar',
-                    style: GoogleFonts.josefinSlab(
-                      fontSize: 18,
-                      color: Colors.white,
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: FittedBox(
+                    child: Text(
+                      'Insira o Nº de vagas para continuar',
+                      style: GoogleFonts.josefinSlab(
+                        fontSize: 18,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ),
-              ),
               );
             }
           },
@@ -65,25 +63,26 @@ class ButtonAreaFuncInterface extends StatelessWidget {
           color: const Color.fromARGB(255, 184, 0, 0),
           text: '- Remover veículo',
           callback: () {
-            if(interfaceModel.vagasOcupadas != 0){
-              Future.microtask(
-                () => Navigator.of(context).pushAndRemoveUntil(
-                    MaterialPageRoute(
-                        builder: (context) => const ListaVagasRemove()),
-                    (route) => false),
+            if (interfaceModel.placa.isNotEmpty) {
+              interfaceModel.clearControllers();
+              Navigator.of(context).pushAndRemoveUntil(
+                MaterialPageRoute(
+                    builder: (context) => const ListaVagasRemove()),
+                ((route) => false),
               );
             } else {
-              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                content: FittedBox(
-                  child: Text(
-                    'Não há vagas para remover',
-                    style: GoogleFonts.josefinSlab(
-                      fontSize: 18,
-                      color: Colors.white,
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: FittedBox(
+                    child: Text(
+                      'Não há vagas para remover',
+                      style: GoogleFonts.josefinSlab(
+                        fontSize: 18,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ),
-              ),
               );
             }
           },

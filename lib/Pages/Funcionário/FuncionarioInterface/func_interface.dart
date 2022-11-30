@@ -1,8 +1,12 @@
 import 'dart:developer';
 
+import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_app/App/Models/func_interface_model.dart';
+import 'package:flutter_app/App/Models/login_controller.dart';
 import 'package:flutter_app/Pages/Funcion%C3%A1rio/ListaVagas/list_veiculos.dart';
 import 'package:flutter_app/Pages/Funcion%C3%A1rio/Widgets/button_area_func_interface.dart';
 import 'package:flutter_app/Pages/Funcion%C3%A1rio/Widgets/insert_vagas.dart';
@@ -17,9 +21,10 @@ class FuncInterface extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
+    var uid = FirebaseAuth.instance.currentUser!.uid;
     log('Funcionario interface - Build');
-    FuncInterfaceModel interfaceModel = context.watch<FuncInterfaceModel>();
+    LoginController loginController = context.read<LoginController>();
+    FuncInterfaceModel interfaceModel = context.read<FuncInterfaceModel>();
     final CustomTheme tema = Theme.of(context).extension<CustomTheme>()!;
     return Scaffold(
       resizeToAvoidBottomInset: true,
@@ -33,7 +38,9 @@ class FuncInterface extends StatelessWidget {
             Future.microtask(() => Navigator.of(context).pushAndRemoveUntil(
                 MaterialPageRoute(builder: (context) => const HomePage()),
                 (route) => false));
+            loginController.clearControllers();
             interfaceModel.clearControllers();
+            interfaceModel.clearAllList();
           },
           icon: const Icon(
             Icons.arrow_back,
@@ -45,28 +52,61 @@ class FuncInterface extends StatelessWidget {
         children: [
           Expanded(
             flex: 9,
-            child: Container(
-              margin: const EdgeInsets.fromLTRB(30, 15, 30, 35),
-              width: MediaQuery.of(context).size.width * 0.98,
-              decoration: tema.decorationContainer,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text('Vagas disponíveis: ${interfaceModel.vagasDisp()}',
-                      style: tema.textstylesTitle),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.05,
-                  ),
-                  Text(
-                    'Vagas ocupadas: ${interfaceModel.vagasOcupadas}',
-                    style: tema.textstylesTitle,
-                  ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.07,
-                  ),
-                  const ButtonAreaFuncInterface(),
-                ],
+            child: FutureBuilder(
+              future: FirebaseFirestore.instance
+                  .collection('estacionamentos')
+                  .where('uid', isEqualTo: uid)
+                  .get()
+                  .then(
+                (value) {
+                  if (value.docs.isNotEmpty) {
+                    if (interfaceModel.placa.isNotEmpty) {
+                      interfaceModel.clearAllList();
+                      for (var element in value.docs) {
+                        interfaceModel.addListObject(
+                          element.data()['placa'],
+                          element.data()['marca'],
+                          element.data()['modelo'],
+                        );
+                      }
+                    } else if (interfaceModel.placa.isEmpty) {
+                      for (var element in value.docs) {
+                        interfaceModel.addListObject(
+                          element.data()['placa'],
+                          element.data()['marca'],
+                          element.data()['modelo'],
+                        );
+                      }
+                    }
+                  }
+                },
               ),
+              builder: ((context, snapshot) {
+                return Container(
+                  margin: const EdgeInsets.fromLTRB(30, 15, 30, 35),
+                  width: MediaQuery.of(context).size.width * 0.98,
+                  decoration: tema.decorationContainer,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      AutoSizeText(
+                          'Vagas disponíveis: ${interfaceModel.vagasDisp()}',
+                          style: tema.textstylesTitle),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.05,
+                      ),
+                      AutoSizeText(
+                        'Vagas ocupadas: ${interfaceModel.placa.length}',
+                        style: tema.textstylesTitle,
+                      ),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.07,
+                      ),
+                      const ButtonAreaFuncInterface(),
+                    ],
+                  ),
+                );
+              }),
             ),
           ),
           Expanded(
@@ -79,7 +119,7 @@ class FuncInterface extends StatelessWidget {
                         .pushAndRemoveUntil(
                             MaterialPageRoute(
                                 builder: (context) => const ListaVagasPage()),
-                            (route) => false));
+                            ((route) => false)));
                   },
                   text: 'Lista de vagas',
                   height: MediaQuery.of(context).size.height,
@@ -94,13 +134,13 @@ class FuncInterface extends StatelessWidget {
                           return InputVagas(
                             callbackButtonBack: () {
                               interfaceModel.clearControllers();
-                              Navigator.pop(context);
+                              Navigator.of(context).pop();
                             },
                             callback: () {
                               if (formKey.currentState!.validate()) {
                                 interfaceModel.setVagasTotais();
                                 interfaceModel.clearControllers();
-                                Navigator.pop(context);
+                                Navigator.of(context).pop();
                               }
                             },
                           );

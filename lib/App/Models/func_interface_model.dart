@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -7,6 +6,8 @@ import 'package:crypto/crypto.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/Widgets/scaffold_messages.dart';
+
+import '../../Pages/Funcionário/FuncionarioInterface/func_interface.dart';
 
 String md5RandomString() {
   final randomNumber = Random().nextDouble();
@@ -16,7 +17,7 @@ String md5RandomString() {
 }
 
 class FuncInterfaceModel extends ChangeNotifier {
-  int vagasTotais = 0;
+  int vagasTotais = 30;
   int vagasOcupadas = 0;
 
   late TextEditingController vagasController;
@@ -42,30 +43,21 @@ class FuncInterfaceModel extends ChangeNotifier {
     notf();
   }
 
-  addListObject() {
-    placa.add(placaController.text);
-    marca.add(marcaController.text);
-    modelo.add(modeloController.text);
-  }
-
-  bool incrementVagasDisp() {
-    if (vagasOcupadas > 0) {
-      vagasOcupadas--;
-      notf();
-    }
-    return false;
-  }
-
-  bool incrementVagasOcup() {
-    if (vagasOcupadas < vagasTotais) {
-      vagasOcupadas++;
-      notf();
-    }
-    return false;
+  addListObject(value1, value2, value3) {
+    placa.add(value1);
+    marca.add(value2);
+    modelo.add(value3);
   }
 
   int vagasDisp() {
-    return vagasTotais - vagasOcupadas;
+    return vagasTotais - placa.length;
+  }
+
+  clearAllList() {
+    placa.clear();
+    marca.clear();
+    modelo.clear();
+    notf();
   }
 
   removeListObject(int index) {
@@ -75,33 +67,41 @@ class FuncInterfaceModel extends ChangeNotifier {
     notf();
   }
 
-  adicionar(context) async{
+  adicionar(context) async {
     var uid = FirebaseAuth.instance.currentUser!.uid;
-    FirebaseFirestore.instance.collection('estacionamentos').doc(placaController.text.toString()).set(
-        {
-          'marca': marcaController.text,
-          'modelo': modeloController.text,
-          'placa': placaController.text,
-          'uid': uid,
-        },
-      ).then((value) {
-        sucesso(context, 'Veículo adicionado com sucesso.');
-        addListObject();
-        Navigator.pop(context);
-        clearControllers();
-      }
-    ).catchError((e){
+    FirebaseFirestore.instance
+        .collection('estacionamentos')
+        .doc(placaController.text.toString())
+        .set(
+      {
+        'marca': marcaController.text,
+        'modelo': modeloController.text,
+        'placa': placaController.text,
+        'uid': uid,
+      },
+    ).then((value) {
+      sucesso(context, 'Veículo adicionado com sucesso.');
+      Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (context) => const FuncInterface()),
+        ((route) => false),
+      );
+      clearControllers();
+    }).catchError((e) {
       erro(context, 'Operação não sucedida');
       clearControllers();
+      Navigator.pop(context);
     });
   }
 
   void remover(context, index) {
-    FirebaseFirestore.instance.collection('estacionamentos').doc(placa[index].toString()).delete()
-    .then((res) {
+    FirebaseFirestore.instance
+        .collection('estacionamentos')
+        .doc(placa[index].toString())
+        .delete()
+        .then((res) {
       sucesso(context, 'Veículo removido com sucesso');
       removeListObject(index);
-    }).catchError((e){
+    }).catchError((e) {
       erro(context, 'Operação não sucedida');
     });
   }

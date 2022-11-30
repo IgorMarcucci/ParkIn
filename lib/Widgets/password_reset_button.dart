@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/App/Models/login_controller.dart';
-import 'package:flutter_app/App/Models/login_controller.dart';
 import 'package:flutter_app/Pages/ResetPassword/SendEmailPage/send_email_reset.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';

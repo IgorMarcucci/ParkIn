@@ -23,9 +23,7 @@ class LoginPageFuncionario extends StatefulWidget {
 class _LoginPageFuncionarioState extends State<LoginPageFuncionario> {
   @override
   Widget build(BuildContext context) {
-    
-    LoginController loginController =
-        context.read<LoginController>();
+    LoginController loginController = context.read<LoginController>();
     log('Login page - Build');
     final CustomTheme tema = Theme.of(context).extension<CustomTheme>()!;
     return Scaffold(
@@ -73,7 +71,11 @@ class _LoginPageFuncionarioState extends State<LoginPageFuncionario> {
                       callback: () {
                         if (formKey.currentState!.validate()) {
                           loginController.setDataFromControllers();
-                          FirebaseFunctions().loginFuncionario(context, loginController.email, loginController.password);
+                          FirebaseFunctions().loginFuncionario(
+                            context,
+                            loginController.email,
+                            loginController.password,
+                          );
                         }
                       },
                     ),

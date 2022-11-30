@@ -27,12 +27,17 @@ class LoginController extends ChangeNotifier {
     required this.cpfController,
   });
 
-  setDataFromControllers(){
+  setDataFromControllers() {
     name = nameController.text;
     email = emailController.text;
     password = passwordController.text;
     passwordConfirm = passwordConfirmController.text;
     cpf = cpfController.text;
+    notf();
+  }
+
+  setNameAndEmailData(data1) {
+    name = data1;
     notf();
   }
 

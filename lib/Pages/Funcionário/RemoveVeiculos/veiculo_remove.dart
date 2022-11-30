@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_app/App/Models/func_interface_model.dart';
 import 'package:flutter_app/Pages/Funcion%C3%A1rio/FuncionarioInterface/func_interface.dart';
@@ -21,9 +20,10 @@ class ListaVagasRemove extends StatelessWidget {
         ),
         leading: IconButton(
           onPressed: () {
-            Future.microtask(() => Navigator.of(context).pushAndRemoveUntil(
-                MaterialPageRoute(builder: (context) => const FuncInterface()),
-                (route) => false));
+            Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(builder: (context) => const FuncInterface()),
+              ((route) => false),
+            );
           },
           icon: const Icon(
             Icons.arrow_back,
@@ -40,7 +40,6 @@ class ListaVagasRemove extends StatelessWidget {
             ),
             onDismissed: (direction) {
               interfaceModel.remover(context, index);
-              interfaceModel.incrementVagasDisp();
             },
             key: const Key('ola'),
             child: Center(

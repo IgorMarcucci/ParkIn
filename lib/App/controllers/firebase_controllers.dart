@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/App/Models/login_controller.dart';
 import 'package:flutter_app/Pages/Home/homepage.dart';
 import 'package:flutter_app/Widgets/scaffold_messages.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -8,19 +7,15 @@ import 'package:firebase_auth/firebase_auth.dart';
 import '../../Pages/Cliente/ClienteInterface/cliente_interface.dart';
 import '../../Pages/Funcionário/FuncionarioInterface/func_interface.dart';
 
-class FirebaseFunctions{
-  
+class FirebaseFunctions {
   void loginCliente(context, email, password) {
     FirebaseAuth.instance
         .signInWithEmailAndPassword(email: email, password: password)
         .then((res) {
       sucesso(context, 'Usuário autenticado com sucesso.');
-      Future.microtask(() => Navigator.of(context)
-                            .pushAndRemoveUntil(
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        const ClienteInterface()),
-                                (route) => false));
+      Future.microtask(() => Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (context) => const ClienteInterface()),
+          (route) => false));
     }).catchError((e) {
       switch (e.code) {
         case 'invalid-email':
@@ -43,12 +38,9 @@ class FirebaseFunctions{
         .signInWithEmailAndPassword(email: email, password: password)
         .then((res) {
       sucesso(context, 'Funcionário autenticado com sucesso.');
-      Future.microtask(() => Navigator.of(context)
-                            .pushAndRemoveUntil(
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        const FuncInterface()),
-                                (route) => false));
+      Future.microtask(() => Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (context) => const FuncInterface()),
+          (route) => false));
     }).catchError((e) {
       switch (e.code) {
         case 'invalid-email':
@@ -69,10 +61,8 @@ class FirebaseFunctions{
   Future<void> esqueceuSenha(context, email) async {
     await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
     Navigator.of(context).pushAndRemoveUntil(
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    const HomePage()),
-                            (route) => false);
+        MaterialPageRoute(builder: (context) => const HomePage()),
+        (route) => false);
   }
 
   void criarContaCliente(context, email, password, name) {
@@ -80,17 +70,14 @@ class FirebaseFunctions{
         .createUserWithEmailAndPassword(email: email, password: password)
         .then((res) {
       //Armazenar o nome no Firestore
-      FirebaseFirestore.instance.collection('cliente').add({
+      FirebaseFirestore.instance.collection('usuarios').add({
         "uid": res.user!.uid.toString(),
         "nome": name,
       });
       sucesso(context, 'Usuário criado com sucesso.');
-      Navigator.of(context)
-                              .pushAndRemoveUntil(
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const ClienteInterface()),
-                                  (route) => false);
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (context) => const ClienteInterface()),
+          (route) => false);
     }).catchError((e) {
       switch (e.code) {
         case 'email-already-in-use':
@@ -116,12 +103,9 @@ class FirebaseFunctions{
         "cpf": cpf.toString(),
       });
       sucesso(context, 'Funcionário criado com sucesso.');
-      Navigator.of(context)
-                              .pushAndRemoveUntil(
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const FuncInterface()),
-                                  (route) => false);
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (context) => const FuncInterface()),
+          (route) => false);
     }).catchError((e) {
       switch (e.code) {
         case 'email-already-in-use':
@@ -140,30 +124,6 @@ class FirebaseFunctions{
     FirebaseAuth.instance.signOut();
   }
 
-  Future<String> retornarUsuarioLogado(context) async {
-    LoginController loginController = context.watch<LoginController>();
-    var uid = FirebaseAuth.instance.currentUser!.uid;
-    // ignore: prefer_typing_uninitialized_variables
-    var res;
-    await FirebaseFirestore.instance
-        .collection('usuarios')
-        .where('uid', isEqualTo: uid)
-        .get()
-        .then(
-      (q) {
-        if (q.docs.isNotEmpty) {
-          res = q.docs[0].data()['nome'];
-        } else {
-          res = "";
-        }
-      },
-    );
-    loginController.name = res.toString();
-    print(loginController.name);
-    loginController.notf();
-    print(loginController.name);
-    return res;
-  }
   Future<String> retornaFuncionarioLogado() async {
     var uid = FirebaseAuth.instance.currentUser!.uid;
     // ignore: prefer_typing_uninitialized_variables

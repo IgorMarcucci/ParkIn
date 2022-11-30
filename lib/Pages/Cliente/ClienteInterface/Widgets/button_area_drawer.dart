@@ -12,8 +12,7 @@ class ButtonAreaDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    LoginController loginController =
-        context.read<LoginController>();
+    LoginController loginController = context.read<LoginController>();
     return Column(
       children: [
         const SeparatorButtons(),
@@ -42,15 +41,6 @@ class ButtonAreaDrawer extends StatelessWidget {
           },
         ),
         SizedBox(height: MediaQuery.of(context).size.height * 0.01),
-        // const SeparatorButtons(),
-        // SizedBox(height: MediaQuery.of(context).size.height * 0.01),
-        // MainButton(
-        //   height: 50,
-        //   width: MediaQuery.of(context).size.width * 0.55,
-        //   text: 'Favoritos',
-        //   callback: () {},
-        // ),
-        // SizedBox(height: MediaQuery.of(context).size.height * 0.01),
         const SeparatorButtons(),
         SizedBox(height: MediaQuery.of(context).size.height * 0.01),
         MainButton(
@@ -58,7 +48,6 @@ class ButtonAreaDrawer extends StatelessWidget {
           width: MediaQuery.of(context).size.width * 0.55,
           text: 'Sair',
           callback: () {
-            loginController.emailController.clear();
             Future.microtask(() => Navigator.of(context).pushAndRemoveUntil(
                 MaterialPageRoute(builder: (context) => const HomePage()),
                 (route) => false));
