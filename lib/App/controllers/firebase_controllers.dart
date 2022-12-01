@@ -120,6 +120,29 @@ class FirebaseFunctions {
     });
   }
 
+  void updateName(context, name) async {
+    var uid = FirebaseAuth.instance.currentUser!.uid;
+    String res;
+    FirebaseFirestore.instance.collection('funcionarios')
+    .where('uid', isEqualTo: uid)
+    .get()
+    .then((value) => {
+      if(value.docs.isNotEmpty){
+        res = value.docs[0].id,
+        FirebaseFirestore.instance.collection('funcionarios')
+        .doc(res)
+        .update({
+          'nome': name
+        }).then((value) => {
+          sucesso(context, 'Nome alterado com sucesso'),
+          Navigator.of(context).pop(),
+        }).catchError((e) {
+          erro(context, 'Erro ao alterar o nome');
+        })
+      }
+    });
+  }
+
   void logout() {
     FirebaseAuth.instance.signOut();
   }

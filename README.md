@@ -30,8 +30,3 @@ Bibliotecas que estão sendo e serão utilizadas:
 - flutter_verification_code: ^1.1.6
 
 Algumas Bibliotecas ainda estão sem uso, no entanto serão usadas já nas próximas etapas do app.
-
-Projeto desenvolvido por:
-
-- Igor Daniel Silva Marcucci - Ciclo: 4º - Periodo: Noturno
-- Guilherme Lima Ramos - Ciclo: 4º - Periodo: Manhã

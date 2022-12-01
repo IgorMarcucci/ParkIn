@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_app/App/Models/func_interface_model.dart';
 import 'package:flutter_app/App/Models/login_controller.dart';
+import 'package:flutter_app/App/controllers/firebase_controllers.dart';
 import 'package:flutter_app/Pages/Funcion%C3%A1rio/ListaVagas/list_veiculos.dart';
 import 'package:flutter_app/Pages/Funcion%C3%A1rio/Widgets/button_area_func_interface.dart';
 import 'package:flutter_app/Pages/Funcion%C3%A1rio/Widgets/insert_vagas.dart';
@@ -38,6 +39,7 @@ class FuncInterface extends StatelessWidget {
             Future.microtask(() => Navigator.of(context).pushAndRemoveUntil(
                 MaterialPageRoute(builder: (context) => const HomePage()),
                 (route) => false));
+            FirebaseFunctions().logout();
             loginController.clearControllers();
             interfaceModel.clearControllers();
             interfaceModel.clearAllList();

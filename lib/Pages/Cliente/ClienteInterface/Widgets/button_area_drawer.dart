@@ -7,6 +7,8 @@ import 'package:flutter_app/Widgets/main_button.dart';
 import 'package:flutter_app/Widgets/separator_buttons.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../App/controllers/firebase_controllers.dart';
+
 class ButtonAreaDrawer extends StatelessWidget {
   const ButtonAreaDrawer({super.key});
 
@@ -51,6 +53,7 @@ class ButtonAreaDrawer extends StatelessWidget {
             Future.microtask(() => Navigator.of(context).pushAndRemoveUntil(
                 MaterialPageRoute(builder: (context) => const HomePage()),
                 (route) => false));
+            FirebaseFunctions().logout();
             loginController.clearControllers();
           },
         ),
