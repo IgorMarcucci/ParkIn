@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/Widgets/button_return.dart';
-import 'package:flutter_app/App/theme/custom_theme.dart';
+import 'package:flutter_app/App/Theme/custom_theme.dart';
 
 class ParkInAreaGlobal extends StatelessWidget {
   const ParkInAreaGlobal(

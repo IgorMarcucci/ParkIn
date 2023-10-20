@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_app/App/Models/func_interface_model.dart';
 import 'package:flutter_app/App/Validators/vagas_validator.dart';
-import 'package:flutter_app/App/theme/custom_theme.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_app/App/Theme/custom_theme.dart';
 
 class InsertVagas extends StatefulWidget {
   const InsertVagas({Key? key, required this.icon, required this.text})
@@ -19,7 +17,7 @@ class InsertVagas extends StatefulWidget {
 class InsertVagasState extends State<InsertVagas> {
   @override
   Widget build(BuildContext context) {
-    FuncInterfaceModel interfaceModel = context.read<FuncInterfaceModel>();
+    // FuncInterfaceModel interfaceModel = context.read<FuncInterfaceModel>();
     final CustomTheme tema = Theme.of(context).extension<CustomTheme>()!;
     return TextFormField(
       inputFormatters: [
@@ -32,7 +30,7 @@ class InsertVagasState extends State<InsertVagas> {
       ),
       style: tema.textstyles,
       validator: (value) => numberValidator(value!),
-      controller: interfaceModel.vagasController,
+      // controller: interfaceModel.vagasController,
     );
   }
 }

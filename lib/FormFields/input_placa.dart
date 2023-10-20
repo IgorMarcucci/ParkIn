@@ -1,9 +1,7 @@
 import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/App/Models/func_interface_model.dart';
 import 'package:flutter_app/App/Validators/CarroValidator/placa_validator.dart';
-import 'package:flutter_app/App/theme/custom_theme.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_app/App/Theme/custom_theme.dart';
 
 class InputPlaca extends StatefulWidget {
   const InputPlaca({Key? key, required this.icon, required this.text})
@@ -20,7 +18,7 @@ class InputPlacaState extends State<InputPlaca> {
   @override
   Widget build(BuildContext context) {
     final CustomTheme tema = Theme.of(context).extension<CustomTheme>()!;
-    FuncInterfaceModel interfaceModel = context.read<FuncInterfaceModel>();
+    // FuncInterfaceModel interfaceModel = context.read<FuncInterfaceModel>();
     return TextFormField(
       inputFormatters: [PlacaVeiculoInputFormatter()],
       keyboardType: TextInputType.text,
@@ -30,7 +28,7 @@ class InputPlacaState extends State<InputPlaca> {
       ),
       style: tema.textstyles,
       validator: (value) => validatePlaca(value!),
-      controller: interfaceModel.placaController,
+      // controller: interfaceModel.placaController,
     );
   }
 }

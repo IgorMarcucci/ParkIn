@@ -2,7 +2,7 @@ import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_app/App/Validators/cpf_validator.dart';
-import 'package:flutter_app/App/theme/custom_theme.dart';
+import 'package:flutter_app/App/Theme/custom_theme.dart';
 
 class InputCpf extends StatefulWidget {
   const InputCpf({Key? key, required this.icon, required this.text, required this.cpfController})

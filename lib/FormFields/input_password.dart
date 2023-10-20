@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/App/Validators/password_validator.dart';
-import 'package:flutter_app/App/theme/custom_theme.dart';
+import 'package:flutter_app/App/Theme/custom_theme.dart';
 
 class PasswordInput extends StatefulWidget {
   const PasswordInput({Key? key, required this.icon, required this.input, required this.passwordController})

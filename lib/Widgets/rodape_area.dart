@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/Widgets/social_media_button.dart';
-import 'package:flutter_app/App/theme/custom_theme.dart';
+import 'package:flutter_app/App/Theme/custom_theme.dart';
 
 class SocialArea extends StatelessWidget {
   const SocialArea({Key? key}) : super(key: key);
@@ -25,9 +25,9 @@ class SocialArea extends StatelessWidget {
         SizedBox(
           height: MediaQuery.of(context).size.height * 0.03,
         ),
-        Row(
+        const Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: const [
+          children: [
             SocialMediaButton(
               icon: 'assets/facebook.png',
             ),

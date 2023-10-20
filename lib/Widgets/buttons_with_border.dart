@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/App/theme/custom_theme.dart';
+import 'package:flutter_app/App/Theme/custom_theme.dart';
 
 class ButtonBorders extends StatelessWidget {
   const ButtonBorders(

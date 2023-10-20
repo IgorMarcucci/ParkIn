@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/App/theme/custom_theme.dart';
+import 'package:flutter_app/App/Theme/custom_theme.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class MainButton extends StatefulWidget {

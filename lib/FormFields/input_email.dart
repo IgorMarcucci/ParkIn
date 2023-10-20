@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/App/Validators/email_validator.dart';
-import 'package:flutter_app/App/theme/custom_theme.dart';
+import 'package:flutter_app/App/Theme/custom_theme.dart';
 
 class InputEmail extends StatefulWidget {
   const InputEmail({Key? key, required this.icon, required this.text, required this.emailController})

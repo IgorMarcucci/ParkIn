@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/Widgets/button_return.dart';
-import 'package:flutter_app/App/theme/custom_theme.dart';
+import 'package:flutter_app/App/Theme/custom_theme.dart';
 
 class ParkInArea extends StatelessWidget {
   const ParkInArea({Key? key, required this.icon, required this.callback})
