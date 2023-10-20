@@ -4,7 +4,7 @@ import 'package:flutter_app/FormFields/input_password.dart';
 import 'package:flutter_app/Widgets/password_reset_button.dart';
 import 'package:provider/provider.dart';
 
-import '../../../Models/user.model.dart';
+import '../../../../Models/user.model.dart';
 
 class InputAreaLoginCliente extends StatelessWidget {
   const InputAreaLoginCliente({Key? key}) : super(key: key);

@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_app/Models/user.model.dart';
 import 'package:flutter_app/Controllers/user.controller.dart';
-import 'package:flutter_app/Views/Funcion%C3%A1rio/Widgets/input_area_register.dart';
-import 'package:flutter_app/Views/Funcion%C3%A1rio/funcionario_page.dart';
+import 'package:flutter_app/Views/Colaborator/Widgets/input_area_register.dart';
+import 'package:flutter_app/Views/Colaborator/funcionario_page.dart';
 import 'package:flutter_app/Widgets/line_title_page.dart';
 import 'package:flutter_app/Widgets/park_in_area_register.dart';
 import 'package:flutter_app/Widgets/main_button.dart';

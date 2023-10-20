@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter_app/Views/Funcion%C3%A1rio/Widgets/column_insert.dart';
+import 'package:flutter_app/Views/Colaborator/Widgets/column_insert.dart';
 import 'package:flutter_app/Widgets/main_button.dart';
 import 'package:flutter_app/App/Theme/custom_theme.dart';
 import 'package:flutter_app/main.dart';

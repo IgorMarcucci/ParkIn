@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_app/Models/func_interface_model.dart';
-import 'package:flutter_app/Views/Funcion%C3%A1rio/RemoveVeiculos/veiculo_remove.dart';
-import 'package:flutter_app/Views/Funcion%C3%A1rio/Widgets/insert_veiculo.dart';
-import 'package:flutter_app/Views/Funcion%C3%A1rio/Widgets/button_add_remove.dart';
+import 'package:flutter_app/Views/Colaborator/RemoveVeiculos/veiculo_remove.dart';
+import 'package:flutter_app/Views/Colaborator/Widgets/insert_veiculo.dart';
+import 'package:flutter_app/Views/Colaborator/Widgets/button_add_remove.dart';
 import 'package:flutter_app/main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';

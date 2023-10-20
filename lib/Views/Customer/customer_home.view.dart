@@ -1,8 +1,8 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_app/Views/Cliente/LoginPage/login_page.dart';
-import 'package:flutter_app/Views/Cliente/RegisterPage/register_page.dart';
+import 'package:flutter_app/Views/Customer/login/customer_login.view.dart';
+import 'package:flutter_app/Views/Customer/register/customer_register.view.dart';
 import 'package:flutter_app/Views/Home/homepage.dart';
 import 'package:flutter_app/Widgets/button_area.dart';
 import 'package:flutter_app/Widgets/line_title_page.dart';

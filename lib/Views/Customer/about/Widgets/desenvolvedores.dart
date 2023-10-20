@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/Views/Cliente/AboutPage/Widgets/dev.dart';
-import 'package:flutter_app/Views/Cliente/InfoPage/Widgets/separators_info.dart';
+import 'package:flutter_app/Views/Customer/about/Widgets/dev.dart';
+import 'package:flutter_app/Views/Customer/info/Widgets/separators_info.dart';
 import 'package:flutter_app/App/Theme/custom_theme.dart';
 
 class Desenvolvedores extends StatelessWidget {

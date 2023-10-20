@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/Models/user.model.dart';
-import 'package:flutter_app/Views/Cliente/AboutPage/about_page.dart';
-import 'package:flutter_app/Views/Cliente/InfoPage/info_page.dart';
+import 'package:flutter_app/Views/Customer/about/about.view.dart';
+import 'package:flutter_app/Views/Customer/info/info.view.dart';
 import 'package:flutter_app/Views/Home/homepage.dart';
 import 'package:flutter_app/Widgets/main_button.dart';
 import 'package:flutter_app/Widgets/separator_buttons.dart';

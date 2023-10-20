@@ -1,8 +1,8 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/Models/func_interface_model.dart';
-import 'package:flutter_app/Views/Funcion%C3%A1rio/FuncionarioInterface/func_interface.dart';
-import 'package:flutter_app/Views/Funcion%C3%A1rio/Widgets/button_list.dart';
+import 'package:flutter_app/Views/Colaborator/FuncionarioInterface/func_interface.dart';
+import 'package:flutter_app/Views/Colaborator/Widgets/button_list.dart';
 import 'package:provider/provider.dart';
 
 class ListaVagasRemove extends StatelessWidget {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/Views/Cliente/ClienteInterface/cliente_interface.dart';
-import 'package:flutter_app/Views/Cliente/InfoPage/Widgets/separators_info.dart';
+import 'package:flutter_app/Views/Customer/customer/customer.view.dart';
+import 'package:flutter_app/Views/Customer/info/Widgets/separators_info.dart';
 import 'package:flutter_app/App/Theme/custom_theme.dart';
 import 'package:provider/provider.dart';
 

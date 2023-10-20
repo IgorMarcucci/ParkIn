@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/Views/Cliente/AboutPage/Widgets/desenvolvedores.dart';
-import 'package:flutter_app/Views/Cliente/AboutPage/Widgets/objetivos.dart';
-import 'package:flutter_app/Views/Cliente/ClienteInterface/cliente_interface.dart';
+import 'package:flutter_app/Views/Customer/about/Widgets/desenvolvedores.dart';
+import 'package:flutter_app/Views/Customer/about/Widgets/objetivos.dart';
+import 'package:flutter_app/Views/Customer/customer/customer.view.dart';
 import 'package:flutter_app/App/Theme/custom_theme.dart';
 
 class AboutPage extends StatelessWidget {

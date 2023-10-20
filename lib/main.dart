@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/App/Keys/keys.dart';
 import 'package:flutter_app/App/Providers/providers.dart';
-import 'package:flutter_app/Views/Home/homepage.dart';
+import 'package:flutter_app/App/Routes/route.dart';
 import 'package:flutter_app/App/Theme/theme.dart';
 import 'package:provider/provider.dart';
 
@@ -22,10 +22,12 @@ class ParkIn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       title: "ParkIn",
       debugShowCheckedModeBanner: false,
-      home: const HomePage(),
+      routerDelegate: routes.routerDelegate,
+      routeInformationParser: routes.routeInformationParser,
+      routeInformationProvider: routes.routeInformationProvider,
       theme: themeData(),
     );
   }

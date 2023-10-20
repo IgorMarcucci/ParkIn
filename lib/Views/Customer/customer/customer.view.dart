@@ -4,9 +4,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/Models/user.model.dart';
-import 'package:flutter_app/Views/Cliente/ClienteInterface/Widgets/button_area_drawer.dart';
+import 'package:flutter_app/Views/Customer/customer/Widgets/button_area_drawer.dart';
 import 'package:flutter_app/App/Theme/custom_theme.dart';
-import 'package:flutter_app/Views/Cliente/ClienteInterface/Widgets/map_model.dart';
+import 'package:flutter_app/Views/Customer/customer/Widgets/map_model.dart';
 import 'package:provider/provider.dart';
 
 class ClienteInterface extends StatefulWidget {

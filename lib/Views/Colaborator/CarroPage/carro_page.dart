@@ -6,11 +6,11 @@ import 'package:flutter_app/Models/user.model.dart';
 import 'package:flutter_app/Controllers/user.controller.dart';
 import 'package:flutter_app/App/Theme/custom_theme.dart';
 import 'package:flutter_app/FormFields/input_name.dart';
-import 'package:flutter_app/Views/Funcion%C3%A1rio/ListaVagas/list_veiculos.dart';
+import 'package:flutter_app/Views/Colaborator/ListaVagas/list_veiculos.dart';
 import 'package:flutter_app/Widgets/main_button.dart';
 import 'package:provider/provider.dart';
 
-import '../../Cliente/InfoPage/Widgets/separators_info.dart';
+import '../../Customer/info/Widgets/separators_info.dart';
 
 class CarroPage extends StatelessWidget {
   const CarroPage({super.key, required this.index});
