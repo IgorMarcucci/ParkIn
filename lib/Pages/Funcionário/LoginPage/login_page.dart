@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_app/App/controllers/user.controller.dart';
-import 'package:flutter_app/App/controllers/firebase.controller.dart';
 import 'package:flutter_app/Pages/Funcion%C3%A1rio/Widgets/input_area_login.dart';
 import 'package:flutter_app/Pages/Funcion%C3%A1rio/funcionario_page.dart';
 import 'package:flutter_app/Widgets/line_title_page.dart';

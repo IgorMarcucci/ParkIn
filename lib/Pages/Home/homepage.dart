@@ -1,10 +1,8 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_app/Pages/Cliente/cliente_page.dart';
 import 'package:flutter_app/Pages/Funcion%C3%A1rio/funcionario_page.dart';
 import 'package:flutter_app/Pages/Home/Widgets/park_in_area.dart';
-import 'package:flutter_app/Widgets/button_area.dart';
 import 'package:flutter_app/Widgets/main_button.dart';
 import 'package:flutter_app/Widgets/rodape_area.dart';
 import 'package:flutter_app/App/theme/custom_theme.dart';

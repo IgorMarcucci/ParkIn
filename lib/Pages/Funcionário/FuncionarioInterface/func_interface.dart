@@ -1,12 +1,9 @@
-import 'dart:developer';
 
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/App/Models/user.model.dart';
 import 'package:flutter_app/App/controllers/park.controller.dart';
 
-import 'package:flutter_app/App/controllers/user.controller.dart';
 import 'package:flutter_app/App/controllers/firebase.controller.dart';
 import 'package:flutter_app/App/controllers/vehicle.controller.dart';
 import 'package:flutter_app/App/services/storage.dart';
@@ -16,7 +13,6 @@ import 'package:flutter_app/Pages/Funcion%C3%A1rio/Widgets/insert_vagas.dart';
 import 'package:flutter_app/Pages/Home/homepage.dart';
 import 'package:flutter_app/Widgets/buttons_with_border.dart';
 import 'package:flutter_app/App/theme/custom_theme.dart';
-import 'package:flutter_app/main.dart';
 import 'package:provider/provider.dart';
 
 class FuncInterface extends StatefulWidget {
