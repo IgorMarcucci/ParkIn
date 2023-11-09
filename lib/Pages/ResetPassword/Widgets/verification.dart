@@ -26,7 +26,7 @@ class VerificationState extends State<Verification> {
           itemSize: 40,
           textStyle: Theme.of(context)
               .textTheme
-              .bodyText2!
+              .bodyMedium!
               .copyWith(color: Colors.black87, fontSize: 24),
           keyboardType: TextInputType.number,
           underlineColor: const Color.fromARGB(255, 89, 89, 89),

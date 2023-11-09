@@ -25,9 +25,9 @@ class SocialArea extends StatelessWidget {
         SizedBox(
           height: MediaQuery.of(context).size.height * 0.03,
         ),
-        Row(
+        const Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: const [
+          children: [
             SocialMediaButton(
               icon: 'assets/facebook.png',
             ),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/App/controllers/user.controller.dart';
-import 'package:flutter_app/FormFields/input_cpf.dart';
 import 'package:flutter_app/FormFields/input_email.dart';
 import 'package:flutter_app/FormFields/input_name.dart';
 import 'package:flutter_app/FormFields/input_password.dart';
