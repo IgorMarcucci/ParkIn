@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/App/Models/func_interface_model.dart';
+import 'package:flutter_app/App/controllers/park.controller.dart';
+import 'package:flutter_app/App/controllers/vehicle.controller.dart';
 import 'package:flutter_app/Pages/Funcion%C3%A1rio/FuncionarioInterface/func_interface.dart';
 import 'package:flutter_app/Pages/Funcion%C3%A1rio/Widgets/button_list.dart';
 import 'package:provider/provider.dart';
@@ -10,7 +11,7 @@ class ListaVagasRemove extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    FuncInterfaceModel interfaceModel = context.read<FuncInterfaceModel>();
+    VehicleController vehicleController = context.read<VehicleController>();
     log('Lista de veículos - Build');
     return Scaffold(
       appBar: AppBar(
@@ -32,14 +33,14 @@ class ListaVagasRemove extends StatelessWidget {
         ),
       ),
       body: ListView.builder(
-        itemCount: interfaceModel.placa.length,
+        itemCount: vehicleController.vehicleList.length,
         itemBuilder: (context, index) {
           return Dismissible(
             background: Container(
               color: Colors.red,
             ),
             onDismissed: (direction) {
-              interfaceModel.remover(context, index);
+              // vehicleController.remover(context, index);
             },
             key: const Key('ola'),
             child: Center(
@@ -47,9 +48,9 @@ class ListaVagasRemove extends StatelessWidget {
                 callback: () {},
                 height: 130,
                 width: MediaQuery.of(context).size.width * 0.9,
-                text: interfaceModel.placa[index].toString(),
-                secondText: interfaceModel.modelo[index].toString(),
-                thirdText: interfaceModel.marca[index].toString(),
+                text: vehicleController.vehicleList[index].carPlate.toString(),
+                secondText: vehicleController.vehicleList[index].modelName.toString(),
+                thirdText: vehicleController.vehicleList[index].brandName.toString(),
                 vagaCounter: (index + 1).toString(),
               ),
             ),

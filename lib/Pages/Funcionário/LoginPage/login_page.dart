@@ -2,8 +2,8 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 
-import 'package:flutter_app/App/Models/login_controller.dart';
-import 'package:flutter_app/App/controllers/firebase_controllers.dart';
+import 'package:flutter_app/App/controllers/user.controller.dart';
+import 'package:flutter_app/App/controllers/firebase.controller.dart';
 import 'package:flutter_app/Pages/Funcion%C3%A1rio/Widgets/input_area_login.dart';
 import 'package:flutter_app/Pages/Funcion%C3%A1rio/funcionario_page.dart';
 import 'package:flutter_app/Widgets/line_title_page.dart';
@@ -23,7 +23,7 @@ class LoginPageFuncionario extends StatefulWidget {
 class _LoginPageFuncionarioState extends State<LoginPageFuncionario> {
   @override
   Widget build(BuildContext context) {
-    LoginController loginController = context.read<LoginController>();
+    UserController userController = context.read<UserController>();
     log('Login page - Build');
     final CustomTheme tema = Theme.of(context).extension<CustomTheme>()!;
     return Scaffold(
@@ -33,7 +33,7 @@ class _LoginPageFuncionarioState extends State<LoginPageFuncionario> {
         width: MediaQuery.of(context).size.width,
         decoration: tema.decorationButton,
         child: Form(
-          key: formKey,
+          key: keys.loginKey,
           child: ListView(
             children: [
               Container(
@@ -44,7 +44,7 @@ class _LoginPageFuncionarioState extends State<LoginPageFuncionario> {
                     textInput: 'Login',
                     callback: () {
                       Future.microtask(() {
-                        loginController.clearControllers();
+                        userController.clearControllers();
                         Navigator.of(context).pushAndRemoveUntil(
                             MaterialPageRoute(
                                 builder: (context) => const FuncionarioPage()),
@@ -69,13 +69,8 @@ class _LoginPageFuncionarioState extends State<LoginPageFuncionario> {
                       width: MediaQuery.of(context).size.width * 0.7,
                       text: 'Fazer Login',
                       callback: () {
-                        if (formKey.currentState!.validate()) {
-                          loginController.setDataFromControllers();
-                          FirebaseFunctions().loginFuncionario(
-                            context,
-                            loginController.email,
-                            loginController.password,
-                          );
+                        if (keys.loginKey.currentState!.validate()) {
+              
                         }
                       },
                     ),

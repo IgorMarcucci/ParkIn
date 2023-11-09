@@ -43,34 +43,12 @@ class FuncionarioPage extends StatelessWidget {
               child: Container(
                 width: MediaQuery.of(context).size.width,
                 decoration: tema.paletteDecoration,
-                child: Column(
+                child: const Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    const LineTitlePage(text: 'Funcionário:'),
-                    TextArea(
-                        topSize: MediaQuery.of(context).size.height * 0.02,
-                        size: MediaQuery.of(context).size.height * 0.04,
-                        secondCallback: () {
-                          Future.microtask(
-                            () => Navigator.of(context).pushAndRemoveUntil(
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        const RegisterPageFuncionario()),
-                                (route) => false),
-                          );
-                        },
-                        secondText: 'Cadastro',
-                        callback: () {
-                          Future.microtask(
-                            () => Navigator.of(context).pushAndRemoveUntil(
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        const LoginPageFuncionario()),
-                                (route) => false),
-                          );
-                        },
-                        text: 'Login'),
-                    const SocialArea(),
+                    LineTitlePage(text: 'Funcionário:'),
+                    TextArea(),
+                    SocialArea(),
                   ],
                 ),
               ),

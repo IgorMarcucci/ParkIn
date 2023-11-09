@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/App/controllers/firebase.controller.dart';
 
-import 'package:flutter_app/App/Models/login_controller.dart';
-import 'package:flutter_app/App/controllers/firebase_controllers.dart';
+import 'package:flutter_app/App/controllers/user.controller.dart';
 import 'package:flutter_app/App/theme/custom_theme.dart';
 import 'package:flutter_app/FormFields/input_email.dart';
 import 'package:flutter_app/Pages/Home/homepage.dart';
@@ -14,8 +14,9 @@ class PasswordResetPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    LoginController loginController =
-        context.read<LoginController>();
+    FirebaseController firebaseController = FirebaseController();
+    UserController userController =
+        context.read<UserController>();
     final CustomTheme tema = Theme.of(context).extension<CustomTheme>()!;
     return Scaffold(
       resizeToAvoidBottomInset: true,
@@ -33,7 +34,7 @@ class PasswordResetPage extends StatelessWidget {
                   textInput: 'Recuperação',
                   callback: () {
                     Future.microtask(() {
-                      loginController.clearControllers();
+                      userController.clearControllers();
                       Navigator.of(context).pushAndRemoveUntil(
                           MaterialPageRoute(
                               builder: (context) => const HomePage()),
@@ -63,16 +64,15 @@ class PasswordResetPage extends StatelessWidget {
                   InputEmail(
                     icon: const Icon(Icons.email),
                     text: "Insira o email da sua conta",
-                    emailController: loginController.emailController,
+                    emailController: userController.emailController,
                   ),
                   MainButton(
                     height: 50,
                     width: MediaQuery.of(context).size.width * 0.7,
                     text: 'Recuperar Senha',
                     callback: () {
-                      loginController.setDataFromControllers();
-                      FirebaseFunctions().esqueceuSenha(context, loginController.email);
-                      loginController.clearControllers();
+                      firebaseController.forgetPass(context, userController.setDataToChangePass());
+                      userController.clearControllers();
                     }
                   ),
                 ],

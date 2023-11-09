@@ -24,7 +24,7 @@ class InputVagas extends StatelessWidget {
       ),
       content: SingleChildScrollView(
         child: Form(
-          key: formKey,
+          key: keys.vacancyKey,
           child: ListBody(
             children: <Widget>[
               const InsertVagas(

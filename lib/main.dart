@@ -1,9 +1,12 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_app/App/Keys/keys.dart';
 import 'package:flutter_app/App/Providers/providers.dart';
 import 'package:flutter_app/Pages/Home/homepage.dart';
 import 'package:flutter_app/App/theme/theme.dart';
 import 'package:flutter_app/firebase_options.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 
 Future<void> main() async {
@@ -11,6 +14,9 @@ Future<void> main() async {
   Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  await Hive.initFlutter();
+  await Hive.openBox('userData');
   runApp(
     MultiProvider(
       providers: appProviders,
@@ -18,12 +24,11 @@ Future<void> main() async {
     ),
   );
 }
-GlobalKey<FormState> formKey = GlobalKey<FormState>();
+Keys keys = Keys();
 
 class ParkIn extends StatelessWidget {
   const ParkIn({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

@@ -47,29 +47,29 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyCEiKdEFKganbbqZ4pnJOs-lJ_o6qsrcd8',
-    appId: '1:377996188370:web:a5b3b5f7c90bbb6c792b0b',
-    messagingSenderId: '377996188370',
-    projectId: 'parkin-c62bb',
-    authDomain: 'parkin-c62bb.firebaseapp.com',
-    storageBucket: 'parkin-c62bb.appspot.com',
+    apiKey: 'AIzaSyC6_MJCzfO2aSdzMpr8KVXKqZ2Q7-ckoE4',
+    appId: '1:245975142527:web:eea60f82baac4666562f4a',
+    messagingSenderId: '245975142527',
+    projectId: 'parkin-73bee',
+    authDomain: 'parkin-73bee.firebaseapp.com',
+    storageBucket: 'parkin-73bee.appspot.com',
+    measurementId: 'G-317GKBSNXP',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDkYfFyWDFV6VsWYLnO27NeQkRn1PAZtr8',
-    appId: '1:377996188370:android:fce69e957f751940792b0b',
-    messagingSenderId: '377996188370',
-    projectId: 'parkin-c62bb',
-    storageBucket: 'parkin-c62bb.appspot.com',
+    apiKey: 'AIzaSyA5jozSf50a47ntiSBedyWsRPbyB5-4t8U',
+    appId: '1:245975142527:android:086c8cb71aa5cd7e562f4a',
+    messagingSenderId: '245975142527',
+    projectId: 'parkin-73bee',
+    storageBucket: 'parkin-73bee.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyBeg-S0zEPOBRpT_VfYKTxGamrZMZmTSCM',
-    appId: '1:377996188370:ios:d98bffc04a89192d792b0b',
-    messagingSenderId: '377996188370',
-    projectId: 'parkin-c62bb',
-    storageBucket: 'parkin-c62bb.appspot.com',
-    iosClientId: '377996188370-c2db790iugge00g3lenop9982qngi7dg.apps.googleusercontent.com',
+    apiKey: 'AIzaSyCOV-nJxFgewL6w8zh65gWQwSviLKw3Pgw',
+    appId: '1:245975142527:ios:67d58c38213690c8562f4a',
+    messagingSenderId: '245975142527',
+    projectId: 'parkin-73bee',
+    storageBucket: 'parkin-73bee.appspot.com',
     iosBundleId: 'com.example.flutterApp',
   );
 }

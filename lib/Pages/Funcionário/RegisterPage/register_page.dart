@@ -2,14 +2,15 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 
-import 'package:flutter_app/App/Models/login_controller.dart';
-import 'package:flutter_app/App/controllers/firebase_controllers.dart';
+import 'package:flutter_app/App/controllers/user.controller.dart';
+import 'package:flutter_app/App/controllers/firebase.controller.dart';
 import 'package:flutter_app/Pages/Funcion%C3%A1rio/Widgets/input_area_register.dart';
 import 'package:flutter_app/Pages/Funcion%C3%A1rio/funcionario_page.dart';
 import 'package:flutter_app/Widgets/line_title_page.dart';
 import 'package:flutter_app/Widgets/park_in_area_register.dart';
 import 'package:flutter_app/Widgets/main_button.dart';
 import 'package:flutter_app/App/theme/custom_theme.dart';
+import 'package:flutter_app/Widgets/scaffold_messages.dart';
 import 'package:flutter_app/main.dart';
 import 'package:provider/provider.dart';
 
@@ -26,8 +27,9 @@ class _RegisterPageFuncionarioState extends State<RegisterPageFuncionario> {
     
     log('Register page - Build');
     final CustomTheme tema = Theme.of(context).extension<CustomTheme>()!;
-    LoginController loginController =
-        context.read<LoginController>();
+    FirebaseController firebaseController = FirebaseController();
+    UserController userController =
+        context.read<UserController>();
     return Scaffold(
       resizeToAvoidBottomInset: true,
       body: Container(
@@ -35,7 +37,7 @@ class _RegisterPageFuncionarioState extends State<RegisterPageFuncionario> {
         width: MediaQuery.of(context).size.width,
         decoration: tema.decorationButton,
         child: Form(
-          key: formKey,
+          key: keys.registerKey,
           child: ListView(
             children: [
               Container(
@@ -46,7 +48,7 @@ class _RegisterPageFuncionarioState extends State<RegisterPageFuncionario> {
                     textInput: 'Cadastro',
                     callback: () {
                       Future.microtask(() {
-                        loginController.clearControllers();
+                        userController.clearControllers();
                         Navigator.of(context).pushAndRemoveUntil(
                             MaterialPageRoute(
                                 builder: (context) => const FuncionarioPage()),
@@ -71,9 +73,16 @@ class _RegisterPageFuncionarioState extends State<RegisterPageFuncionario> {
                       width: MediaQuery.of(context).size.width * 0.7,
                       text: 'Cadastrar',
                       callback: () {
-                        if (formKey.currentState!.validate()) {
-                          loginController.setDataFromControllers();
-                          FirebaseFunctions().criarContaFuncionario(context, loginController.email, loginController.password, loginController.name, loginController.cpf);
+                        if (keys.registerKey.currentState!.validate()) {
+                          if (userController
+                                  .confirmPasswordController.text ==
+                              userController.passwordController.text) {
+                            firebaseController.createAccount(context, userController.setDataToRegister());
+                            userController.clearControllers();
+                          } else {
+                            message(
+                                context, "As senhas devem ser iguais.");
+                          }
                         }
                       },
                     ),

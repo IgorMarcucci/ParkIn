@@ -1,37 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/Pages/Funcion%C3%A1rio/LoginPage/login_page.dart';
+import 'package:flutter_app/Pages/Funcion%C3%A1rio/RegisterPage/register_page.dart';
 import 'package:flutter_app/Widgets/main_button.dart';
 import 'package:flutter_app/Widgets/separator.dart';
 
 class TextArea extends StatelessWidget {
   const TextArea(
-      {Key? key,
-      required this.topSize,
-      required this.size,
-      required this.secondCallback,
-      required this.secondText,
-      required this.callback,
-      required this.text})
+      {Key? key,})
       : super(key: key);
 
-  final String text;
-  final Function callback;
-  final String secondText;
-  final Function secondCallback;
-  final double size;
-  final double topSize;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(
-          height: topSize,
-        ),
         MainButton(
           height: 45,
           width: MediaQuery.of(context).size.width * 0.7,
-          text: text,
-          callback: callback,
+          text: 'Login',
+          callback: (){
+            Navigator.of(context).pushAndRemoveUntil(
+                MaterialPageRoute(
+                    builder: (context) =>
+                        const LoginPageFuncionario()),
+                (route) => false);
+          },
         ),
         SizedBox(
           height: MediaQuery.of(context).size.height * 0.03,
@@ -41,13 +34,16 @@ class TextArea extends StatelessWidget {
           height: MediaQuery.of(context).size.height * 0.03,
         ),
         MainButton(
-          text: secondText,
-          callback: secondCallback,
+          text: 'Cadastrar',
+          callback: (){
+            Navigator.of(context).pushAndRemoveUntil(
+                MaterialPageRoute(
+                    builder: (context) =>
+                        const RegisterPageFuncionario()),
+                (route) => false);
+          },
           height: 45,
           width: MediaQuery.of(context).size.width * 0.7,
-        ),
-        SizedBox(
-          height: size,
         ),
       ],
     );

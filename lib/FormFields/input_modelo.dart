@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/App/Models/func_interface_model.dart';
 import 'package:flutter_app/App/Validators/CarroValidator/modelo_validator.dart';
+import 'package:flutter_app/App/controllers/vehicle.controller.dart';
 import 'package:flutter_app/App/theme/custom_theme.dart';
 import 'package:provider/provider.dart';
 
@@ -19,7 +19,7 @@ class InputModeloState extends State<InputModelo> {
   @override
   Widget build(BuildContext context) {
     final CustomTheme tema = Theme.of(context).extension<CustomTheme>()!;
-    FuncInterfaceModel interfaceModel = context.read<FuncInterfaceModel>();
+    VehicleController vehicleController = context.read<VehicleController>();
     return TextFormField(
       keyboardType: TextInputType.text,
       decoration: InputDecoration(
@@ -28,7 +28,7 @@ class InputModeloState extends State<InputModelo> {
       ),
       style: tema.textstyles,
       validator: (value) => validateModelo(value!),
-      controller: interfaceModel.modeloController,
+      controller: vehicleController.modeloController,
     );
   }
 }

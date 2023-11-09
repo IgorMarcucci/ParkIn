@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/App/Models/login_controller.dart';
+import 'package:flutter_app/App/controllers/user.controller.dart';
 import 'package:flutter_app/FormFields/input_cpf.dart';
 import 'package:flutter_app/FormFields/input_email.dart';
 import 'package:flutter_app/FormFields/input_name.dart';
@@ -11,23 +11,23 @@ class InputAreaRegisterFunc extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    LoginController loginController = context.read<LoginController>();
+    UserController userController = context.read<UserController>();
     return Container(
       padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
       child: Column(
         children: [
           InputName(
             icon: const Icon(Icons.person),
-            text: 'Informe seu nome',
-            nameController: loginController.nameController,
+            text: 'Informe seu nome de usuário',
+            nameController: userController.usernameController,
           ),
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.016,
           ),
-          InputCpf(
-            icon: const Icon(Icons.perm_identity),
-            text: 'Informe o seu CPF',
-            cpfController: loginController.cpfController,
+          InputName(
+            icon: const Icon(Icons.person),
+            text: 'Informe seu nome completo',
+            nameController: userController.nameController,
           ),
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.016,
@@ -35,7 +35,7 @@ class InputAreaRegisterFunc extends StatelessWidget {
           InputEmail(
             icon: const Icon(Icons.email),
             text: "Informe seu email",
-            emailController: loginController.emailController,
+            emailController: userController.emailController,
           ),
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.008,
@@ -43,7 +43,7 @@ class InputAreaRegisterFunc extends StatelessWidget {
           PasswordInput(
             icon: const Icon(Icons.password),
             input: 'Informe sua senha',
-            passwordController: loginController.passwordController,
+            passwordController: userController.passwordController,
           ),
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.008,
@@ -51,7 +51,7 @@ class InputAreaRegisterFunc extends StatelessWidget {
           PasswordInput(
             icon: const Icon(Icons.password),
             input: 'Repita sua senha',
-            passwordController: loginController.passwordConfirmController,
+            passwordController: userController.confirmPasswordController,
           ),
         ],
       ),
