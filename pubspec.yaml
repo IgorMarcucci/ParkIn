@@ -54,6 +54,8 @@ dependencies:
   cloud_firestore: ^4.12.2
   google_fonts: ^4.0.4
   firebase_auth: ^4.12.1
+  geolocator: ^10.1.0
+  geocoding: ^2.1.1
 
 dev_dependencies:
   flutter_test:

@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_app/App/controllers/user.controller.dart';
+import 'package:flutter_app/Pages/Funcion%C3%A1rio/FuncionarioInterface/func_interface.dart';
 import 'package:flutter_app/Pages/Funcion%C3%A1rio/Widgets/input_area_login.dart';
 import 'package:flutter_app/Pages/Funcion%C3%A1rio/funcionario_page.dart';
 import 'package:flutter_app/Widgets/line_title_page.dart';
@@ -68,8 +69,13 @@ class _LoginPageFuncionarioState extends State<LoginPageFuncionario> {
                       width: MediaQuery.of(context).size.width * 0.7,
                       text: 'Fazer Login',
                       callback: () {
-                        if (keys.loginKey.currentState!.validate()) {
-              
+                        if (keys.loginKey.currentState!
+                            .validate()) {
+                          Navigator.of(context).pushAndRemoveUntil(
+                            MaterialPageRoute(
+                                builder: (context) => const FuncInterface()),
+                            (route) => false);
+                          userController.clearControllers();
                         }
                       },
                     ),

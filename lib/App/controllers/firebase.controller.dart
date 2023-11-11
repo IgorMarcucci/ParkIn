@@ -119,6 +119,18 @@ class FirebaseController {
     });
   }
 
+  void randomPostFunction(BuildContext context, Map<String, dynamic> body) async {
+    await FirebaseFirestore.instance
+        .collection(body['collection'])
+        .add(body['body'])
+  
+        .then((value) {
+      message(context, 'Operação realizada com sucesso');
+    }).catchError((e) {
+      message(context, 'Operação mal sucedida');
+    });
+  }
+
   void deleteFunction(context, Map<String, dynamic> body) {
     FirebaseFirestore.instance
         .collection(body['collection'])
