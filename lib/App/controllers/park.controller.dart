@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/App/Models/park.model.dart';
 import 'package:flutter_app/App/Models/user.model.dart';
@@ -10,6 +11,7 @@ class ParkController extends ChangeNotifier {
   LatLng parkPosition = const LatLng(0, 0);
   int? totalParkSpace;
   int? currentPartSpace;
+  List<ParkModel> parkList = [];
 
   ParkController({
     required this.addressController,
@@ -65,5 +67,21 @@ class ParkController extends ChangeNotifier {
       locale: parkPosition,
       userId: value.uid,
     );
+  }
+
+  addList(List<ParkModel> value){
+    parkList = value;
+    notifyListeners();
+  }
+
+  clearList(){
+    parkList.clear();
+    notifyListeners();
+  }
+  List<ParkModel> convertToParkList(
+      List<QueryDocumentSnapshot<Object>> snapshots) {
+    return snapshots
+        .map((snapshot) => ParkModel.fromSnapshot(snapshot))
+        .toList();
   }
 }

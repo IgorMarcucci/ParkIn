@@ -184,4 +184,22 @@ class FirebaseController {
       rethrow;
     }
   }
+
+  Future<List<QueryDocumentSnapshot>> getDataByUid<T>(
+      UserModel user, String collection) async {
+    try {
+      final querySnapshot = await FirebaseFirestore.instance
+          .collection(collection)
+          .where('userId', isEqualTo: user.uid)
+          .get();
+
+      if (querySnapshot.docs.isNotEmpty) {
+        return querySnapshot.docs;
+      } else {
+        return [];
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

@@ -13,6 +13,7 @@ import 'package:flutter_app/Pages/Funcion%C3%A1rio/Widgets/insert_vagas.dart';
 import 'package:flutter_app/Pages/Home/homepage.dart';
 import 'package:flutter_app/Widgets/buttons_with_border.dart';
 import 'package:flutter_app/App/theme/custom_theme.dart';
+import 'package:flutter_app/Widgets/loading_indicator.dart';
 import 'package:provider/provider.dart';
 
 class FuncInterface extends StatefulWidget {
@@ -66,32 +67,61 @@ class _FuncInterfaceState extends State<FuncInterface> {
           Expanded(
             flex: 9,
             child: FutureBuilder(
-              future: firebaseController.getData(user, 'park'),
+              future: firebaseController.getDataByUid(user, 'parks'),
               builder: ((context, snapshot) {
-                return Container(
-                  margin: const EdgeInsets.fromLTRB(30, 15, 30, 35),
-                  width: MediaQuery.of(context).size.width * 0.98,
-                  decoration: tema.decorationContainer,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      AutoSizeText(
-                          'Vagas disponíveis: ${parkController.listAvailableSpace(vehicleController.filteredVehicleList.length)}',
-                          style: tema.textstylesTitle),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.05,
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(child: LoadingIndicator());
+                }
+                if (snapshot.hasError) {
+                  return Scaffold(
+                    appBar: AppBar(
+                      leading: IconButton(
+                        onPressed: () {
+                          Navigator.of(context)
+                        .pushAndRemoveUntil(
+                            MaterialPageRoute(
+                                builder: (context) => const HomePage()),
+                            ((route) => false));
+                        },
+                        icon: const Icon(Icons.arrow_back),
                       ),
-                      AutoSizeText(
-                        'Vagas ocupadas: ${vehicleController.filteredVehicleList.length}',
-                        style: tema.textstylesTitle,
-                      ),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.07,
-                      ),
-                      const ButtonAreaFuncInterface(),
-                    ],
-                  ),
-                );
+                    ),
+                    body: const Center(
+                      child: AutoSizeText('Erro de conexão'),
+                    ),
+                  );
+                }
+                if (snapshot.hasData) {
+                  WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+                    parkController.addList(parkController.convertToParkList(snapshot.data!));
+                  });
+                  return Container(
+                    margin: const EdgeInsets.fromLTRB(30, 15, 30, 35),
+                    width: MediaQuery.of(context).size.width * 0.98,
+                    decoration: tema.decorationContainer,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        AutoSizeText(
+                            'Vagas disponíveis: ${parkController.listAvailableSpace(vehicleController.filteredVehicleList.length)}',
+                            style: tema.textstylesTitle),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.05,
+                        ),
+                        AutoSizeText(
+                          'Vagas ocupadas: ${vehicleController.filteredVehicleList.length}',
+                          style: tema.textstylesTitle,
+                        ),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.07,
+                        ),
+                        const ButtonAreaFuncInterface(),
+                      ],
+                    ),
+                  );
+                } else {
+                  return const LoadingIndicator();
+                }
               }),
             ),
           ),
@@ -101,11 +131,11 @@ class _FuncInterfaceState extends State<FuncInterface> {
               children: [
                 ButtonBorders(
                   callback: () {
-                    Future.microtask(() => Navigator.of(context)
+                    Navigator.of(context)
                         .pushAndRemoveUntil(
                             MaterialPageRoute(
                                 builder: (context) => const ListaVagasPage()),
-                            ((route) => false)));
+                            ((route) => false));
                   },
                   text: 'Lista de vagas',
                   height: MediaQuery.of(context).size.height,

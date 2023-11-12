@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class ParkModel {
@@ -32,5 +33,18 @@ class ParkModel {
     data['address'] = address;
     data['locale'] = locale;
     return data;
+  }
+
+  factory ParkModel.fromSnapshot(QueryDocumentSnapshot<Object?> snapshot) {
+    Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
+    return ParkModel(
+      id: data['id'],
+      userId: data['userId'],
+      name: data['name'],
+      qtd: data['qtd'],
+      currentQtd: data['currentQtd'],
+      address: data['address'],
+      locale: data['locale'],
+    );
   }
 }
