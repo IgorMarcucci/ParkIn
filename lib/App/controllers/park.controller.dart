@@ -69,15 +69,16 @@ class ParkController extends ChangeNotifier {
     );
   }
 
-  addList(List<ParkModel> value){
+  void addList(List<ParkModel> value){
     parkList = value;
     notifyListeners();
   }
 
-  clearList(){
+  void clearList(){
     parkList.clear();
     notifyListeners();
   }
+  
   List<ParkModel> convertToParkList(
       List<QueryDocumentSnapshot<Object>> snapshots) {
     return snapshots

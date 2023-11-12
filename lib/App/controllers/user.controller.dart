@@ -36,7 +36,7 @@ class UserController extends ChangeNotifier {
     return UserModel(email: emailController.text);
   }
 
-  clearControllers() {
+  void clearControllers() {
     emailController.clear();
     nameController.clear();
     usernameController.clear();
