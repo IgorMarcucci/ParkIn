@@ -7,11 +7,11 @@ class InputText extends StatelessWidget {
     required this.controller,
     required this.text,
     required this.typetxt,
-    required this.icone,
+    required this.icon,
   }) : super(key: key);
 
   final TextEditingController controller;
-  final Icon icone;
+  final Icon icon;
   final String text;
   final TextInputType typetxt;
 
@@ -21,7 +21,7 @@ class InputText extends StatelessWidget {
       textInputAction: TextInputAction.next,
       keyboardType: typetxt,
       decoration: InputDecoration(
-        icon: icone,
+        icon: icon,
         labelText: text,
       ),
       controller: controller,

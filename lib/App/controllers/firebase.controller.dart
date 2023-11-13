@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/App/Models/user.model.dart';
 import 'package:flutter_app/App/services/storage.dart';
+import 'package:flutter_app/Pages/Funcion%C3%A1rio/FuncionarioInterface/func_interface.dart';
 import 'package:flutter_app/Widgets/scaffold_messages.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -28,7 +29,10 @@ class FirebaseController {
               "email": res.user!.email,
             };
             storageData.saveData(data, 'userData');
-            
+            Navigator.of(context).pushAndRemoveUntil(
+                            MaterialPageRoute(
+                                builder: (context) => const FuncInterface()),
+                            (route) => false);
           } else {
             message(context, 'Usuário não encontrado');
           }
@@ -68,17 +72,23 @@ class FirebaseController {
   }
 
   void createAccount(BuildContext context, UserModel user) {
+    print(user);
+    print('chamada');
     FirebaseAuth.instance
         .createUserWithEmailAndPassword(
             email: user.email!, password: user.password!)
-        .then((res) {
+        .then((res) async {
+      print('ola');
+      print(res.user!.uid);
       user.uid = res.user!.uid;
+      user.email = res.user!.email;
       FirebaseFirestore.instance
           .collection('users')
           .doc(user.uid)
           .set(user.toJson());
+      print('deu certo');
       message(context, 'Usuário criado com sucesso.');
-      
+      returnLoggedUser(context, user.uid!, user.email!);
     }).catchError((e) {
       switch (e.code) {
         case 'email-already-in-use':
@@ -147,24 +157,29 @@ class FirebaseController {
     await FirebaseAuth.instance.signOut();
   }
 
-  Future<String> returnLoggedUser() async {
-    var uid = FirebaseAuth.instance.currentUser!.uid;
-    // ignore: prefer_typing_uninitialized_variables
-    var res;
+  void returnLoggedUser(BuildContext context, String uid, String email) async {
     await FirebaseFirestore.instance
-        .collection('users')
-        .where('uid', isEqualTo: uid)
-        .get()
-        .then(
-      (q) {
-        if (q.docs.isNotEmpty) {
-          res = q.docs[0].data()['name'];
-        } else {
-          res = "";
-        }
-      },
-    );
-    return res;
+          .collection('users')
+          .where('uid', isEqualTo: uid)
+          .get()
+          .then(
+        (q) {
+          if (q.docs.isNotEmpty) {
+            var data = {
+              "uid": uid,
+              "username": q.docs[0].data()['username'],
+              "email": email,
+            };
+            storageData.saveData(data, 'userData');
+            Navigator.of(context).pushAndRemoveUntil(
+                            MaterialPageRoute(
+                                builder: (context) => const FuncInterface()),
+                            (route) => false);
+          } else {
+            message(context, 'Usuário não encontrado');
+          }
+        },
+      );
   }
 
   Future<List<QueryDocumentSnapshot>> getData<T>(

@@ -3,6 +3,7 @@ import 'package:flutter_app/App/controllers/user.controller.dart';
 import 'package:flutter_app/FormFields/input_email.dart';
 import 'package:flutter_app/FormFields/input_name.dart';
 import 'package:flutter_app/FormFields/input_password.dart';
+import 'package:flutter_app/FormFields/input_text.dart';
 import 'package:provider/provider.dart';
 
 class InputAreaRegisterFunc extends StatelessWidget {
@@ -15,10 +16,11 @@ class InputAreaRegisterFunc extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
       child: Column(
         children: [
-          InputName(
+          InputText(
             icon: const Icon(Icons.person),
             text: 'Informe seu nome de usuário',
-            nameController: userController.usernameController,
+            typetxt: TextInputType.text,
+            controller: userController.usernameController,
           ),
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.016,

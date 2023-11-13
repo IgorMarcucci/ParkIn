@@ -16,7 +16,9 @@ import 'package:geolocator/geolocator.dart';
 import 'package:provider/provider.dart';
 
 class ParkRegister extends StatefulWidget {
-  const ParkRegister({Key? key}) : super(key: key);
+  const ParkRegister({Key? key, required this.route}) : super(key: key);
+
+  final Widget route;
 
   @override
   State<ParkRegister> createState() => _ParkRegisterState();
@@ -78,7 +80,7 @@ class _ParkRegisterState extends State<ParkRegister> {
                           controller: parkController.nameController!,
                           text: 'Insira o nome do estacionamento',
                           typetxt: TextInputType.text,
-                          icone: const Icon(Icons.edit),
+                          icon: const Icon(Icons.edit),
                         ),
                         SizedBox(
                           height: MediaQuery.of(context).size.height * 0.016,
@@ -87,7 +89,7 @@ class _ParkRegisterState extends State<ParkRegister> {
                           controller: parkController.addressController!,
                           text: 'Insira o endereço do estacionamento',
                           typetxt: TextInputType.text,
-                          icone: const Icon(Icons.location_on),
+                          icon: const Icon(Icons.location_on),
                         ),
                         SizedBox(
                           height: MediaQuery.of(context).size.height * 0.016,
@@ -96,7 +98,7 @@ class _ParkRegisterState extends State<ParkRegister> {
                           controller: parkController.qtdController!,
                           text: 'Insira a quantidade de vagas',
                           typetxt: TextInputType.text,
-                          icone: const Icon(Icons.location_on),
+                          icon: const Icon(Icons.location_on),
                         ),
                       ],
                     ),

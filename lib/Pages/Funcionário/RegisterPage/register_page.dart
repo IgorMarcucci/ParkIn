@@ -79,6 +79,7 @@ class _RegisterPageFuncionarioState extends State<RegisterPageFuncionario> {
                               userController.passwordController.text) {
                             firebaseController.createAccount(context, userController.setDataToRegister());
                             userController.clearControllers();
+                            
                           } else {
                             message(
                                 context, "As senhas devem ser iguais.");

@@ -7,6 +7,7 @@ import 'package:flutter_app/App/controllers/park.controller.dart';
 import 'package:flutter_app/App/controllers/firebase.controller.dart';
 import 'package:flutter_app/App/controllers/vehicle.controller.dart';
 import 'package:flutter_app/App/services/storage.dart';
+import 'package:flutter_app/Pages/Funcion%C3%A1rio/EstacionamentoCadastro/park_register.dart';
 import 'package:flutter_app/Pages/Funcion%C3%A1rio/ListaVagas/list_veiculos.dart';
 import 'package:flutter_app/Pages/Funcion%C3%A1rio/Widgets/button_area_func_interface.dart';
 import 'package:flutter_app/Pages/Funcion%C3%A1rio/Widgets/insert_vagas.dart';
@@ -38,139 +39,148 @@ class _FuncInterfaceState extends State<FuncInterface> {
 
   @override
   Widget build(BuildContext context) {
+    StorageData storageData = StorageData();
     FirebaseController firebaseController = FirebaseController();
     VehicleController vehicleController = context.read<VehicleController>();
     ParkController parkController = context.read<ParkController>();
     final CustomTheme tema = Theme.of(context).extension<CustomTheme>()!;
-    return Scaffold(
-      resizeToAvoidBottomInset: true,
-      appBar: AppBar(
-        centerTitle: true,
-        title: const Text(
-          'Funcionário',
-        ),
-        leading: IconButton(
-          onPressed: () {
-            Future.microtask(() => Navigator.of(context).pushAndRemoveUntil(
-                MaterialPageRoute(builder: (context) => const HomePage()),
-                (route) => false));
-            firebaseController.logout();
-          },
-          icon: const Icon(
-            Icons.arrow_back,
-            color: Colors.black,
-          ),
-        ),
-      ),
-      body: Column(
-        children: [
-          Expanded(
-            flex: 9,
-            child: FutureBuilder(
-              future: firebaseController.getDataByUid(user, 'parks'),
-              builder: ((context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(child: LoadingIndicator());
-                }
-                if (snapshot.hasError) {
-                  return Scaffold(
-                    appBar: AppBar(
-                      leading: IconButton(
-                        onPressed: () {
-                          Navigator.of(context)
-                        .pushAndRemoveUntil(
-                            MaterialPageRoute(
-                                builder: (context) => const HomePage()),
-                            ((route) => false));
-                        },
-                        icon: const Icon(Icons.arrow_back),
-                      ),
-                    ),
-                    body: const Center(
-                      child: AutoSizeText('Erro de conexão'),
-                    ),
-                  );
-                }
-                if (snapshot.hasData) {
-                  WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-                    parkController.addList(parkController.convertToParkList(snapshot.data!));
-                  });
-                  return Container(
-                    margin: const EdgeInsets.fromLTRB(30, 15, 30, 35),
-                    width: MediaQuery.of(context).size.width * 0.98,
-                    decoration: tema.decorationContainer,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        AutoSizeText(
-                            'Vagas disponíveis: ${parkController.listAvailableSpace(vehicleController.filteredVehicleList.length)}',
-                            style: tema.textstylesTitle),
-                        SizedBox(
-                          height: MediaQuery.of(context).size.height * 0.05,
+    return FutureBuilder(
+      future: firebaseController.getDataByUid(user, 'parks'),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const Center(child: LoadingIndicator());
+                    }
+                    if (snapshot.hasError) {
+                      return Scaffold(
+                        appBar: AppBar(
+                          leading: IconButton(
+                            onPressed: () {
+                              storageData.removeData('userData');
+                              firebaseController.logout();
+                              Navigator.of(context)
+                            .pushAndRemoveUntil(
+                                MaterialPageRoute(
+                                    builder: (context) => const HomePage()),
+                                ((route) => false));
+                            },
+                            icon: const Icon(Icons.arrow_back),
+                          ),
                         ),
-                        AutoSizeText(
-                          'Vagas ocupadas: ${vehicleController.filteredVehicleList.length}',
-                          style: tema.textstylesTitle,
+                        body: const Center(
+                          child: AutoSizeText('Erro de conexão, clique para sair'),
                         ),
-                        SizedBox(
-                          height: MediaQuery.of(context).size.height * 0.07,
-                        ),
-                        const ButtonAreaFuncInterface(),
-                      ],
-                    ),
-                  );
-                } else {
-                  return const LoadingIndicator();
-                }
-              }),
+                      );
+                    }
+        if(snapshot.hasData){
+          WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+            print(snapshot.data);
+          });
+          return Scaffold(
+          resizeToAvoidBottomInset: true,
+          appBar: AppBar(
+            centerTitle: true,
+            title: const Text(
+              'Funcionário',
+            ),
+            leading: IconButton(
+              onPressed: () {
+                Future.microtask(() => Navigator.of(context).pushAndRemoveUntil(
+                    MaterialPageRoute(builder: (context) => const HomePage()),
+                    (route) => false));
+                firebaseController.logout();
+              },
+              icon: const Icon(
+                Icons.arrow_back,
+                color: Colors.black,
+              ),
             ),
           ),
-          Expanded(
-            flex: 1,
-            child: Row(
-              children: [
-                ButtonBorders(
-                  callback: () {
-                    Navigator.of(context)
-                        .pushAndRemoveUntil(
-                            MaterialPageRoute(
-                                builder: (context) => const ListaVagasPage()),
-                            ((route) => false));
-                  },
-                  text: 'Lista de vagas',
-                  height: MediaQuery.of(context).size.height,
-                  width: MediaQuery.of(context).size.width * 0.5,
+          body: Column(
+            children: [
+              Expanded(
+                flex: 9,
+                child: Container(
+                        margin: const EdgeInsets.fromLTRB(30, 15, 30, 35),
+                        width: MediaQuery.of(context).size.width * 0.98,
+                        decoration: tema.decorationContainer,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            AutoSizeText(
+                                'Vagas totais: ${parkController.parkList[0].qtd}',
+                                style: tema.textstylesTitle),
+                            SizedBox(
+                              height: MediaQuery.of(context).size.height * 0.05,
+                            ),
+                            AutoSizeText(
+                                'Vagas disponíveis: ${parkController.listAvailableSpace(vehicleController.filteredVehicleList.length)}',
+                                style: tema.textstylesTitle),
+                            SizedBox(
+                              height: MediaQuery.of(context).size.height * 0.05,
+                            ),
+                            AutoSizeText(
+                              'Vagas ocupadas: ${parkController.parkList[0].currentQtd}',
+                              style: tema.textstylesTitle,
+                            ),
+                            SizedBox(
+                              height: MediaQuery.of(context).size.height * 0.07,
+                            ),
+                            const ButtonAreaFuncInterface(),
+                          ],
+                        ),
+              ),),
+              Expanded(
+                flex: 1,
+                child: Row(
+                  children: [
+                    ButtonBorders(
+                      callback: () {
+                        Navigator.of(context)
+                            .pushAndRemoveUntil(
+                                MaterialPageRoute(
+                                    builder: (context) => const ListaVagasPage()),
+                                ((route) => false));
+                      },
+                      text: 'Lista de vagas',
+                      height: MediaQuery.of(context).size.height,
+                      width: MediaQuery.of(context).size.width * 0.5,
+                    ),
+                    ButtonBorders(
+                      callback: () {
+                        showDialog<void>(
+                            context: context,
+                            barrierDismissible: false, // user must tap button!
+                            builder: (BuildContext context) {
+                              return InputVagas(
+                                callbackButtonBack: () {
+                                  // vehicleController.clearControllers();
+                                  Navigator.of(context).pop();
+                                },
+                                callback: () {
+                                  // if (formKey.currentState!.validate()) {
+                                  //   interfaceModel.setVagasTotais();
+                                  //   interfaceModel.clearControllers();
+                                  //   Navigator.of(context).pop();
+                                  // }
+                                },
+                              );
+                            });
+                      },
+                      text: 'Inserir Nº de vagas',
+                      height: MediaQuery.of(context).size.height,
+                      width: MediaQuery.of(context).size.width * 0.5,
+                    ),
+                  ],
                 ),
-                ButtonBorders(
-                  callback: () {
-                    showDialog<void>(
-                        context: context,
-                        barrierDismissible: false, // user must tap button!
-                        builder: (BuildContext context) {
-                          return InputVagas(
-                            callbackButtonBack: () {
-                              // vehicleController.clearControllers();
-                              Navigator.of(context).pop();
-                            },
-                            callback: () {
-                              // if (formKey.currentState!.validate()) {
-                              //   interfaceModel.setVagasTotais();
-                              //   interfaceModel.clearControllers();
-                              //   Navigator.of(context).pop();
-                              // }
-                            },
-                          );
-                        });
-                  },
-                  text: 'Inserir Nº de vagas',
-                  height: MediaQuery.of(context).size.height,
-                  width: MediaQuery.of(context).size.width * 0.5,
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
-        ],
-      ),
+        );
+        } else {
+          return const ParkRegister(route: FuncInterface(),);
+        }
+        
+      }
     );
   }
 }

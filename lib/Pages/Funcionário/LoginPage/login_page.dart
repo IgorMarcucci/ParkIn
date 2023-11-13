@@ -1,9 +1,9 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_app/App/controllers/firebase.controller.dart';
 
 import 'package:flutter_app/App/controllers/user.controller.dart';
-import 'package:flutter_app/Pages/Funcion%C3%A1rio/FuncionarioInterface/func_interface.dart';
 import 'package:flutter_app/Pages/Funcion%C3%A1rio/Widgets/input_area_login.dart';
 import 'package:flutter_app/Pages/Funcion%C3%A1rio/funcionario_page.dart';
 import 'package:flutter_app/Widgets/line_title_page.dart';
@@ -23,6 +23,7 @@ class LoginPageFuncionario extends StatefulWidget {
 class _LoginPageFuncionarioState extends State<LoginPageFuncionario> {
   @override
   Widget build(BuildContext context) {
+    FirebaseController firebaseController = FirebaseController();
     UserController userController = context.read<UserController>();
     log('Login page - Build');
     final CustomTheme tema = Theme.of(context).extension<CustomTheme>()!;
@@ -43,13 +44,11 @@ class _LoginPageFuncionarioState extends State<LoginPageFuncionario> {
                   child: ParkInAreaGlobal(
                     textInput: 'Login',
                     callback: () {
-                      Future.microtask(() {
                         userController.clearControllers();
                         Navigator.of(context).pushAndRemoveUntil(
                             MaterialPageRoute(
                                 builder: (context) => const FuncionarioPage()),
                             (route) => false);
-                      });
                     },
                     icon: const Icon(Icons.keyboard_return),
                   ),
@@ -71,10 +70,7 @@ class _LoginPageFuncionarioState extends State<LoginPageFuncionario> {
                       callback: () {
                         if (keys.loginKey.currentState!
                             .validate()) {
-                          Navigator.of(context).pushAndRemoveUntil(
-                            MaterialPageRoute(
-                                builder: (context) => const FuncInterface()),
-                            (route) => false);
+                          firebaseController.loginAccount(context, userController.setDataToLogin());
                           userController.clearControllers();
                         }
                       },
