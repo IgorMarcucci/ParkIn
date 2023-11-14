@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/App/Models/user.model.dart';
 import 'package:flutter_app/App/services/storage.dart';
 import 'package:flutter_app/Pages/Funcion%C3%A1rio/FuncionarioInterface/func_interface.dart';
+import 'package:flutter_app/Pages/Funcion%C3%A1rio/LoginPage/login_page.dart';
 import 'package:flutter_app/Widgets/scaffold_messages.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -72,23 +73,25 @@ class FirebaseController {
   }
 
   void createAccount(BuildContext context, UserModel user) {
-    print(user);
-    print('chamada');
     FirebaseAuth.instance
         .createUserWithEmailAndPassword(
             email: user.email!, password: user.password!)
-        .then((res) async {
-      print('ola');
-      print(res.user!.uid);
+        .then((res) {
       user.uid = res.user!.uid;
-      user.email = res.user!.email;
       FirebaseFirestore.instance
           .collection('users')
           .doc(user.uid)
-          .set(user.toJson());
-      print('deu certo');
+          .set({
+            "name": user.name,
+            "username": user.username,
+            "email": user.email,
+            "uid": user.uid,
+          });
       message(context, 'Usuário criado com sucesso.');
-      returnLoggedUser(context, user.uid!, user.email!);
+      Navigator.of(context).pushAndRemoveUntil(
+                            MaterialPageRoute(
+                                builder: (context) => const LoginPageFuncionario()),
+                            (route) => false);
     }).catchError((e) {
       switch (e.code) {
         case 'email-already-in-use':
@@ -171,10 +174,7 @@ class FirebaseController {
               "email": email,
             };
             storageData.saveData(data, 'userData');
-            Navigator.of(context).pushAndRemoveUntil(
-                            MaterialPageRoute(
-                                builder: (context) => const FuncInterface()),
-                            (route) => false);
+            
           } else {
             message(context, 'Usuário não encontrado');
           }

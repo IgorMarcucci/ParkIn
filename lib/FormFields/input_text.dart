@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/App/Validators/text_validate.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class InputText extends StatelessWidget {
   const InputText({
@@ -24,6 +25,12 @@ class InputText extends StatelessWidget {
         icon: icon,
         labelText: text,
       ),
+      style: GoogleFonts.josefinSlab(
+            textStyle: const TextStyle(
+              fontSize: 24,
+              color: Color.fromARGB(255, 56, 56, 56),
+            ),
+          ),
       controller: controller,
       validator: (value) => textValidate(value!),
     );

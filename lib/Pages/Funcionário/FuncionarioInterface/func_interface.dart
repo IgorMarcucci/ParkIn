@@ -73,7 +73,6 @@ class _FuncInterfaceState extends State<FuncInterface> {
                     }
         if(snapshot.hasData){
           WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-            print(snapshot.data);
           });
           return Scaffold(
           resizeToAvoidBottomInset: true,
