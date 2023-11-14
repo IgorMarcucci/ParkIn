@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/App/Models/user.model.dart';
-import 'package:flutter_app/App/controllers/park.controller.dart';
 import 'package:flutter_app/App/services/storage.dart';
-import 'package:flutter_app/Pages/Funcion%C3%A1rio/EstacionamentoCadastro/park_register.dart';
 import 'package:flutter_app/Pages/Funcion%C3%A1rio/FuncionarioInterface/func_interface.dart';
 import 'package:flutter_app/Pages/Funcion%C3%A1rio/LoginPage/login_page.dart';
 import 'package:flutter_app/Widgets/scaffold_messages.dart';
@@ -34,7 +32,7 @@ class FirebaseController {
             storageData.saveData(data, 'userData');
             Navigator.of(context).pushAndRemoveUntil(
                             MaterialPageRoute(
-                                builder: (context) => const ParkRegister()),
+                                builder: (context) => const FuncInterface()),
                             (route) => false);
           } else {
             message(context, 'Usuário não encontrado');
@@ -190,24 +188,6 @@ class FirebaseController {
       final querySnapshot = await FirebaseFirestore.instance
           .collection(collection)
           .where('uid', isEqualTo: user.uid)
-          .get();
-
-      if (querySnapshot.docs.isNotEmpty) {
-        return querySnapshot.docs;
-      } else {
-        return [];
-      }
-    } catch (e) {
-      rethrow;
-    }
-  }
-
-  Future<List<QueryDocumentSnapshot>> getDataByUid<T>(
-      UserModel user, String collection) async {
-    try {
-      final querySnapshot = await FirebaseFirestore.instance
-          .collection(collection)
-          .where('userId', isEqualTo: user.uid)
           .get();
 
       if (querySnapshot.docs.isNotEmpty) {

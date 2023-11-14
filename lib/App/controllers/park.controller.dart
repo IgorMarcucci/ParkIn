@@ -2,16 +2,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/App/Models/park.model.dart';
 import 'package:flutter_app/App/Models/user.model.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class ParkController extends ChangeNotifier {
   TextEditingController? nameController; 
   TextEditingController? qtdController;
   TextEditingController? addressController;
-  LatLng parkPosition = const LatLng(0, 0);
+  GeoPoint parkPosition = const GeoPoint(0, 0);
   int? totalParkSpace;
   int? currentPartSpace;
-  List<ParkModel> parkList = [];
+  ParkModel park = ParkModel(); 
 
   ParkController({
     required this.addressController,
@@ -20,17 +19,17 @@ class ParkController extends ChangeNotifier {
   });
 
   void changeParkPosition(double lat, double long) {
-    parkPosition = LatLng(lat, long);
+    parkPosition = GeoPoint(lat, long);
     notifyListeners();
   }
 
   void clearParkPosition() {
-    parkPosition = const LatLng(0, 0);
+    parkPosition = const GeoPoint(0, 0);
     notifyListeners();
   }
 
-  int listAvailableSpace(int parkSpace){
-    return (totalParkSpace! - parkSpace);
+  int listAvailableSpace(){
+    return (park.qtd! - park.currentQtd!);
   }
 
   ParkModel returnParkModel(UserModel value){
@@ -39,22 +38,22 @@ class ParkController extends ChangeNotifier {
       qtd: int.parse(qtdController!.text),
       currentQtd: 0,
       address: addressController!.text,
-      locale: parkPosition,
-      userId: value.uid,
+      locale: parkPosition == const GeoPoint(0, 0) ? const GeoPoint(-21.1860088700891, -47.83350443863764) : parkPosition,
+      uid: value.uid,
     );
   }
 
   Map<String, dynamic> returnRegisterParkModel(UserModel value) {
     return {
       "collection": "parks",
-      "body": returnParkModel(value),
+      "body": returnParkModel(value).toJson(),
     };
   }
 
   Map<String, dynamic> returnChangeInfoParkModel(UserModel value) {
     return {
       "collection": "parks",
-      "body": returnChangeInformationModel(value),
+      "body": returnChangeInformationModel(value).toJson(),
     };
   }
 
@@ -65,22 +64,22 @@ class ParkController extends ChangeNotifier {
       currentQtd: currentPartSpace,
       address: addressController!.text,
       locale: parkPosition,
-      userId: value.uid,
+      uid: value.uid,
     );
   }
 
   void addList(List<ParkModel> value){
-    parkList = value;
+    park = value[0];
     notifyListeners();
   }
 
   void clearList(){
-    parkList.clear();
+    park = ParkModel();
     notifyListeners();
   }
   
   List<ParkModel> convertToParkList(
-      List<QueryDocumentSnapshot<Object>> snapshots) {
+      List<QueryDocumentSnapshot<Object?>> snapshots) {
     return snapshots
         .map((snapshot) => ParkModel.fromSnapshot(snapshot))
         .toList();

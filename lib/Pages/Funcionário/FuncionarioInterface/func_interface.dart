@@ -1,11 +1,11 @@
 
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/App/Models/user.model.dart';
 import 'package:flutter_app/App/controllers/park.controller.dart';
 
 import 'package:flutter_app/App/controllers/firebase.controller.dart';
-import 'package:flutter_app/App/controllers/vehicle.controller.dart';
 import 'package:flutter_app/App/services/storage.dart';
 import 'package:flutter_app/Pages/Funcion%C3%A1rio/EstacionamentoCadastro/park_register.dart';
 import 'package:flutter_app/Pages/Funcion%C3%A1rio/ListaVagas/list_veiculos.dart';
@@ -41,38 +41,38 @@ class _FuncInterfaceState extends State<FuncInterface> {
   Widget build(BuildContext context) {
     StorageData storageData = StorageData();
     FirebaseController firebaseController = FirebaseController();
-    VehicleController vehicleController = context.read<VehicleController>();
     ParkController parkController = context.read<ParkController>();
     final CustomTheme tema = Theme.of(context).extension<CustomTheme>()!;
-    return FutureBuilder(
-      future: firebaseController.getDataByUid(user, 'parks'),
+    return FutureBuilder<List<QueryDocumentSnapshot<Object?>>>(
+      future: firebaseController.getData(user, 'parks'),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-                      return const Center(child: LoadingIndicator());
-                    }
-                    if (snapshot.hasError) {
-                      return Scaffold(
-                        appBar: AppBar(
-                          leading: IconButton(
-                            onPressed: () {
-                              storageData.removeData('userData');
-                              firebaseController.logout();
-                              Navigator.of(context)
-                            .pushAndRemoveUntil(
-                                MaterialPageRoute(
-                                    builder: (context) => const HomePage()),
-                                ((route) => false));
-                            },
-                            icon: const Icon(Icons.arrow_back),
-                          ),
-                        ),
-                        body: const Center(
-                          child: AutoSizeText('Erro de conexão, clique para sair'),
-                        ),
-                      );
-                    }
-        if(snapshot.hasData){
+          return const Center(child: LoadingIndicator());
+        }
+        if (snapshot.hasError) {
+          return Scaffold(
+            appBar: AppBar(
+              leading: IconButton(
+                onPressed: () {
+                  storageData.removeData('userData');
+                  firebaseController.logout();
+                  Navigator.of(context)
+                .pushAndRemoveUntil(
+                    MaterialPageRoute(
+                        builder: (context) => const HomePage()),
+                    ((route) => false));
+                },
+                icon: const Icon(Icons.arrow_back),
+              ),
+            ),
+            body: const Center(
+              child: AutoSizeText('Erro de conexão, clique para sair'),
+            ),
+          );
+        }
+        if(snapshot.hasData && snapshot.data != null){
           WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+            parkController.addList(parkController.convertToParkList(snapshot.data!));
           });
           return Scaffold(
           resizeToAvoidBottomInset: true,
@@ -81,20 +81,79 @@ class _FuncInterfaceState extends State<FuncInterface> {
             title: const Text(
               'Funcionário',
             ),
-            leading: IconButton(
-              onPressed: () {
-                Future.microtask(() => Navigator.of(context).pushAndRemoveUntil(
-                    MaterialPageRoute(builder: (context) => const HomePage()),
-                    (route) => false));
-                firebaseController.logout();
-              },
-              icon: const Icon(
-                Icons.arrow_back,
-                color: Colors.black,
-              ),
-            ),
           ),
-          body: Column(
+          drawer: Drawer(
+                  child: ListView(
+                    padding: EdgeInsets.zero,
+                    children: <Widget>[
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          SizedBox(
+                            height: 220,
+                            child: UserAccountsDrawerHeader(
+                              decoration: const BoxDecoration(
+                                color: Color(0xFF2564EB),
+                              ),
+                              accountEmail: FittedBox(
+                                child: AutoSizeText(
+                                  user.email.toString(),
+                                  style: tema.textDrawer,
+                                ),
+                              ),
+                              accountName: FittedBox(
+                                child: AutoSizeText(
+                                  user.username.toString(),
+                                  style: tema.textDrawer,
+                                ),
+                              ),
+                              currentAccountPicture: const CircleAvatar(
+                                backgroundColor: Colors.transparent,
+                                child: Icon(
+                                  Icons.account_circle,
+                                  size: 80,
+                                  color: Color.fromARGB(255, 255, 255, 255),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              ListTile(
+                                title: SizedBox(
+                                  height: 42,
+                                  width: MediaQuery.of(context).size.width,
+                                  child: Center(
+                                    child: AutoSizeText(
+                                      'Sair',
+                                      style: tema.textstyles,
+                                      overflow: TextOverflow.clip,
+                                      maxLines: 2,
+                                      softWrap: true,
+                                    ),
+                                  ),
+                                ),
+                                onTap: () {
+                                  storageData.removeData('userData');
+                  firebaseController.logout();
+                  Navigator.of(context)
+                .pushAndRemoveUntil(
+                    MaterialPageRoute(
+                        builder: (context) => const HomePage()),
+                    ((route) => false));
+                                },
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+          body: Consumer<ParkController>(
+              builder: (context, value, child) {
+                return Column(
             children: [
               Expanded(
                 flex: 9,
@@ -106,19 +165,19 @@ class _FuncInterfaceState extends State<FuncInterface> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             AutoSizeText(
-                                'Vagas totais: ${parkController.parkList[0].qtd}',
+                                'Vagas totais: ${parkController.park.qtd ?? 0}',
                                 style: tema.textstylesTitle),
                             SizedBox(
                               height: MediaQuery.of(context).size.height * 0.05,
                             ),
                             AutoSizeText(
-                                'Vagas disponíveis: ${parkController.listAvailableSpace(vehicleController.filteredVehicleList.length)}',
+                                'Vagas disponíveis: ${parkController.park.qtd == null && parkController.park.currentQtd == null ? 0 : parkController.listAvailableSpace()}',
                                 style: tema.textstylesTitle),
                             SizedBox(
                               height: MediaQuery.of(context).size.height * 0.05,
                             ),
                             AutoSizeText(
-                              'Vagas ocupadas: ${parkController.parkList[0].currentQtd}',
+                              'Vagas ocupadas: ${parkController.park.currentQtd ?? 0}',
                               style: tema.textstylesTitle,
                             ),
                             SizedBox(
@@ -173,10 +232,11 @@ class _FuncInterfaceState extends State<FuncInterface> {
                 ),
               ),
             ],
-          ),
+          );
+              }),
         );
         } else {
-          return const ParkRegister();
+          return const ParkRegisterPage();
         }
         
       }

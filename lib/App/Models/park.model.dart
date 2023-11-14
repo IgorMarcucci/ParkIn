@@ -1,21 +1,20 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class ParkModel {
   int? id;
-  String? userId;
+  String? uid;
   String? name;
   int? qtd;
   int? currentQtd;
   String? address;
-  LatLng? locale;
+  GeoPoint? locale;
 
   ParkModel(
-      {this.id, this.userId, this.name, this.qtd, this.currentQtd, this.address, this.locale});
+      {this.id, this.uid, this.name, this.qtd, this.currentQtd, this.address, this.locale});
 
   ParkModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    userId = json['userId'];
+    uid = json['uid'];
     name = json['name'];
     qtd = json['qtd'];
     currentQtd = json['currentQtd'];
@@ -26,7 +25,7 @@ class ParkModel {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
-    data['userId'] = userId;
+    data['uid'] = uid;
     data['name'] = name;
     data['qtd'] = qtd;
     data['currentQtd'] = currentQtd;
@@ -39,12 +38,17 @@ class ParkModel {
     Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
     return ParkModel(
       id: data['id'],
-      userId: data['userId'],
+      uid: data['uid'],
       name: data['name'],
       qtd: data['qtd'],
       currentQtd: data['currentQtd'],
       address: data['address'],
       locale: data['locale'],
     );
+  }
+
+  @override
+  String toString() {
+    return '$address $currentQtd $id $locale $name $qtd $uid';
   }
 }

@@ -4,25 +4,30 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/App/Models/user.model.dart';
 import 'package:flutter_app/App/controllers/park.controller.dart';
 
+import 'package:flutter_app/App/controllers/user.controller.dart';
 import 'package:flutter_app/App/controllers/firebase.controller.dart';
 import 'package:flutter_app/App/services/permission.dart';
 import 'package:flutter_app/App/services/storage.dart';
 import 'package:flutter_app/FormFields/input_text.dart';
-import 'package:flutter_app/Pages/Funcion%C3%A1rio/funcionario_page.dart';
+import 'package:flutter_app/Pages/Funcion%C3%A1rio/FuncionarioInterface/func_interface.dart';
+import 'package:flutter_app/Pages/Home/homepage.dart';
+import 'package:flutter_app/Widgets/line_title_page.dart';
 import 'package:flutter_app/Widgets/park_in_area_register.dart';
 import 'package:flutter_app/Widgets/main_button.dart';
+import 'package:flutter_app/App/theme/custom_theme.dart';
+import 'package:flutter_app/Widgets/scaffold_messages.dart';
 import 'package:flutter_app/main.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:provider/provider.dart';
 
-class ParkRegister extends StatefulWidget {
-  const ParkRegister({Key? key}) : super(key: key);
+class ParkRegisterPage extends StatefulWidget {
+  const ParkRegisterPage({Key? key}) : super(key: key);
 
   @override
-  State<ParkRegister> createState() => _ParkRegisterState();
+  State<ParkRegisterPage> createState() => _ParkRegisterPageState();
 }
 
-class _ParkRegisterState extends State<ParkRegister> {
+class _ParkRegisterPageState extends State<ParkRegisterPage> {
   UserModel user = UserModel();
 
   @override
@@ -35,19 +40,27 @@ class _ParkRegisterState extends State<ParkRegister> {
     super.initState();
   }
 
+
   @override
   Widget build(BuildContext context) {
     
     log('Register page - Build');
-    PermissionService permissionService = PermissionService();
+    final CustomTheme tema = Theme.of(context).extension<CustomTheme>()!;
     ParkController parkController = context.read<ParkController>();
+    PermissionService permissionService = PermissionService();
+    StorageData storageData = StorageData();
     FirebaseController firebaseController = FirebaseController();
+    UserController userController =
+        context.read<UserController>();
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      body: Form(
-        key: keys.parkRegisterKey,
-        child: SingleChildScrollView(
-          child: Column(
+      body: Container(
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+        decoration: tema.decorationButton,
+        child: Form(
+          key: keys.parkRegisterKey,
+          child: ListView(
             children: [
               Container(
                 height: MediaQuery.of(context).size.height * 0.30,
@@ -57,9 +70,13 @@ class _ParkRegisterState extends State<ParkRegister> {
                     textInput: 'Cadastro do estacionamento',
                     callback: () {
                       Future.microtask(() {
+                        message(context, 'Saindo...');
+                        userController.clearControllers();
+                        firebaseController.logout();
+                        storageData.removeData('userData');
                         Navigator.of(context).pushAndRemoveUntil(
                             MaterialPageRoute(
-                                builder: (context) => const FuncionarioPage()),
+                                builder: (context) => const HomePage()),
                             (route) => false);
                       });
                     },
@@ -67,10 +84,15 @@ class _ParkRegisterState extends State<ParkRegister> {
                   ),
                 ),
               ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Container(
+              Container(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height * 0.8,
+                decoration: tema.paletteDecoration,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    const LineTitlePage(text: 'Estacionamento'),
+                    Container(
                     padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
                     child: Column(
                       children: [
@@ -111,13 +133,18 @@ class _ParkRegisterState extends State<ParkRegister> {
                           Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high).then((value){
                             parkController.changeParkPosition(value.latitude, value.longitude);
                             firebaseController.randomPostFunction(context, parkController.returnRegisterParkModel(user));
+                            Navigator.of(context).pushAndRemoveUntil(
+                            MaterialPageRoute(
+                                builder: (context) => const FuncInterface()),
+                            (route) => false);
                           });
                         });
                         
                       }
                     },
                   ),
-                ],
+                  ],
+                ),
               ),
             ],
           ),

@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_app/App/controllers/fields.controller.dart';
 import 'package:flutter_app/App/controllers/firebase.controller.dart';
 
 import 'package:flutter_app/App/controllers/user.controller.dart';
@@ -23,6 +24,7 @@ class LoginPageFuncionario extends StatefulWidget {
 class _LoginPageFuncionarioState extends State<LoginPageFuncionario> {
   @override
   Widget build(BuildContext context) {
+    FieldsController fieldsController = context.watch<FieldsController>();
     FirebaseController firebaseController = FirebaseController();
     UserController userController = context.read<UserController>();
     log('Login page - Build');
@@ -33,7 +35,9 @@ class _LoginPageFuncionarioState extends State<LoginPageFuncionario> {
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
         decoration: tema.decorationButton,
-        child: Form(
+        child: IgnorePointer(
+          ignoring: fieldsController.loading,
+          child: Form(
           key: keys.loginKey,
           child: ListView(
             children: [
@@ -80,7 +84,7 @@ class _LoginPageFuncionarioState extends State<LoginPageFuncionario> {
               ),
             ],
           ),
-        ),
+        ),),
       ),
     );
   }
