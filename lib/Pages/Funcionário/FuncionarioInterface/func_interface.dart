@@ -176,7 +176,7 @@ class _FuncInterfaceState extends State<FuncInterface> {
           ),
         );
         } else {
-          return const ParkRegister(route: FuncInterface(),);
+          return const ParkRegister();
         }
         
       }

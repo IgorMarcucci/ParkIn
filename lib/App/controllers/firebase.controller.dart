@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/App/Models/user.model.dart';
+import 'package:flutter_app/App/controllers/park.controller.dart';
 import 'package:flutter_app/App/services/storage.dart';
+import 'package:flutter_app/Pages/Funcion%C3%A1rio/EstacionamentoCadastro/park_register.dart';
 import 'package:flutter_app/Pages/Funcion%C3%A1rio/FuncionarioInterface/func_interface.dart';
 import 'package:flutter_app/Pages/Funcion%C3%A1rio/LoginPage/login_page.dart';
 import 'package:flutter_app/Widgets/scaffold_messages.dart';
@@ -32,7 +34,7 @@ class FirebaseController {
             storageData.saveData(data, 'userData');
             Navigator.of(context).pushAndRemoveUntil(
                             MaterialPageRoute(
-                                builder: (context) => const FuncInterface()),
+                                builder: (context) => const ParkRegister()),
                             (route) => false);
           } else {
             message(context, 'Usuário não encontrado');

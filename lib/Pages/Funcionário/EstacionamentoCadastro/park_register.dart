@@ -16,9 +16,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:provider/provider.dart';
 
 class ParkRegister extends StatefulWidget {
-  const ParkRegister({Key? key, required this.route}) : super(key: key);
-
-  final Widget route;
+  const ParkRegister({Key? key}) : super(key: key);
 
   @override
   State<ParkRegister> createState() => _ParkRegisterState();
