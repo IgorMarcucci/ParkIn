@@ -28,7 +28,7 @@ class InputModeloState extends State<InputModelo> {
       ),
       style: tema.textstyles,
       validator: (value) => validateModelo(value!),
-      controller: vehicleController.modeloController,
+      controller: vehicleController.modelController,
     );
   }
 }

@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/App/Models/park.model.dart';
 import 'package:flutter_app/App/Models/user.model.dart';
+import 'package:flutter_app/App/services/id.dart';
 
 class ParkController extends ChangeNotifier {
   TextEditingController? nameController; 
@@ -32,6 +33,27 @@ class ParkController extends ChangeNotifier {
     return (park.qtd! - park.currentQtd!);
   }
 
+  Map<String, dynamic> setDataToRegisterPark(UserModel value) {
+    return {
+      "collection": "parks",
+      "body": returnParkModel(value).toJson(),
+    };
+  }
+
+  Map<String, dynamic> setDataToChangePark() {
+    return {
+      "collection": "parks",
+      "body": returnChangeInformationModel().toJson(),
+    };
+  }
+
+  Map<String, dynamic> setDataToAddVehicleInPark() {
+    return {
+      "collection": "parks",
+      "body": returnChangeAddVehicleModel().toJson(),
+    };
+  }
+
   ParkModel returnParkModel(UserModel value){
     return ParkModel(
       name: nameController!.text,
@@ -39,32 +61,32 @@ class ParkController extends ChangeNotifier {
       currentQtd: 0,
       address: addressController!.text,
       locale: parkPosition == const GeoPoint(0, 0) ? const GeoPoint(-21.1860088700891, -47.83350443863764) : parkPosition,
+      id: generateShortUniqueId(),
       uid: value.uid,
     );
   }
 
-  Map<String, dynamic> returnRegisterParkModel(UserModel value) {
-    return {
-      "collection": "parks",
-      "body": returnParkModel(value).toJson(),
-    };
-  }
-
-  Map<String, dynamic> returnChangeInfoParkModel(UserModel value) {
-    return {
-      "collection": "parks",
-      "body": returnChangeInformationModel(value).toJson(),
-    };
-  }
-
-  ParkModel returnChangeInformationModel(UserModel value){
+  ParkModel returnChangeInformationModel(){
     return ParkModel(
-      name: nameController!.text,
+      name: park.name,
       qtd: int.parse(qtdController!.text),
-      currentQtd: currentPartSpace,
-      address: addressController!.text,
-      locale: parkPosition,
-      uid: value.uid,
+      currentQtd: park.currentQtd,
+      address: park.address,
+      locale: park.locale,
+      uid: park.uid,
+      id: park.id,
+    );
+  }
+
+  ParkModel returnChangeAddVehicleModel(){
+    return ParkModel(
+      name: park.name,
+      qtd: park.qtd,
+      currentQtd: (park.currentQtd! + 1),
+      address: park.address,
+      locale: park.locale,
+      uid: park.uid,
+      id: park.id,
     );
   }
 
@@ -83,5 +105,12 @@ class ParkController extends ChangeNotifier {
     return snapshots
         .map((snapshot) => ParkModel.fromSnapshot(snapshot))
         .toList();
+  }
+
+  clearControllers(){
+    addressController!.clear();
+    nameController!.clear();
+    qtdController!.clear();
+    notifyListeners();
   }
 }

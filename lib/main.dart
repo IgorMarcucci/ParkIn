@@ -17,6 +17,7 @@ Future<void> main() async {
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   await Hive.initFlutter();
   await Hive.openBox('userData');
+  await Hive.openBox('parkData');
   runApp(
     MultiProvider(
       providers: appProviders,

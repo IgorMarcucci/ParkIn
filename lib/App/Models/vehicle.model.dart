@@ -1,6 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class VehicleModel {
-  int? id;
-  int? parkId;
+  String? id;
+  String? parkId;
   String? carPlate;
   String? brandName;
   String? modelName;
@@ -35,5 +37,25 @@ class VehicleModel {
     data['value'] = value;
     data['active'] = active;
     return data;
+  }
+
+  @override
+  String toString() {
+    return '$active $brandName $carPlate $entryTime $exitTime $id $modelName $parkId $value';
+  }
+
+  factory VehicleModel.fromSnapshot(QueryDocumentSnapshot<Object?> snapshot) {
+    Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
+    return VehicleModel(
+      id: data['id'],
+      parkId: data['parkId'],
+      carPlate: data['carPlate'],
+      brandName: data['brandName'],
+      modelName: data['modelName'],
+      entryTime: data['entryTime'],
+      exitTime: data['exitTime'],
+      value: data['value'],
+      active: data['active'],
+    );
   }
 }

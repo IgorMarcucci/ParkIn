@@ -1,7 +1,6 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/App/controllers/vehicle.controller.dart';
-import 'package:flutter_app/Pages/Funcion%C3%A1rio/FuncionarioInterface/func_interface.dart';
 import 'package:flutter_app/Pages/Funcion%C3%A1rio/Widgets/button_list.dart';
 import 'package:provider/provider.dart';
 
@@ -20,10 +19,7 @@ class ListaVagasRemove extends StatelessWidget {
         ),
         leading: IconButton(
           onPressed: () {
-            Navigator.of(context).pushAndRemoveUntil(
-              MaterialPageRoute(builder: (context) => const FuncInterface()),
-              ((route) => false),
-            );
+            Navigator.of(context).pop();
           },
           icon: const Icon(
             Icons.arrow_back,

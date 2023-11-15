@@ -132,7 +132,7 @@ class _ParkRegisterPageState extends State<ParkRegisterPage> {
                         permissionService.handleLocationPermission(context).then((value){
                           Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high).then((value){
                             parkController.changeParkPosition(value.latitude, value.longitude);
-                            firebaseController.randomPostFunction(context, parkController.returnRegisterParkModel(user));
+                            firebaseController.postFunction(context, parkController.setDataToRegisterPark(user));
                             Navigator.of(context).pushAndRemoveUntil(
                             MaterialPageRoute(
                                 builder: (context) => const FuncInterface()),

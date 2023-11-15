@@ -5,8 +5,8 @@ import 'package:provider/provider.dart';
 ChangeNotifierProvider vehicleProvider =
     ChangeNotifierProvider<VehicleController>(
   create: (context) => VehicleController(
-    placaController: TextEditingController(),
-    modeloController: TextEditingController(),
-    marcaController: TextEditingController(),
+    carPlateController: TextEditingController(),
+    modelController: TextEditingController(),
+    brandController: TextEditingController(),
   ),
 );

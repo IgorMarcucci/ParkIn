@@ -6,6 +6,7 @@ import 'package:flutter_app/App/Models/user.model.dart';
 import 'package:flutter_app/App/controllers/park.controller.dart';
 
 import 'package:flutter_app/App/controllers/firebase.controller.dart';
+import 'package:flutter_app/App/controllers/vehicle.controller.dart';
 import 'package:flutter_app/App/services/storage.dart';
 import 'package:flutter_app/Pages/Funcion%C3%A1rio/EstacionamentoCadastro/park_register.dart';
 import 'package:flutter_app/Pages/Funcion%C3%A1rio/ListaVagas/list_veiculos.dart';
@@ -15,6 +16,7 @@ import 'package:flutter_app/Pages/Home/homepage.dart';
 import 'package:flutter_app/Widgets/buttons_with_border.dart';
 import 'package:flutter_app/App/theme/custom_theme.dart';
 import 'package:flutter_app/Widgets/loading_indicator.dart';
+import 'package:flutter_app/main.dart';
 import 'package:provider/provider.dart';
 
 class FuncInterface extends StatefulWidget {
@@ -39,6 +41,7 @@ class _FuncInterfaceState extends State<FuncInterface> {
 
   @override
   Widget build(BuildContext context) {
+    VehicleController vehicleController = context.read<VehicleController>();
     StorageData storageData = StorageData();
     FirebaseController firebaseController = FirebaseController();
     ParkController parkController = context.read<ParkController>();
@@ -70,9 +73,10 @@ class _FuncInterfaceState extends State<FuncInterface> {
             ),
           );
         }
-        if(snapshot.hasData && snapshot.data != null){
+        if(snapshot.hasData && snapshot.data != null && snapshot.data!.isNotEmpty){
           WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
             parkController.addList(parkController.convertToParkList(snapshot.data!));
+            storageData.saveParkData({"name": parkController.park.name, "id": parkController.park.id, "uid": parkController.park.uid, "address": parkController.park.address}, 'parkData');
           });
           return Scaffold(
           resizeToAvoidBottomInset: true,
@@ -194,10 +198,10 @@ class _FuncInterfaceState extends State<FuncInterface> {
                     ButtonBorders(
                       callback: () {
                         Navigator.of(context)
-                            .pushAndRemoveUntil(
+                            .push(
                                 MaterialPageRoute(
                                     builder: (context) => const ListaVagasPage()),
-                                ((route) => false));
+                                );
                       },
                       text: 'Lista de vagas',
                       height: MediaQuery.of(context).size.height,
@@ -211,20 +215,27 @@ class _FuncInterfaceState extends State<FuncInterface> {
                             builder: (BuildContext context) {
                               return InputVagas(
                                 callbackButtonBack: () {
-                                  // vehicleController.clearControllers();
+                                  vehicleController.clearControllers();
                                   Navigator.of(context).pop();
                                 },
                                 callback: () {
-                                  // if (formKey.currentState!.validate()) {
-                                  //   interfaceModel.setVagasTotais();
-                                  //   interfaceModel.clearControllers();
-                                  //   Navigator.of(context).pop();
-                                  // }
+                                  if (keys.vacancyKey.currentState!.validate()) {
+                                    firebaseController.updateFunction(context, parkController.setDataToChangePark());
+                                    Future.delayed(const Duration(seconds: 2), () {
+                                      parkController.clearControllers();
+                                      Navigator.of(context)
+                            .pushAndRemoveUntil(
+                                MaterialPageRoute(
+                                    builder: (context) => const FuncInterface()),
+                                ((route) => false));
+                                    });
+                                    
+                                  }
                                 },
                               );
                             });
                       },
-                      text: 'Inserir Nº de vagas',
+                      text: 'Alterar Nº de vagas',
                       height: MediaQuery.of(context).size.height,
                       width: MediaQuery.of(context).size.width * 0.5,
                     ),

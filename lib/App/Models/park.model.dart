@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ParkModel {
-  int? id;
+  String? id;
   String? uid;
   String? name;
   int? qtd;

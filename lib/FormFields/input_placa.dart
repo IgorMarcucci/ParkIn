@@ -30,7 +30,7 @@ class InputPlacaState extends State<InputPlaca> {
       ),
       style: tema.textstyles,
       validator: (value) => validatePlaca(value!),
-      controller: vehicleController.placaController,
+      controller: vehicleController.carPlateController,
     );
   }
 }

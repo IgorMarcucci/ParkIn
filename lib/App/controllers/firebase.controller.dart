@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/App/Models/park.model.dart';
 import 'package:flutter_app/App/Models/user.model.dart';
 import 'package:flutter_app/App/services/storage.dart';
 import 'package:flutter_app/Pages/Funcion%C3%A1rio/FuncionarioInterface/func_interface.dart';
@@ -109,7 +110,7 @@ class FirebaseController {
   void updateFunction(BuildContext context, Map<String, dynamic> body) async {
     FirebaseFirestore.instance
         .collection(body['collection'])
-        .doc(body['document'])
+        .doc(body['body']['id'])
         .update(body['body'])
         .then((value) {message(context, 'Operação realizada com sucesso');
         })
@@ -121,7 +122,7 @@ class FirebaseController {
   void postFunction(BuildContext context, Map<String, dynamic> body) async {
     await FirebaseFirestore.instance
         .collection(body['collection'])
-        .doc(body['document'])
+        .doc(body['body']['id'])
         .set(
           body['body'],
         )
@@ -188,6 +189,24 @@ class FirebaseController {
       final querySnapshot = await FirebaseFirestore.instance
           .collection(collection)
           .where('uid', isEqualTo: user.uid)
+          .get();
+
+      if (querySnapshot.docs.isNotEmpty) {
+        return querySnapshot.docs;
+      } else {
+        return [];
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<List<QueryDocumentSnapshot>> getVehicles<T>(
+      ParkModel value, String collection) async {
+    try {
+      final querySnapshot = await FirebaseFirestore.instance
+          .collection(collection)
+          .where('parkId', isEqualTo: value.id)
           .get();
 
       if (querySnapshot.docs.isNotEmpty) {

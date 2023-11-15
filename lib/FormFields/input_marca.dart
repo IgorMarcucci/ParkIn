@@ -28,7 +28,7 @@ class InputMarcaState extends State<InputMarca> {
       ),
       style: tema.textstyles,
       validator: (value) => validateMarca(value!),
-      controller: vehicleController.marcaController,
+      controller: vehicleController.brandController,
     );
   }
 }

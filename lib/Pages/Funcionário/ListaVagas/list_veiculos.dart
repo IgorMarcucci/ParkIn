@@ -1,9 +1,13 @@
-import 'dart:developer';
 
+import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/App/Models/park.model.dart';
+import 'package:flutter_app/App/controllers/firebase.controller.dart';
 import 'package:flutter_app/App/controllers/vehicle.controller.dart';
-import 'package:flutter_app/Pages/Funcion%C3%A1rio/FuncionarioInterface/func_interface.dart';
+import 'package:flutter_app/App/services/storage.dart';
 import 'package:flutter_app/Pages/Funcion%C3%A1rio/Widgets/button_list.dart';
+import 'package:flutter_app/Widgets/loading_indicator.dart';
 import 'package:provider/provider.dart';
 
 class ListaVagasPage extends StatefulWidget {
@@ -14,11 +18,49 @@ class ListaVagasPage extends StatefulWidget {
 }
 
 class _ListaVagasPageState extends State<ListaVagasPage> {
+  ParkModel park = ParkModel();
+
+  @override
+  void initState() {
+    StorageData storageData = StorageData();
+    Map<String, dynamic> map =
+        Map<String, dynamic>.from(storageData.readData('parkData'));
+    park = ParkModel.fromJson(map);
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    log('Lista de veículos - Build');
+    FirebaseController firebaseController = FirebaseController();
     VehicleController vehicleController = context.read<VehicleController>();
-    return Scaffold(
+    return FutureBuilder<List<QueryDocumentSnapshot<Object?>>>(
+      future: firebaseController.getVehicles(park, 'vehicles'),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(child: LoadingIndicator());
+        }
+        if (snapshot.hasError) {
+          return Scaffold(
+            appBar: AppBar(
+              leading: IconButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                icon: const Icon(Icons.arrow_back),
+              ),
+            ),
+            body: const Center(
+              child: AutoSizeText('Erro de conexão, clique para voltar'),
+            ),
+          );
+        }
+        if(snapshot.hasData && snapshot.data != null && snapshot.data!.isNotEmpty){
+          WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+            vehicleController.addList(vehicleController.convertToVehicleList(snapshot.data!));
+            vehicleController.filterList();
+          });
+          return Scaffold(
       appBar: AppBar(
         centerTitle: true,
         title: const Text(
@@ -26,10 +68,7 @@ class _ListaVagasPageState extends State<ListaVagasPage> {
         ),
         leading: IconButton(
           onPressed: () {
-            Navigator.of(context).pushAndRemoveUntil(
-              MaterialPageRoute(builder: (context) => const FuncInterface()),
-              ((route) => false),
-            );
+            Navigator.of(context).pop();
           },
           icon: const Icon(
             Icons.arrow_back,
@@ -37,27 +76,35 @@ class _ListaVagasPageState extends State<ListaVagasPage> {
           ),
         ),
       ),
-      body: ListView.builder(
-        itemCount: vehicleController.vehicleList.length,
+      body: Consumer<VehicleController>(
+        builder: (context, value, child) {
+          return ListView.builder(
+        itemCount: vehicleController.filteredVehicleList.length,
         itemBuilder: (context, index) {
           return ButtonList(
             callback: () {
-              // Future.microtask(() => Navigator.of(context).pushAndRemoveUntil(
-              //     MaterialPageRoute(
-              //         builder: (context) => CarroPage(
-              //               index: index,
-              //             )),
-              //     (route) => false));
             },
             height: 130,
             width: MediaQuery.of(context).size.width * 0.7,
-            text: vehicleController.vehicleList[index].carPlate.toString(),
-            secondText: vehicleController.vehicleList[index].modelName.toString(),
-            thirdText: vehicleController.vehicleList[index].brandName.toString(),
+            text: vehicleController.filteredVehicleList[index].carPlate.toString(),
+            secondText: vehicleController.filteredVehicleList[index].modelName.toString(),
+            thirdText: vehicleController.filteredVehicleList[index].brandName.toString(),
             vagaCounter: (index + 1).toString(),
           );
         },
+      );
+        },
       ),
+    );
+        } else {
+          return const Scaffold(
+            body: Center(
+              child: Text('Sem veículos para exibir'),
+            ),
+          );
+        }
+        
+      }
     );
   }
 }
