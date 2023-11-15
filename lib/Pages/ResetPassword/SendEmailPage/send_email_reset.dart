@@ -67,8 +67,8 @@ class PasswordResetPage extends StatelessWidget {
                     emailController: userController.emailController,
                   ),
                   MainButton(
-                    height: 50,
-                    width: MediaQuery.of(context).size.width * 0.7,
+                    height: 42,
+                    width: MediaQuery.of(context).size.width * 0.6,
                     text: 'Recuperar Senha',
                     callback: () {
                       firebaseController.forgetPass(context, userController.setDataToChangePass());

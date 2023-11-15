@@ -218,4 +218,34 @@ class FirebaseController {
       rethrow;
     }
   }
+
+  void personalizedFunctionVehicle(BuildContext context, Map<String, dynamic> body, Map<String, dynamic> valuePark, ) async {
+    await FirebaseFirestore.instance
+        .collection(body['collection'])
+        .doc(body['body']['id'])
+        .set(
+          body['body'],
+        )
+        .then((valueRes) {
+        FirebaseFirestore.instance
+        .collection(valuePark['collection'])
+        .doc(valuePark['body']['id'])
+        .update(valuePark['body'])
+        .then((res) {
+          message(context, 'Operação realizada com sucesso');
+          Navigator.of(context)
+            .pushAndRemoveUntil(
+                MaterialPageRoute(
+                    builder: (context) => const FuncInterface()),
+                ((route) => false));
+        })
+        .catchError((e) {
+      message(context, 'Operação mal sucedida');
+      return;
+    });
+    }).catchError((e) {
+      message(context, 'Operação mal sucedida');
+      return;
+    });
+  }
 }

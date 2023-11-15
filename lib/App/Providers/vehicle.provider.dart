@@ -8,5 +8,6 @@ ChangeNotifierProvider vehicleProvider =
     carPlateController: TextEditingController(),
     modelController: TextEditingController(),
     brandController: TextEditingController(),
+    valueController: TextEditingController(),
   ),
 );

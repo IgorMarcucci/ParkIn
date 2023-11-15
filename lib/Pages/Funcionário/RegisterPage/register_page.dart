@@ -41,7 +41,7 @@ class _RegisterPageFuncionarioState extends State<RegisterPageFuncionario> {
           child: ListView(
             children: [
               Container(
-                height: MediaQuery.of(context).size.height * 0.30,
+                height: MediaQuery.of(context).size.height * 0.35,
                 color: const Color.fromARGB(0, 207, 54, 54),
                 child: Center(
                   child: ParkInAreaGlobal(
@@ -69,8 +69,8 @@ class _RegisterPageFuncionarioState extends State<RegisterPageFuncionario> {
                     const LineTitlePage(text: 'Funcionário:'),
                     const InputAreaRegisterFunc(),
                     MainButton(
-                      height: 50,
-                      width: MediaQuery.of(context).size.width * 0.7,
+                      height: 42,
+                      width: MediaQuery.of(context).size.width * 0.6,
                       text: 'Cadastrar',
                       callback: () {
                         if (keys.registerKey.currentState!.validate()) {

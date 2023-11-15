@@ -32,7 +32,7 @@ class InsertVeiculo extends StatelessWidget {
               MainButton(
                 text: 'Confirmar',
                 callback: callback,
-                height: 40,
+                height: 42,
                 width: MediaQuery.of(context).size.width * 0.5,
               ),
               SizedBox(
@@ -41,7 +41,7 @@ class InsertVeiculo extends StatelessWidget {
               MainButton(
                 text: 'Sair',
                 callback: callbackButtonBack,
-                height: 40,
+                height: 42,
                 width: MediaQuery.of(context).size.width * 0.4,
               ),
             ],

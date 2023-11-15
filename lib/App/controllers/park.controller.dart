@@ -54,6 +54,13 @@ class ParkController extends ChangeNotifier {
     };
   }
 
+  Map<String, dynamic> setDataToRemoveVehicleInPark() {
+    return {
+      "collection": "parks",
+      "body": returnChangeRemoveVehicleModel().toJson(),
+    };
+  }
+
   ParkModel returnParkModel(UserModel value){
     return ParkModel(
       name: nameController!.text,
@@ -83,6 +90,18 @@ class ParkController extends ChangeNotifier {
       name: park.name,
       qtd: park.qtd,
       currentQtd: (park.currentQtd! + 1),
+      address: park.address,
+      locale: park.locale,
+      uid: park.uid,
+      id: park.id,
+    );
+  }
+
+  ParkModel returnChangeRemoveVehicleModel(){
+    return ParkModel(
+      name: park.name,
+      qtd: park.qtd,
+      currentQtd: (park.currentQtd! - 1),
       address: park.address,
       locale: park.locale,
       uid: park.uid,

@@ -4,7 +4,6 @@ import 'package:flutter_app/App/controllers/firebase.controller.dart';
 import 'package:flutter_app/App/controllers/park.controller.dart';
 import 'package:flutter_app/App/controllers/vehicle.controller.dart';
 import 'package:flutter_app/App/services/storage.dart';
-import 'package:flutter_app/Pages/Funcion%C3%A1rio/FuncionarioInterface/func_interface.dart';
 
 import 'package:flutter_app/Pages/Funcion%C3%A1rio/RemoveVeiculos/veiculo_remove.dart';
 import 'package:flutter_app/Pages/Funcion%C3%A1rio/Widgets/insert_veiculo.dart';
@@ -54,18 +53,14 @@ class _ButtonAreaFuncInterfaceState extends State<ButtonAreaFuncInterface> {
                     return InsertVeiculo(
                       callback: () {
                         if (keys.vehicleKey.currentState!.validate()) {
-                                    firebaseController.postFunction(context, vehicleController.setDataToVehicleRegister(parkController.park));
-                                    firebaseController.updateFunction(context, parkController.setDataToAddVehicleInPark());
-                                    Future.delayed(const Duration(seconds: 4), () {
-                                      parkController.clearControllers();
-                                      Navigator.of(context)
-                            .pushAndRemoveUntil(
-                                MaterialPageRoute(
-                                    builder: (context) => const FuncInterface()),
-                                ((route) => false));
-                                    });
+                            if(parkController.park.currentQtd! < parkController.park.qtd!){
+                              firebaseController.personalizedFunctionVehicle(context, vehicleController.setDataToVehicleRegister(parkController.park),  parkController.setDataToAddVehicleInPark());
+                              parkController.clearControllers();
+                            } else {
+                              message(context, 'Limite de vagas excedido!');
+                            }
                                     
-                                  }
+                        }
                       },
                       callbackButtonBack: () {
                         Navigator.of(context).pop();

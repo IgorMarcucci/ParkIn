@@ -6,6 +6,7 @@ import 'package:flutter_app/App/Models/park.model.dart';
 import 'package:flutter_app/App/controllers/firebase.controller.dart';
 import 'package:flutter_app/App/controllers/vehicle.controller.dart';
 import 'package:flutter_app/App/services/storage.dart';
+import 'package:flutter_app/Pages/Funcion%C3%A1rio/Information/information_page.dart';
 import 'package:flutter_app/Pages/Funcion%C3%A1rio/Widgets/button_list.dart';
 import 'package:flutter_app/Widgets/loading_indicator.dart';
 import 'package:provider/provider.dart';
@@ -24,7 +25,7 @@ class _ListaVagasPageState extends State<ListaVagasPage> {
   void initState() {
     StorageData storageData = StorageData();
     Map<String, dynamic> map =
-        Map<String, dynamic>.from(storageData.readData('parkData'));
+        Map<String, dynamic>.from(storageData.readParkData('parkData'));
     park = ParkModel.fromJson(map);
 
     super.initState();
@@ -83,6 +84,12 @@ class _ListaVagasPageState extends State<ListaVagasPage> {
         itemBuilder: (context, index) {
           return ButtonList(
             callback: () {
+              vehicleController.setDataToModel(vehicleController.filteredVehicleList[index]);
+              Navigator.of(context)
+                .push(
+                    MaterialPageRoute(
+                        builder: (context) => const InformationPage()),
+                );
             },
             height: 130,
             width: MediaQuery.of(context).size.width * 0.7,
@@ -93,6 +100,7 @@ class _ListaVagasPageState extends State<ListaVagasPage> {
           );
         },
       );
+
         },
       ),
     );

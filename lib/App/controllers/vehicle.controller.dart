@@ -8,13 +8,16 @@ class VehicleController extends ChangeNotifier {
   TextEditingController? carPlateController;
   TextEditingController? modelController;
   TextEditingController? brandController;
+  TextEditingController? valueController;
   List<VehicleModel> vehicleList = [];
   List<VehicleModel> filteredVehicleList = [];
+  VehicleModel vehicle = VehicleModel();
 
   VehicleController({
     required this.brandController,
     required this.modelController,
     required this.carPlateController,
+    required this.valueController
   });
 
   VehicleModel returnVehicleRegisterModel(ParkModel data){
@@ -22,7 +25,7 @@ class VehicleController extends ChangeNotifier {
       carPlate: carPlateController!.text,
       modelName: modelController!.text,
       brandName: brandController!.text,
-      entryTime: DateTime.now(),
+      entryTime: Timestamp.now(),
       exitTime: null,
       value: 0,
       parkId: data.id,
@@ -35,6 +38,30 @@ class VehicleController extends ChangeNotifier {
     return {
       "collection": "vehicles",
       "body": returnVehicleRegisterModel(data).toJson(),
+    };
+  }
+
+  VehicleModel returnChangeVehicleModel(ParkModel data, VehicleModel model){
+    return VehicleModel(
+      carPlate: model.carPlate,
+      modelName: model.modelName,
+      brandName: model.brandName,
+      entryTime: model.entryTime,
+      exitTime: Timestamp.now(),
+      value: double.parse(valueController!
+        .text
+        .replaceAll('.', '')
+        .replaceAll(',', '.')),
+      parkId: model.parkId,
+      id: model.id,
+      active: false,
+    );
+  }
+
+  Map<String, dynamic> setDataToChangeVehicle(ParkModel data, VehicleModel model){
+    return {
+      "collection": "vehicles",
+      "body": returnChangeVehicleModel(data, model).toJson(),
     };
   }
 
@@ -70,5 +97,10 @@ class VehicleController extends ChangeNotifier {
     return snapshots
         .map((snapshot) => VehicleModel.fromSnapshot(snapshot))
         .toList();
+  }
+
+  setDataToModel(VehicleModel data){
+    vehicle = data;
+    notifyListeners();
   }
 }

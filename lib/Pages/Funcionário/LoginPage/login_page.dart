@@ -42,7 +42,7 @@ class _LoginPageFuncionarioState extends State<LoginPageFuncionario> {
           child: ListView(
             children: [
               Container(
-                height: MediaQuery.of(context).size.height * 0.30,
+                height: MediaQuery.of(context).size.height * 0.35,
                 color: const Color.fromARGB(0, 207, 54, 54),
                 child: Center(
                   child: ParkInAreaGlobal(
@@ -68,8 +68,8 @@ class _LoginPageFuncionarioState extends State<LoginPageFuncionario> {
                     const LineTitlePage(text: 'Funcionário:'),
                     const InputAreaLoginFunc(),
                     MainButton(
-                      height: 50,
-                      width: MediaQuery.of(context).size.width * 0.7,
+                      height: 42,
+                      width: MediaQuery.of(context).size.width * 0.6,
                       text: 'Fazer Login',
                       callback: () {
                         if (keys.loginKey.currentState!

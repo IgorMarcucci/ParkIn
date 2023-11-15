@@ -43,8 +43,8 @@ class HomePage extends StatelessWidget {
                                 builder: (context) => const FuncionarioPage()),
                             (route) => false);
                       },
-                      height: 45,
-                      width: MediaQuery.of(context).size.width * 0.7,
+                      height: 42,
+                      width: MediaQuery.of(context).size.width * 0.6,
                     ),
                     // TextArea(
                     //   topSize: MediaQuery.of(context).size.height * 0.08,

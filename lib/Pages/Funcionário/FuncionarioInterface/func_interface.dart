@@ -6,9 +6,9 @@ import 'package:flutter_app/App/Models/user.model.dart';
 import 'package:flutter_app/App/controllers/park.controller.dart';
 
 import 'package:flutter_app/App/controllers/firebase.controller.dart';
-import 'package:flutter_app/App/controllers/vehicle.controller.dart';
 import 'package:flutter_app/App/services/storage.dart';
 import 'package:flutter_app/Pages/Funcion%C3%A1rio/EstacionamentoCadastro/park_register.dart';
+import 'package:flutter_app/Pages/Funcion%C3%A1rio/Historico/historico_page.dart';
 import 'package:flutter_app/Pages/Funcion%C3%A1rio/ListaVagas/list_veiculos.dart';
 import 'package:flutter_app/Pages/Funcion%C3%A1rio/Widgets/button_area_func_interface.dart';
 import 'package:flutter_app/Pages/Funcion%C3%A1rio/Widgets/insert_vagas.dart';
@@ -41,7 +41,6 @@ class _FuncInterfaceState extends State<FuncInterface> {
 
   @override
   Widget build(BuildContext context) {
-    VehicleController vehicleController = context.read<VehicleController>();
     StorageData storageData = StorageData();
     FirebaseController firebaseController = FirebaseController();
     ParkController parkController = context.read<ParkController>();
@@ -97,7 +96,7 @@ class _FuncInterfaceState extends State<FuncInterface> {
                             height: 220,
                             child: UserAccountsDrawerHeader(
                               decoration: const BoxDecoration(
-                                color: Color(0xFF2564EB),
+                                color: Color.fromARGB(255, 156, 156, 156),
                               ),
                               accountEmail: FittedBox(
                                 child: AutoSizeText(
@@ -116,7 +115,7 @@ class _FuncInterfaceState extends State<FuncInterface> {
                                 child: Icon(
                                   Icons.account_circle,
                                   size: 80,
-                                  color: Color.fromARGB(255, 255, 255, 255),
+                                  color: Color.fromARGB(255, 0, 0, 0),
                                 ),
                               ),
                             ),
@@ -124,6 +123,28 @@ class _FuncInterfaceState extends State<FuncInterface> {
                           Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
+                              ListTile(
+                                title: SizedBox(
+                                  height: 42,
+                                  width: MediaQuery.of(context).size.width,
+                                  child: Center(
+                                    child: AutoSizeText(
+                                      'Histórico',
+                                      style: tema.textstyles,
+                                      overflow: TextOverflow.clip,
+                                      maxLines: 2,
+                                      softWrap: true,
+                                    ),
+                                  ),
+                                ),
+                                onTap: () {
+                                  Navigator.of(context)
+                                    .push(
+                                        MaterialPageRoute(
+                                            builder: (context) => const HistoricoPage()),
+                                    );
+                                },
+                              ),
                               ListTile(
                                 title: SizedBox(
                                   height: 42,
@@ -140,12 +161,13 @@ class _FuncInterfaceState extends State<FuncInterface> {
                                 ),
                                 onTap: () {
                                   storageData.removeData('userData');
-                  firebaseController.logout();
-                  Navigator.of(context)
-                .pushAndRemoveUntil(
-                    MaterialPageRoute(
-                        builder: (context) => const HomePage()),
-                    ((route) => false));
+                                  firebaseController.logout();
+                                  Navigator.of(context)
+                                    .pushAndRemoveUntil(
+                                        MaterialPageRoute(
+                                            builder: (context) => const HomePage()),
+                                        ((route) => false),
+                                    );
                                 },
                               ),
                             ],
@@ -215,7 +237,7 @@ class _FuncInterfaceState extends State<FuncInterface> {
                             builder: (BuildContext context) {
                               return InputVagas(
                                 callbackButtonBack: () {
-                                  vehicleController.clearControllers();
+                                  parkController.clearControllers();
                                   Navigator.of(context).pop();
                                 },
                                 callback: () {

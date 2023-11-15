@@ -7,6 +7,7 @@ import 'package:flutter_app/Pages/Home/homepage.dart';
 import 'package:flutter_app/App/theme/theme.dart';
 import 'package:flutter_app/firebase_options.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 Future<void> main() async {
@@ -26,6 +27,9 @@ Future<void> main() async {
   );
 }
 Keys keys = Keys();
+NumberFormat formatValue = NumberFormat("#,##0.00", "pt_BR");
+DateFormat formatDate = DateFormat("dd/MM/yyyy");
+DateFormat formatHour = DateFormat('HH:mm');
 
 class ParkIn extends StatelessWidget {
   const ParkIn({Key? key}) : super(key: key);

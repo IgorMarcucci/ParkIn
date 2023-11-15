@@ -15,8 +15,8 @@ class TextArea extends StatelessWidget {
     return Column(
       children: [
         MainButton(
-          height: 45,
-          width: MediaQuery.of(context).size.width * 0.7,
+          height: 42,
+          width: MediaQuery.of(context).size.width * 0.6,
           text: 'Login',
           callback: (){
             Navigator.of(context).pushAndRemoveUntil(
@@ -42,8 +42,8 @@ class TextArea extends StatelessWidget {
                         const RegisterPageFuncionario()),
                 (route) => false);
           },
-          height: 45,
-          width: MediaQuery.of(context).size.width * 0.7,
+          height: 42,
+          width: MediaQuery.of(context).size.width * 0.6,
         ),
       ],
     );

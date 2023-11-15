@@ -6,8 +6,8 @@ class VehicleModel {
   String? carPlate;
   String? brandName;
   String? modelName;
-  DateTime? entryTime;
-  DateTime? exitTime;
+  Timestamp? entryTime;
+  Timestamp? exitTime;
   double? value;
   bool? active;
 

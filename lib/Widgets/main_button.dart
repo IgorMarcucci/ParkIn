@@ -38,12 +38,14 @@ class _MainButtonState extends State<MainButton> {
             onPressed: () {
               widget.callback();
             },
-            child: FittedBox(
-              child: Text(
-                widget.text,
-                textAlign: TextAlign.center,
-                style: GoogleFonts.josefinSlab(
-                  fontSize: 28,
+            child: Center(
+              child: FittedBox(
+                child: Text(
+                  widget.text,
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.josefinSlab(
+                    fontSize: 24,
+                  ),
                 ),
               ),
             )),

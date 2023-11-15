@@ -124,8 +124,8 @@ class _ParkRegisterPageState extends State<ParkRegisterPage> {
                     ),
                   ),
                   MainButton(
-                    height: 50,
-                    width: MediaQuery.of(context).size.width * 0.7,
+                    height: 42,
+                    width: MediaQuery.of(context).size.width * 0.6,
                     text: 'Cadastrar',
                     callback: () {
                       if (keys.parkRegisterKey.currentState!.validate()) {
