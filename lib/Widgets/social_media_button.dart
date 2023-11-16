@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class SocialMediaButton extends StatelessWidget {
-  const SocialMediaButton({Key? key, required this.icon}) : super(key: key);
+  const SocialMediaButton({super.key, required this.icon});
 
   final String icon;
 

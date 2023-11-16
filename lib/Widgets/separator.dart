@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Separator extends StatelessWidget {
-  const Separator({Key? key}) : super(key: key);
+  const Separator({super.key});
 
   @override
   Widget build(BuildContext context) {

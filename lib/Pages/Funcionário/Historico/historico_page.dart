@@ -12,7 +12,7 @@ import 'package:flutter_app/Widgets/loading_indicator.dart';
 import 'package:provider/provider.dart';
 
 class HistoricoPage extends StatefulWidget {
-  const HistoricoPage({Key? key}) : super(key: key);
+  const HistoricoPage({super.key});
 
   @override
   State<HistoricoPage> createState() => _HistoricoPageState();

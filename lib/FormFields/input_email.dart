@@ -3,8 +3,7 @@ import 'package:flutter_app/App/Validators/email_validator.dart';
 import 'package:flutter_app/App/theme/custom_theme.dart';
 
 class InputEmail extends StatefulWidget {
-  const InputEmail({Key? key, required this.icon, required this.text, required this.emailController})
-      : super(key: key);
+  const InputEmail({super.key, required this.icon, required this.text, required this.emailController});
 
   final Icon icon;
   final String text;

@@ -9,7 +9,7 @@ import 'package:flutter_app/Widgets/rodape_area.dart';
 import 'package:flutter_app/App/theme/custom_theme.dart';
 
 class FuncionarioPage extends StatelessWidget {
-  const FuncionarioPage({Key? key}) : super(key: key);
+  const FuncionarioPage({super.key});
 
   @override
   Widget build(BuildContext context) {

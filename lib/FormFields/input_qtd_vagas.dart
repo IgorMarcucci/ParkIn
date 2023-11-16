@@ -6,8 +6,7 @@ import 'package:flutter_app/App/theme/custom_theme.dart';
 import 'package:provider/provider.dart';
 
 class InsertVagas extends StatefulWidget {
-  const InsertVagas({Key? key, required this.icon, required this.text})
-      : super(key: key);
+  const InsertVagas({super.key, required this.icon, required this.text});
 
   final Icon icon;
   final String text;

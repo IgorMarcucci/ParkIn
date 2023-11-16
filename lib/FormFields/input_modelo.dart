@@ -5,8 +5,7 @@ import 'package:flutter_app/App/theme/custom_theme.dart';
 import 'package:provider/provider.dart';
 
 class InputModelo extends StatefulWidget {
-  const InputModelo({Key? key, required this.icon, required this.text})
-      : super(key: key);
+  const InputModelo({super.key, required this.icon, required this.text});
 
   final Icon icon;
   final String text;

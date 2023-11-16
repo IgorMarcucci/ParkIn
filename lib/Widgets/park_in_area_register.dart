@@ -4,11 +4,10 @@ import 'package:flutter_app/App/theme/custom_theme.dart';
 
 class ParkInAreaGlobal extends StatelessWidget {
   const ParkInAreaGlobal(
-      {Key? key,
+      {super.key,
       required this.icon,
       required this.callback,
-      required this.textInput})
-      : super(key: key);
+      required this.textInput});
 
   final Function callback;
   final Icon icon;

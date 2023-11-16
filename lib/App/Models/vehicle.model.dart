@@ -54,7 +54,7 @@ class VehicleModel {
       modelName: data['modelName'],
       entryTime: data['entryTime'],
       exitTime: data['exitTime'],
-      value: data['value'],
+      value: double.parse(data['value']),
       active: data['active'],
     );
   }

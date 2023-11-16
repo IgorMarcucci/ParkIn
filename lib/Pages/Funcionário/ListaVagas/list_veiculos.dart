@@ -12,7 +12,7 @@ import 'package:flutter_app/Widgets/loading_indicator.dart';
 import 'package:provider/provider.dart';
 
 class ListaVagasPage extends StatefulWidget {
-  const ListaVagasPage({Key? key}) : super(key: key);
+  const ListaVagasPage({super.key});
 
   @override
   State<ListaVagasPage> createState() => _ListaVagasPageState();

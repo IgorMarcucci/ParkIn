@@ -5,8 +5,7 @@ import 'package:flutter_app/App/theme/custom_theme.dart';
 import 'package:provider/provider.dart';
 
 class InputMarca extends StatefulWidget {
-  const InputMarca({Key? key, required this.icon, required this.text})
-      : super(key: key);
+  const InputMarca({super.key, required this.icon, required this.text});
 
   final Icon icon;
   final String text;

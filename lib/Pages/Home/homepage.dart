@@ -8,7 +8,7 @@ import 'package:flutter_app/Widgets/rodape_area.dart';
 import 'package:flutter_app/App/theme/custom_theme.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {

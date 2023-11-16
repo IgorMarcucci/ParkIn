@@ -7,8 +7,7 @@ import 'package:flutter_app/main.dart';
 
 class InputVagas extends StatelessWidget {
   const InputVagas(
-      {Key? key, required this.callback, required this.callbackButtonBack})
-      : super(key: key);
+      {super.key, required this.callback, required this.callbackButtonBack});
 
   final Function callback;
   final Function callbackButtonBack;

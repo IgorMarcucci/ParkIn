@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class LineTitlePage extends StatelessWidget {
-  const LineTitlePage({Key? key, required this.text}) : super(key: key);
+  const LineTitlePage({super.key, required this.text});
 
   final String text;
 

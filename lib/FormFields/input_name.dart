@@ -3,8 +3,7 @@ import 'package:flutter_app/App/Validators/name_validator.dart';
 import 'package:flutter_app/App/theme/custom_theme.dart';
 
 class InputName extends StatefulWidget {
-  const InputName({Key? key, required this.icon, required this.text, required this.nameController})
-      : super(key: key);
+  const InputName({super.key, required this.icon, required this.text, required this.nameController});
 
   final Icon icon;
   final String text;

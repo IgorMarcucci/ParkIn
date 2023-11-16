@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/App/theme/custom_theme.dart';
 
 class ParkInAreaHome extends StatelessWidget {
-  const ParkInAreaHome({Key? key}) : super(key: key);
+  const ParkInAreaHome({super.key});
 
   @override
   Widget build(BuildContext context) {

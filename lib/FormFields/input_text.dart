@@ -4,12 +4,12 @@ import 'package:google_fonts/google_fonts.dart';
 
 class InputText extends StatelessWidget {
   const InputText({
-    Key? key,
+    super.key,
     required this.controller,
     required this.text,
     required this.typetxt,
     required this.icon,
-  }) : super(key: key);
+  });
 
   final TextEditingController controller;
   final Icon icon;

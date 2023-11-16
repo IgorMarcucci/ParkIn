@@ -7,7 +7,7 @@ import 'package:flutter_app/FormFields/input_text.dart';
 import 'package:provider/provider.dart';
 
 class InputAreaRegisterFunc extends StatelessWidget {
-  const InputAreaRegisterFunc({Key? key}) : super(key: key);
+  const InputAreaRegisterFunc({super.key});
 
   @override
   Widget build(BuildContext context) {

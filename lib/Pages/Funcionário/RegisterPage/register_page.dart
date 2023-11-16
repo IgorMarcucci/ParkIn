@@ -15,7 +15,7 @@ import 'package:flutter_app/main.dart';
 import 'package:provider/provider.dart';
 
 class RegisterPageFuncionario extends StatefulWidget {
-  const RegisterPageFuncionario({Key? key}) : super(key: key);
+  const RegisterPageFuncionario({super.key});
 
   @override
   State<RegisterPageFuncionario> createState() => _RegisterPageFuncionarioState();

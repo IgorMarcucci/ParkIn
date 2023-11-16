@@ -3,7 +3,7 @@ import 'package:flutter_app/App/theme/custom_theme.dart';
 
 class ButtonList extends StatelessWidget {
   const ButtonList({
-    Key? key,
+    super.key,
     required this.text,
     required this.callback,
     required this.height,
@@ -11,7 +11,7 @@ class ButtonList extends StatelessWidget {
     required this.secondText,
     required this.thirdText,
     required this.vagaCounter,
-  }) : super(key: key);
+  });
 
   final String text;
   final Function callback;

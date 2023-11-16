@@ -4,12 +4,11 @@ import 'package:google_fonts/google_fonts.dart';
 
 class MainButton extends StatefulWidget {
   const MainButton(
-      {Key? key,
+      {super.key,
       required this.text,
       required this.callback,
       required this.height,
-      required this.width})
-      : super(key: key);
+      required this.width});
 
   final String text;
   final Function callback;

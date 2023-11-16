@@ -3,13 +3,12 @@ import 'package:flutter_app/App/theme/custom_theme.dart';
 
 class ButtonAddRemove extends StatelessWidget {
   const ButtonAddRemove(
-      {Key? key,
+      {super.key,
       required this.color,
       required this.text,
       required this.callback,
       required this.height,
-      required this.width})
-      : super(key: key);
+      required this.width});
 
   final Color color;
   final String text;

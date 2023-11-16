@@ -6,8 +6,7 @@ import 'package:flutter_app/App/theme/custom_theme.dart';
 import 'package:provider/provider.dart';
 
 class InputPlaca extends StatefulWidget {
-  const InputPlaca({Key? key, required this.icon, required this.text})
-      : super(key: key);
+  const InputPlaca({super.key, required this.icon, required this.text});
 
   final Icon icon;
   final String text;

@@ -6,8 +6,7 @@ import 'package:flutter_app/Widgets/separator.dart';
 
 class TextArea extends StatelessWidget {
   const TextArea(
-      {Key? key,})
-      : super(key: key);
+      {super.key,});
 
 
   @override

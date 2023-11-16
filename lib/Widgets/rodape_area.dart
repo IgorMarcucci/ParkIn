@@ -3,7 +3,7 @@ import 'package:flutter_app/Widgets/social_media_button.dart';
 import 'package:flutter_app/App/theme/custom_theme.dart';
 
 class SocialArea extends StatelessWidget {
-  const SocialArea({Key? key}) : super(key: key);
+  const SocialArea({super.key});
 
   @override
   Widget build(BuildContext context) {

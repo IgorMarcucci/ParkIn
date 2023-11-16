@@ -78,10 +78,9 @@ class _ButtonAreaFuncInterfaceState extends State<ButtonAreaFuncInterface> {
           text: '- Remover veículo',
           callback: () {
             if(parkController.park.currentQtd! > 0){
-              Navigator.of(context).pushAndRemoveUntil(
+              Navigator.of(context).push(
                 MaterialPageRoute(
                     builder: (context) => const ListaVagasRemove()),
-                ((route) => false),
               );
             } else {
               message(context, 'Não há vagas para remover');

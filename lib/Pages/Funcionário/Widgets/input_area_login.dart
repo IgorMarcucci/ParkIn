@@ -6,7 +6,7 @@ import 'package:flutter_app/Widgets/password_reset_button.dart';
 import 'package:provider/provider.dart';
 
 class InputAreaLoginFunc extends StatelessWidget {
-  const InputAreaLoginFunc({Key? key}) : super(key: key);
+  const InputAreaLoginFunc({super.key});
 
   @override
   Widget build(BuildContext context) {

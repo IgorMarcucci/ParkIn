@@ -14,7 +14,7 @@ import 'package:flutter_app/main.dart';
 import 'package:provider/provider.dart';
 
 class ListaVagasRemove extends StatefulWidget {
-  const ListaVagasRemove({Key? key}) : super(key: key);
+  const ListaVagasRemove({super.key});
 
   @override
   State<ListaVagasRemove> createState() => _ListaVagasRemoveState();

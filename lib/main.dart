@@ -32,7 +32,7 @@ DateFormat formatDate = DateFormat("dd/MM/yyyy");
 DateFormat formatHour = DateFormat('HH:mm');
 
 class ParkIn extends StatelessWidget {
-  const ParkIn({Key? key}) : super(key: key);
+  const ParkIn({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -5,12 +5,12 @@ import 'package:flutter_app/App/Validators/validate_money.dart';
 
 class InputMoney extends StatefulWidget {
   const InputMoney({
-    Key? key,
+    super.key,
     required this.text,
     required this.typetxt,
     required this.icone,
     required this.moneyController,
-  }) : super(key: key);
+  });
   final Icon icone;
   final String text;
   final TextInputType typetxt;
