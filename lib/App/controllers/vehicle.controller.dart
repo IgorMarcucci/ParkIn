@@ -103,4 +103,81 @@ class VehicleController extends ChangeNotifier {
     vehicle = data;
     notifyListeners();
   }
+
+  double sumValuesInSameWeek() {
+    DateTime now = DateTime.now();
+    DateTime startOfWeek = now.subtract(Duration(days: now.weekday - 1));
+    DateTime endOfWeek = now.add(Duration(days: 7 - now.weekday));
+
+    double sum = 0.0;
+
+    for (VehicleModel vehicle in vehicleList) {
+      if(vehicle.active == false){
+        if (DateTime.fromMillisecondsSinceEpoch(vehicle.entryTime!.millisecondsSinceEpoch).isAfter(startOfWeek) &&
+          DateTime.fromMillisecondsSinceEpoch(vehicle.entryTime!.millisecondsSinceEpoch).isBefore(endOfWeek)) {
+        sum += vehicle.value!;
+      }
+      }
+    }
+
+    return sum;
+  }
+
+  double sumValuesInSameMonth() {
+    DateTime now = DateTime.now();
+    DateTime startOfMonth = DateTime(now.year, now.month, 1);
+    DateTime endOfMonth = DateTime(now.year, now.month + 1, 1).subtract(const Duration(days: 1));
+
+    double sum = 0.0;
+
+      for (VehicleModel vehicle in vehicleList) {
+        if(vehicle.active == false){
+          if (DateTime.fromMillisecondsSinceEpoch(vehicle.entryTime!.millisecondsSinceEpoch).isAfter(startOfMonth) &&
+            DateTime.fromMillisecondsSinceEpoch(vehicle.entryTime!.millisecondsSinceEpoch).isBefore(endOfMonth)) {
+          sum += vehicle.value!;
+        }
+        }
+      }
+
+      return sum;
+  }
+
+  int index7days() {
+    DateTime now = DateTime.now();
+    DateTime startOfWeek = now.subtract(Duration(days: now.weekday - 1));
+    DateTime endOfWeek = now.add(Duration(days: 7 - now.weekday));
+
+    int sum = 0;
+
+    for (VehicleModel vehicle in vehicleList) {
+      if(vehicle.active == false){
+        if (DateTime.fromMillisecondsSinceEpoch(vehicle.entryTime!.millisecondsSinceEpoch).isAfter(startOfWeek) &&
+          DateTime.fromMillisecondsSinceEpoch(vehicle.entryTime!.millisecondsSinceEpoch).isBefore(endOfWeek)) {
+        sum += 1;
+      }
+      }
+    }
+
+    return sum;
+  }
+
+  int index1month() {
+    DateTime now = DateTime.now();
+    DateTime startOfMonth = DateTime(now.year, now.month, 1);
+    DateTime endOfMonth = DateTime(now.year, now.month + 1, 1).subtract(const Duration(days: 1));
+
+    int sum = 0;
+
+      for (VehicleModel vehicle in vehicleList) {
+        if(vehicle.active == false){
+          if (DateTime.fromMillisecondsSinceEpoch(vehicle.entryTime!.millisecondsSinceEpoch).isAfter(startOfMonth) &&
+            DateTime.fromMillisecondsSinceEpoch(vehicle.entryTime!.millisecondsSinceEpoch).isBefore(endOfMonth)) {
+          sum += 1;
+        }
+        }
+      }
+
+      return sum;
+  }
+
 }

@@ -10,6 +10,7 @@ import 'package:flutter_app/App/services/storage.dart';
 import 'package:flutter_app/Pages/Funcion%C3%A1rio/EstacionamentoCadastro/park_register.dart';
 import 'package:flutter_app/Pages/Funcion%C3%A1rio/Historico/historico_page.dart';
 import 'package:flutter_app/Pages/Funcion%C3%A1rio/ListaVagas/list_veiculos.dart';
+import 'package:flutter_app/Pages/Funcion%C3%A1rio/Relatorio/relatorio_page.dart';
 import 'package:flutter_app/Pages/Funcion%C3%A1rio/Widgets/button_area_func_interface.dart';
 import 'package:flutter_app/Pages/Funcion%C3%A1rio/Widgets/insert_vagas.dart';
 import 'package:flutter_app/Pages/Home/homepage.dart';
@@ -151,6 +152,28 @@ class _FuncInterfaceState extends State<FuncInterface> {
                                   width: MediaQuery.of(context).size.width,
                                   child: Center(
                                     child: AutoSizeText(
+                                      'Relatórios',
+                                      style: tema.textstyles,
+                                      overflow: TextOverflow.clip,
+                                      maxLines: 2,
+                                      softWrap: true,
+                                    ),
+                                  ),
+                                ),
+                                onTap: () {
+                                  Navigator.of(context)
+                                    .push(
+                                        MaterialPageRoute(
+                                            builder: (context) => const RelatorioPage()),
+                                    );
+                                },
+                              ),
+                              ListTile(
+                                title: SizedBox(
+                                  height: 42,
+                                  width: MediaQuery.of(context).size.width,
+                                  child: Center(
+                                    child: AutoSizeText(
                                       'Sair',
                                       style: tema.textstyles,
                                       overflow: TextOverflow.clip,
@@ -184,35 +207,36 @@ class _FuncInterfaceState extends State<FuncInterface> {
               Expanded(
                 flex: 9,
                 child: Container(
-                        margin: const EdgeInsets.fromLTRB(30, 15, 30, 35),
-                        width: MediaQuery.of(context).size.width * 0.98,
-                        decoration: tema.decorationContainer,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            AutoSizeText(
-                                'Vagas totais: ${parkController.park.qtd ?? 0}',
-                                style: tema.textstylesTitle),
-                            SizedBox(
-                              height: MediaQuery.of(context).size.height * 0.05,
-                            ),
-                            AutoSizeText(
-                                'Vagas disponíveis: ${parkController.park.qtd == null && parkController.park.currentQtd == null ? 0 : parkController.listAvailableSpace()}',
-                                style: tema.textstylesTitle),
-                            SizedBox(
-                              height: MediaQuery.of(context).size.height * 0.05,
-                            ),
-                            AutoSizeText(
-                              'Vagas ocupadas: ${parkController.park.currentQtd ?? 0}',
-                              style: tema.textstylesTitle,
-                            ),
-                            SizedBox(
-                              height: MediaQuery.of(context).size.height * 0.07,
-                            ),
-                            const ButtonAreaFuncInterface(),
-                          ],
-                        ),
-              ),),
+                  margin: const EdgeInsets.fromLTRB(30, 15, 30, 35),
+                  width: MediaQuery.of(context).size.width * 0.98,
+                  decoration: tema.decorationContainer,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      AutoSizeText(
+                          'Vagas totais: ${parkController.park.qtd ?? 0}',
+                          style: tema.textstylesTitle),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.05,
+                      ),
+                      AutoSizeText(
+                          'Vagas disponíveis: ${parkController.park.qtd == null && parkController.park.currentQtd == null ? 0 : parkController.listAvailableSpace()}',
+                          style: tema.textstylesTitle),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.05,
+                      ),
+                      AutoSizeText(
+                        'Vagas ocupadas: ${parkController.park.currentQtd ?? 0}',
+                        style: tema.textstylesTitle,
+                      ),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.07,
+                      ),
+                      const ButtonAreaFuncInterface(),
+                    ],
+                  ),
+                ),
+              ),
               Expanded(
                 flex: 1,
                 child: Row(
