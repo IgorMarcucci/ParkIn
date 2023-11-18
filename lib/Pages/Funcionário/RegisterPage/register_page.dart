@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/App/controllers/user.controller.dart';
 import 'package:flutter_app/App/controllers/firebase.controller.dart';
 import 'package:flutter_app/Pages/Funcion%C3%A1rio/Widgets/input_area_register.dart';
-import 'package:flutter_app/Pages/Funcion%C3%A1rio/funcionario_page.dart';
 import 'package:flutter_app/Widgets/line_title_page.dart';
 import 'package:flutter_app/Widgets/park_in_area_register.dart';
 import 'package:flutter_app/Widgets/main_button.dart';
@@ -47,13 +46,8 @@ class _RegisterPageFuncionarioState extends State<RegisterPageFuncionario> {
                   child: ParkInAreaGlobal(
                     textInput: 'Cadastro',
                     callback: () {
-                      Future.microtask(() {
                         userController.clearControllers();
-                        Navigator.of(context).pushAndRemoveUntil(
-                            MaterialPageRoute(
-                                builder: (context) => const FuncionarioPage()),
-                            (route) => false);
-                      });
+                        Navigator.of(context).pop();
                     },
                     icon: const Icon(Icons.keyboard_return),
                   ),

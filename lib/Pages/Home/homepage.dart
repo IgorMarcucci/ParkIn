@@ -35,16 +35,23 @@ class HomePage extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    MainButton(
-                      text: 'Prosseguir',
-                      callback: () {
-                        Navigator.of(context).pushAndRemoveUntil(
-                            MaterialPageRoute(
-                                builder: (context) => const FuncionarioPage()),
-                            (route) => false);
-                      },
-                      height: 42,
-                      width: MediaQuery.of(context).size.width * 0.6,
+                    SizedBox(
+                      height: 250,
+                      child: SizedBox(
+                        height: 42,
+                        child: Center(
+                          child: MainButton(
+                            text: 'Prosseguir',
+                            callback: () {
+                              Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                      builder: (context) => const FuncionarioPage()),);
+                            },
+                            height: 42,
+                            width: MediaQuery.of(context).size.width * 0.6,
+                          ),
+                        ),
+                      ),
                     ),
                     // TextArea(
                     //   topSize: MediaQuery.of(context).size.height * 0.08,

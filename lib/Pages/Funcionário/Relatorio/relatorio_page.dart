@@ -81,7 +81,7 @@ class _RelatorioPageState extends State<RelatorioPage> {
                     child: Container(
                       height: MediaQuery.of(context).size.height-110,
                       width: MediaQuery.of(context).size.width,
-                      decoration: tema.decorationContainer,
+                      // decoration: tema.decorationContainer,
                       margin: const EdgeInsets.all(10),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -95,7 +95,7 @@ class _RelatorioPageState extends State<RelatorioPage> {
                             ),
                           ),
                           Container(
-                            color: const Color.fromARGB(255, 204, 204, 204),
+                            decoration: tema.decorationContainer,
                             height: 250,
                             margin: const EdgeInsets.fromLTRB(
                                 15, 0, 15, 0),
@@ -200,7 +200,7 @@ class _RelatorioPageState extends State<RelatorioPage> {
                             ),
                           ),
                           Container(
-                            color: const Color.fromARGB(255, 204, 204, 204),
+                            decoration: tema.decorationContainer,
                             height: 250,
                             margin: const EdgeInsets.fromLTRB(
                                 15, 0, 15, 0),

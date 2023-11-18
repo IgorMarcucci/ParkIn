@@ -97,7 +97,7 @@ class _FuncInterfaceState extends State<FuncInterface> {
                             height: 220,
                             child: UserAccountsDrawerHeader(
                               decoration: const BoxDecoration(
-                                color: Color.fromARGB(255, 156, 156, 156),
+                                color: Color.fromARGB(255, 214, 214, 214),
                               ),
                               accountEmail: FittedBox(
                                 child: AutoSizeText(

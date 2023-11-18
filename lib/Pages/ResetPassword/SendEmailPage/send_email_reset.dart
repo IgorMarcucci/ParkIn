@@ -1,10 +1,10 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/App/controllers/firebase.controller.dart';
 
 import 'package:flutter_app/App/controllers/user.controller.dart';
 import 'package:flutter_app/App/theme/custom_theme.dart';
 import 'package:flutter_app/FormFields/input_email.dart';
-import 'package:flutter_app/Pages/Home/homepage.dart';
 import 'package:flutter_app/Widgets/main_button.dart';
 import 'package:flutter_app/Widgets/park_in_area_register.dart';
 import 'package:provider/provider.dart';
@@ -27,7 +27,7 @@ class PasswordResetPage extends StatelessWidget {
         child: ListView(
           children: [
             Container(
-              height: MediaQuery.of(context).size.height * 0.30,
+              height: MediaQuery.of(context).size.height * 0.35,
               color: const Color.fromARGB(0, 207, 54, 54),
               child: Center(
                 child: ParkInAreaGlobal(
@@ -35,10 +35,7 @@ class PasswordResetPage extends StatelessWidget {
                   callback: () {
                     Future.microtask(() {
                       userController.clearControllers();
-                      Navigator.of(context).pushAndRemoveUntil(
-                          MaterialPageRoute(
-                              builder: (context) => const HomePage()),
-                          (route) => false);
+                      Navigator.of(context).pop();
                     });
                   },
                   icon: const Icon(Icons.keyboard_return),
@@ -55,7 +52,7 @@ class PasswordResetPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Center(
-                    child: Text(
+                    child: AutoSizeText(
                       'Insira seu email cadastrado no app para a recuperação de senha. Enviaremos um código para seu email para realizar a troca de senha.',
                       style: tema.textstylesTitle,
                       textAlign: TextAlign.center,

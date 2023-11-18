@@ -29,10 +29,11 @@ class ButtonAddRemove extends StatelessWidget {
         ),
         boxShadow: const [
           BoxShadow(
-              color: Color.fromARGB(144, 17, 17, 17),
-              offset: Offset(2, 3),
-              blurRadius: 7.0,
-              blurStyle: BlurStyle.normal)
+            color: Color.fromARGB(82, 0, 0, 0),
+            offset: Offset(1, 3),
+            blurRadius: 2.0,
+            blurStyle: BlurStyle.normal,
+          ),
         ],
       ),
       child: SizedBox.expand(

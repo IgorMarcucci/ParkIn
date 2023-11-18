@@ -57,15 +57,15 @@ ThemeData themeData() => ThemeData.light().copyWith(
             ),
           ),
           decorationbox: const BoxDecoration(
-            color: Color.fromARGB(255, 232, 232, 232),
+            color: Color.fromARGB(255, 214, 214, 214),
             borderRadius: BorderRadius.all(
               Radius.circular(4),
             ),
             boxShadow: [
               BoxShadow(
-                color: Color.fromARGB(82, 58, 58, 58),
-                offset: Offset(2, 2),
-                blurRadius: 6.0,
+                color: Color.fromARGB(82, 0, 0, 0),
+                offset: Offset(1, 3),
+                blurRadius: 2.0,
                 blurStyle: BlurStyle.normal,
               ),
             ],
@@ -142,20 +142,14 @@ ThemeData themeData() => ThemeData.light().copyWith(
             borderRadius: BorderRadius.all(
               Radius.circular(4),
             ),
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [
-                Color.fromARGB(255, 219, 219, 219),
-                Color.fromARGB(255, 184, 184, 184),
-              ],
-            ),
+            color: Color.fromARGB(255, 214, 214, 214),
             boxShadow: [
               BoxShadow(
-                  color: Color.fromARGB(144, 17, 17, 17),
-                  offset: Offset(2, 3),
-                  blurRadius: 7.0,
-                  blurStyle: BlurStyle.normal)
+                color: Color.fromARGB(82, 0, 0, 0),
+                offset: Offset(1, 3),
+                blurRadius: 2.0,
+                blurStyle: BlurStyle.normal,
+              ),
             ],
           ),
           imageDrawer: const BoxDecoration(

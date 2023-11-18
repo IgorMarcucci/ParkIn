@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_app/Pages/Home/homepage.dart';
 import 'package:flutter_app/Widgets/button_area.dart';
 import 'package:flutter_app/Widgets/line_title_page.dart';
 import 'package:flutter_app/Widgets/parkin_area.dart';
@@ -27,10 +26,7 @@ class FuncionarioPage extends StatelessWidget {
                 color: Colors.transparent,
                 child: ParkInArea(
                   callback: () {
-                    Navigator.of(context).pushAndRemoveUntil(
-                        MaterialPageRoute(
-                            builder: (context) => const HomePage()),
-                        (route) => false);
+                    Navigator.of(context).pop();
                   },
                   icon: const Icon(Icons.keyboard_return),
                 ),

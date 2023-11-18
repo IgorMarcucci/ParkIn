@@ -16,12 +16,10 @@ class PasswordResetButton extends StatelessWidget {
       child: TextButton(
         onPressed: () {
           userController.clearControllers();
-          Future.microtask(() {
-            Navigator.of(context).pushAndRemoveUntil(
+            Navigator.of(context).push(
                 MaterialPageRoute(
                     builder: (context) => const PasswordResetPage()),
-                (route) => false);
-          });
+                );
         },
         child: Text(
           'Recuperar Senha',

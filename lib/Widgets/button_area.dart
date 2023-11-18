@@ -18,11 +18,11 @@ class TextArea extends StatelessWidget {
           width: MediaQuery.of(context).size.width * 0.6,
           text: 'Login',
           callback: (){
-            Navigator.of(context).pushAndRemoveUntil(
+            Navigator.of(context).push(
                 MaterialPageRoute(
                     builder: (context) =>
                         const LoginPageFuncionario()),
-                (route) => false);
+                );
           },
         ),
         SizedBox(
@@ -35,11 +35,11 @@ class TextArea extends StatelessWidget {
         MainButton(
           text: 'Cadastrar',
           callback: (){
-            Navigator.of(context).pushAndRemoveUntil(
+            Navigator.of(context).push(
                 MaterialPageRoute(
                     builder: (context) =>
                         const RegisterPageFuncionario()),
-                (route) => false);
+                );
           },
           height: 42,
           width: MediaQuery.of(context).size.width * 0.6,
