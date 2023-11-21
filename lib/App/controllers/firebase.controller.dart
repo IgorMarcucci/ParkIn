@@ -201,6 +201,23 @@ class FirebaseController {
     }
   }
 
+  Future<List<QueryDocumentSnapshot>> getAllData<T>(
+      String collection) async {
+    try {
+      final querySnapshot = await FirebaseFirestore.instance
+          .collection(collection)
+          .get();
+
+      if (querySnapshot.docs.isNotEmpty) {
+        return querySnapshot.docs;
+      } else {
+        return [];
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   Future<List<QueryDocumentSnapshot>> getVehicles<T>(
       ParkModel value, String collection) async {
     try {

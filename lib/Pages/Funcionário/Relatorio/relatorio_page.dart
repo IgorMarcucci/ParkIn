@@ -43,17 +43,19 @@ class _RelatorioPageState extends State<RelatorioPage> {
           return const Center(child: LoadingIndicator());
         }
         if (snapshot.hasError) {
-          return Scaffold(
-            appBar: AppBar(
-              leading: IconButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                icon: const Icon(Icons.arrow_back),
+          return SafeArea(
+            child: Scaffold(
+              appBar: AppBar(
+                leading: IconButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  icon: const Icon(Icons.arrow_back),
+                ),
               ),
-            ),
-            body: const Center(
-              child: AutoSizeText('Erro de conexão, clique para voltar'),
+              body: const Center(
+                child: AutoSizeText('Erro de conexão, clique para voltar'),
+              ),
             ),
           );
         }
@@ -63,252 +65,254 @@ class _RelatorioPageState extends State<RelatorioPage> {
           });
           return LayoutBuilder(
             builder: (context, p1) {
-              return Scaffold(
-                backgroundColor: Colors.white,
-                appBar: AppBar(
-                  elevation: 0,
+              return SafeArea(
+                child: Scaffold(
                   backgroundColor: Colors.white,
-                  surfaceTintColor: Colors.black12,
-                  centerTitle: true,
-                  title: const Text(
-                    'Relatórios',
-                    selectionColor: Colors.black,
+                  appBar: AppBar(
+                    elevation: 0,
+                    backgroundColor: Colors.white,
+                    surfaceTintColor: Colors.black12,
+                    centerTitle: true,
+                    title: const Text(
+                      'Relatórios',
+                      selectionColor: Colors.black,
+                    ),
                   ),
-                ),
-                drawerEnableOpenDragGesture: false,
-                body: SafeArea(
-                  child: SingleChildScrollView(
-                    child: Container(
-                      height: MediaQuery.of(context).size.height-110,
-                      width: MediaQuery.of(context).size.width,
-                      // decoration: tema.decorationContainer,
-                      margin: const EdgeInsets.all(10),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          FittedBox(
-                            fit: BoxFit.fitWidth,
-                            child: AutoSizeText(
-                              'Dashboard',
-                              style: tema.textstylesTitle,
+                  drawerEnableOpenDragGesture: false,
+                  body: SafeArea(
+                    child: SingleChildScrollView(
+                      child: Container(
+                        height: MediaQuery.of(context).size.height-110,
+                        width: MediaQuery.of(context).size.width,
+                        // decoration: tema.decorationContainer,
+                        margin: const EdgeInsets.all(10),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            FittedBox(
+                              fit: BoxFit.fitWidth,
+                              child: AutoSizeText(
+                                'Dashboard',
+                                style: tema.textstylesTitle,
+                              ),
                             ),
-                          ),
-                          Container(
-                            decoration: tema.decorationContainer,
-                            height: 250,
-                            margin: const EdgeInsets.fromLTRB(
-                                15, 0, 15, 0),
-                            child: Row(
-                              children: [
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                Column(
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.start,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    Flexible(
-                                      child: FittedBox(
-                                        fit: BoxFit.fitWidth,
-                                        child: AutoSizeText(
-                                          'Receita últimos 7 dias',
-                                          style: tema.textstylesTitle,
+                            Container(
+                              decoration: tema.decorationContainer,
+                              height: 250,
+                              margin: const EdgeInsets.fromLTRB(
+                                  15, 0, 15, 0),
+                              child: Row(
+                                children: [
+                                  const SizedBox(
+                                    width: 10,
+                                  ),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      Flexible(
+                                        child: FittedBox(
+                                          fit: BoxFit.fitWidth,
+                                          child: AutoSizeText(
+                                            'Receita últimos 7 dias',
+                                            style: tema.textstylesTitle,
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment
-                                              .spaceBetween,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment
-                                              .center,
-                                      children: [
-                                        FittedBox(
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment
+                                                .spaceBetween,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment
+                                                .center,
+                                        children: [
+                                          FittedBox(
+                                            fit: BoxFit.fitWidth,
+                                            child: AutoSizeText(
+                                              'Total:',
+                                              style:
+                                                  tema.textstyles,
+                                            ),
+                                          ),
+                                          const SizedBox(
+                                            width: 10,
+                                          ),
+                                          FittedBox(
+                                            fit: BoxFit.fitWidth,
+                                            child: AutoSizeText(
+                                              vehicleController.index7days() > 0 ? "R\$ ${formatValue.format(vehicleController.sumValuesInSameWeek())}" : "R\$ 0,00",
+                                              style: GoogleFonts.poppins(
+                                                  color: const Color.fromARGB(255, 0, 0, 0),
+                                                  fontSize: 36,
+                                                  fontWeight:
+                                                      FontWeight
+                                                          .w600),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      Flexible(
+                                        child: FittedBox(
                                           fit: BoxFit.fitWidth,
                                           child: AutoSizeText(
-                                            'Total:',
-                                            style:
-                                                tema.textstyles,
+                                            'Quantidade de veículos',
+                                            style: tema.textstylesTitle,
                                           ),
-                                        ),
-                                        const SizedBox(
-                                          width: 10,
-                                        ),
-                                        FittedBox(
-                                          fit: BoxFit.fitWidth,
-                                          child: AutoSizeText(
-                                            vehicleController.index7days() > 0 ? "R\$ ${formatValue.format(vehicleController.sumValuesInSameWeek())}" : "R\$ 0,00",
-                                            style: GoogleFonts.poppins(
-                                                color: const Color.fromARGB(255, 0, 0, 0),
-                                                fontSize: 36,
-                                                fontWeight:
-                                                    FontWeight
-                                                        .w600),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    Flexible(
-                                      child: FittedBox(
-                                        fit: BoxFit.fitWidth,
-                                        child: AutoSizeText(
-                                          'Quantidade de veículos',
-                                          style: tema.textstylesTitle,
                                         ),
                                       ),
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment
-                                              .spaceBetween,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment
-                                              .center,
-                                      children: [
-                                        FittedBox(
-                                          fit: BoxFit.fitWidth,
-                                          child: AutoSizeText(
-                                            'Total:',
-                                            style:
-                                                tema.textstyles,
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment
+                                                .spaceBetween,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment
+                                                .center,
+                                        children: [
+                                          FittedBox(
+                                            fit: BoxFit.fitWidth,
+                                            child: AutoSizeText(
+                                              'Total:',
+                                              style:
+                                                  tema.textstyles,
+                                            ),
                                           ),
-                                        ),
-                                        const SizedBox(
-                                          width: 10,
-                                        ),
-                                        FittedBox(
-                                          fit: BoxFit.fitWidth,
-                                          child: AutoSizeText(
-                                            vehicleController.index7days().toString(),
-                                            style: GoogleFonts.poppins(
-                                                color: const Color.fromARGB(255, 0, 0, 0),
-                                                fontSize: 36,
-                                                fontWeight:
-                                                    FontWeight
-                                                        .w600),
+                                          const SizedBox(
+                                            width: 10,
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ],
+                                          FittedBox(
+                                            fit: BoxFit.fitWidth,
+                                            child: AutoSizeText(
+                                              vehicleController.index7days().toString(),
+                                              style: GoogleFonts.poppins(
+                                                  color: const Color.fromARGB(255, 0, 0, 0),
+                                                  fontSize: 36,
+                                                  fontWeight:
+                                                      FontWeight
+                                                          .w600),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
-                          Container(
-                            decoration: tema.decorationContainer,
-                            height: 250,
-                            margin: const EdgeInsets.fromLTRB(
-                                15, 0, 15, 0),
-                            child: Row(
-                              children: [
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                Column(
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.start,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    Flexible(
-                                      child: FittedBox(
-                                        fit: BoxFit.fitWidth,
-                                        child: AutoSizeText(
-                                          'Receita últimos 30 dias',
-                                          style: tema.textstylesTitle,
-                                          overflow:
-                                              TextOverflow.ellipsis,
+                            Container(
+                              decoration: tema.decorationContainer,
+                              height: 250,
+                              margin: const EdgeInsets.fromLTRB(
+                                  15, 0, 15, 0),
+                              child: Row(
+                                children: [
+                                  const SizedBox(
+                                    width: 10,
+                                  ),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      Flexible(
+                                        child: FittedBox(
+                                          fit: BoxFit.fitWidth,
+                                          child: AutoSizeText(
+                                            'Receita últimos 30 dias',
+                                            style: tema.textstylesTitle,
+                                            overflow:
+                                                TextOverflow.ellipsis,
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment
-                                              .spaceBetween,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment
-                                              .center,
-                                      children: [
-                                        FittedBox(
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment
+                                                .spaceBetween,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment
+                                                .center,
+                                        children: [
+                                          FittedBox(
+                                            fit: BoxFit.fitWidth,
+                                            child: AutoSizeText(
+                                              'Total: ',
+                                              style:
+                                                  tema.textstyles,
+                                            ),
+                                          ),
+                                          const SizedBox(
+                                            width: 10,
+                                          ),
+                                          FittedBox(
+                                            fit: BoxFit.fitWidth,
+                                            child: AutoSizeText(
+                                              vehicleController.index1month() > 0 ? "R\$ ${formatValue.format(vehicleController.sumValuesInSameMonth())}" : "R\$ 0,00",
+                                              style: GoogleFonts.poppins(
+                                                  color: const Color.fromARGB(255, 0, 0, 0),
+                                                  fontSize: 36,
+                                                  fontWeight:
+                                                      FontWeight
+                                                          .w600),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      Flexible(
+                                        child: FittedBox(
                                           fit: BoxFit.fitWidth,
                                           child: AutoSizeText(
-                                            'Total: ',
-                                            style:
-                                                tema.textstyles,
+                                            'Quantidade de veículos',
+                                            style: tema.textstylesTitle,
+                                            overflow:
+                                                TextOverflow.ellipsis,
                                           ),
-                                        ),
-                                        const SizedBox(
-                                          width: 10,
-                                        ),
-                                        FittedBox(
-                                          fit: BoxFit.fitWidth,
-                                          child: AutoSizeText(
-                                            vehicleController.index1month() > 0 ? "R\$ ${formatValue.format(vehicleController.sumValuesInSameMonth())}" : "R\$ 0,00",
-                                            style: GoogleFonts.poppins(
-                                                color: const Color.fromARGB(255, 0, 0, 0),
-                                                fontSize: 36,
-                                                fontWeight:
-                                                    FontWeight
-                                                        .w600),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    Flexible(
-                                      child: FittedBox(
-                                        fit: BoxFit.fitWidth,
-                                        child: AutoSizeText(
-                                          'Quantidade de veículos',
-                                          style: tema.textstylesTitle,
-                                          overflow:
-                                              TextOverflow.ellipsis,
                                         ),
                                       ),
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment
-                                              .spaceBetween,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment
-                                              .center,
-                                      children: [
-                                        FittedBox(
-                                          fit: BoxFit.fitWidth,
-                                          child: AutoSizeText(
-                                            'Total: ',
-                                            style:
-                                                tema.textstyles,
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment
+                                                .spaceBetween,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment
+                                                .center,
+                                        children: [
+                                          FittedBox(
+                                            fit: BoxFit.fitWidth,
+                                            child: AutoSizeText(
+                                              'Total: ',
+                                              style:
+                                                  tema.textstyles,
+                                            ),
                                           ),
-                                        ),
-                                        const SizedBox(
-                                          width: 10,
-                                        ),
-                                        FittedBox(
-                                          fit: BoxFit.fitWidth,
-                                          child: AutoSizeText(
-                                            vehicleController.index1month().toString(),
-                                            style: GoogleFonts.poppins(
-                                                color: const Color.fromARGB(255, 0, 0, 0),
-                                                fontSize: 36,
-                                                fontWeight:
-                                                    FontWeight
-                                                        .w600),
+                                          const SizedBox(
+                                            width: 10,
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ],
+                                          FittedBox(
+                                            fit: BoxFit.fitWidth,
+                                            child: AutoSizeText(
+                                              vehicleController.index1month().toString(),
+                                              style: GoogleFonts.poppins(
+                                                  color: const Color.fromARGB(255, 0, 0, 0),
+                                                  fontSize: 36,
+                                                  fontWeight:
+                                                      FontWeight
+                                                          .w600),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -317,9 +321,11 @@ class _RelatorioPageState extends State<RelatorioPage> {
             },
           );
         } else {
-          return const Scaffold(
-            body: Center(
-              child: Text('SEM DADOS PARA EXIBIR'),
+          return  const SafeArea(
+            child: Scaffold(
+              body: Center(
+                child: Text('SEM DADOS PARA EXIBIR'),
+              ),
             ),
           );
         }

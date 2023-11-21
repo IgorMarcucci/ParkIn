@@ -29,62 +29,64 @@ class _RegisterPageFuncionarioState extends State<RegisterPageFuncionario> {
     FirebaseController firebaseController = FirebaseController();
     UserController userController =
         context.read<UserController>();
-    return Scaffold(
-      resizeToAvoidBottomInset: true,
-      body: Container(
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
-        decoration: tema.decorationButton,
-        child: Form(
-          key: keys.registerKey,
-          child: ListView(
-            children: [
-              Container(
-                height: MediaQuery.of(context).size.height * 0.35,
-                color: const Color.fromARGB(0, 207, 54, 54),
-                child: Center(
-                  child: ParkInAreaGlobal(
-                    textInput: 'Cadastro',
-                    callback: () {
-                        userController.clearControllers();
-                        Navigator.of(context).pop();
-                    },
-                    icon: const Icon(Icons.keyboard_return),
+    return SafeArea(
+      child: Scaffold(
+        resizeToAvoidBottomInset: true,
+        body: Container(
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+          decoration: tema.decorationButton,
+          child: Form(
+            key: keys.registerKey,
+            child: ListView(
+              children: [
+                Container(
+                  height: MediaQuery.of(context).size.height * 0.35,
+                  color: const Color.fromARGB(0, 207, 54, 54),
+                  child: Center(
+                    child: ParkInAreaGlobal(
+                      textInput: 'Cadastro',
+                      callback: () {
+                          userController.clearControllers();
+                          Navigator.of(context).pop();
+                      },
+                      icon: const Icon(Icons.keyboard_return),
+                    ),
                   ),
                 ),
-              ),
-              Container(
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height * 0.8,
-                decoration: tema.paletteDecoration,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    const LineTitlePage(text: 'Funcionário:'),
-                    const InputAreaRegisterFunc(),
-                    MainButton(
-                      height: 42,
-                      width: MediaQuery.of(context).size.width * 0.6,
-                      text: 'Cadastrar',
-                      callback: () {
-                        if (keys.registerKey.currentState!.validate()) {
-                          if (userController
-                                  .confirmPasswordController.text ==
-                              userController.passwordController.text) {
-                            firebaseController.createAccount(context, userController.setDataToRegister());
-                            userController.clearControllers();
-                            
-                          } else {
-                            message(
-                                context, "As senhas devem ser iguais.");
+                Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height * 0.8,
+                  decoration: tema.paletteDecoration,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      const LineTitlePage(text: 'Funcionário:'),
+                      const InputAreaRegisterFunc(),
+                      MainButton(
+                        height: 42,
+                        width: MediaQuery.of(context).size.width * 0.6,
+                        text: 'Cadastrar',
+                        callback: () {
+                          if (keys.registerKey.currentState!.validate()) {
+                            if (userController
+                                    .confirmPasswordController.text ==
+                                userController.passwordController.text) {
+                              firebaseController.createAccount(context, userController.setDataToRegister());
+                              userController.clearControllers();
+                              
+                            } else {
+                              message(
+                                  context, "As senhas devem ser iguais.");
+                            }
                           }
-                        }
-                      },
-                    ),
-                  ],
+                        },
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

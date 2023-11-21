@@ -86,6 +86,7 @@ class VehicleController extends ChangeNotifier {
   }
 
   void clearControllers(){
+    valueController!.clear();
     carPlateController!.clear();
     modelController!.clear();
     brandController!.clear();
@@ -180,4 +181,10 @@ class VehicleController extends ChangeNotifier {
       return sum;
   }
 
+  void removeVehicle(int index) {
+    if (index >= 0 && index < vehicleList.length) {
+      vehicleList.removeAt(index);
+      notifyListeners();
+    }
+  }
 }

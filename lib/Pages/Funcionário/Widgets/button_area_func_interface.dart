@@ -56,6 +56,7 @@ class _ButtonAreaFuncInterfaceState extends State<ButtonAreaFuncInterface> {
                             if(parkController.park.currentQtd! < parkController.park.qtd!){
                               firebaseController.personalizedFunctionVehicle(context, vehicleController.setDataToVehicleRegister(parkController.park),  parkController.setDataToAddVehicleInPark());
                               parkController.clearControllers();
+                              vehicleController.clearControllers();
                             } else {
                               message(context, 'Limite de vagas excedido!');
                             }
@@ -64,6 +65,8 @@ class _ButtonAreaFuncInterfaceState extends State<ButtonAreaFuncInterface> {
                       },
                       callbackButtonBack: () {
                         Navigator.of(context).pop();
+                        parkController.clearControllers();
+                        vehicleController.clearControllers();
                       },
                     );
                   });

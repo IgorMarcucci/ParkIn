@@ -100,6 +100,7 @@ class _ListaVagasRemoveState extends State<ListaVagasRemove> {
                                 if(parkController.park.currentQtd! > 0){
                                   firebaseController.personalizedFunctionVehicle(context, vehicleController.setDataToChangeVehicle(parkController.park, vehicleController.filteredVehicleList[index]),  parkController.setDataToRemoveVehicleInPark());
                                   parkController.clearControllers();
+                                  // vehicleController.clearControllers();
                                 } else {
                                   message(context, 'Não há mais carros para excluir');
                                 }

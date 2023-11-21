@@ -28,59 +28,61 @@ class _LoginPageFuncionarioState extends State<LoginPageFuncionario> {
     UserController userController = context.read<UserController>();
     log('Login page - Build');
     final CustomTheme tema = Theme.of(context).extension<CustomTheme>()!;
-    return Scaffold(
-      resizeToAvoidBottomInset: true,
-      body: Container(
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
-        decoration: tema.decorationButton,
-        child: IgnorePointer(
-          ignoring: fieldsController.loading,
-          child: Form(
-          key: keys.loginKey,
-          child: ListView(
-            children: [
-              Container(
-                height: MediaQuery.of(context).size.height * 0.35,
-                color: const Color.fromARGB(0, 207, 54, 54),
-                child: Center(
-                  child: ParkInAreaGlobal(
-                    textInput: 'Login',
-                    callback: () {
-                        userController.clearControllers();
-                        Navigator.of(context).pop();
-                    },
-                    icon: const Icon(Icons.keyboard_return),
+    return SafeArea(
+      child: Scaffold(
+        resizeToAvoidBottomInset: true,
+        body: Container(
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+          decoration: tema.decorationButton,
+          child: IgnorePointer(
+            ignoring: fieldsController.loading,
+            child: Form(
+            key: keys.loginKey,
+            child: ListView(
+              children: [
+                Container(
+                  height: MediaQuery.of(context).size.height * 0.35,
+                  color: const Color.fromARGB(0, 207, 54, 54),
+                  child: Center(
+                    child: ParkInAreaGlobal(
+                      textInput: 'Login',
+                      callback: () {
+                          userController.clearControllers();
+                          Navigator.of(context).pop();
+                      },
+                      icon: const Icon(Icons.keyboard_return),
+                    ),
                   ),
                 ),
-              ),
-              Container(
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height * 0.70,
-                decoration: tema.paletteDecoration,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    const LineTitlePage(text: 'Funcionário:'),
-                    const InputAreaLoginFunc(),
-                    MainButton(
-                      height: 42,
-                      width: MediaQuery.of(context).size.width * 0.6,
-                      text: 'Fazer Login',
-                      callback: () {
-                        if (keys.loginKey.currentState!
-                            .validate()) {
-                          firebaseController.loginAccount(context, userController.setDataToLogin());
-                          userController.clearControllers();
-                        }
-                      },
-                    ),
-                  ],
+                Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height * 0.70,
+                  decoration: tema.paletteDecoration,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      const LineTitlePage(text: 'Funcionário:'),
+                      const InputAreaLoginFunc(),
+                      MainButton(
+                        height: 42,
+                        width: MediaQuery.of(context).size.width * 0.6,
+                        text: 'Fazer Login',
+                        callback: () {
+                          if (keys.loginKey.currentState!
+                              .validate()) {
+                            firebaseController.loginAccount(context, userController.setDataToLogin());
+                            userController.clearControllers();
+                          }
+                        },
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
-          ),
-        ),),
+              ],
+            ),
+          ),),
+        ),
       ),
     );
   }

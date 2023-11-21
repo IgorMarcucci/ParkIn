@@ -42,17 +42,19 @@ class _ListaVagasPageState extends State<ListaVagasPage> {
           return const Center(child: LoadingIndicator());
         }
         if (snapshot.hasError) {
-          return Scaffold(
-            appBar: AppBar(
-              leading: IconButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                icon: const Icon(Icons.arrow_back),
+          return SafeArea(
+            child: Scaffold(
+              appBar: AppBar(
+                leading: IconButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  icon: const Icon(Icons.arrow_back),
+                ),
               ),
-            ),
-            body: const Center(
-              child: AutoSizeText('Erro de conexão, clique para voltar'),
+              body: const Center(
+                child: AutoSizeText('Erro de conexão, clique para voltar'),
+              ),
             ),
           );
         }
@@ -61,53 +63,57 @@ class _ListaVagasPageState extends State<ListaVagasPage> {
             vehicleController.addList(vehicleController.convertToVehicleList(snapshot.data!));
             vehicleController.filterList();
           });
-          return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: const Text(
-          'Veículos',
-        ),
-        leading: IconButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-          icon: const Icon(
-            Icons.arrow_back,
-            color: Colors.black,
-          ),
-        ),
-      ),
-      body: Consumer<VehicleController>(
-        builder: (context, value, child) {
-          return ListView.builder(
-        itemCount: vehicleController.filteredVehicleList.length,
-        itemBuilder: (context, index) {
-          return ButtonList(
-            callback: () {
-              vehicleController.setDataToModel(vehicleController.filteredVehicleList[index]);
-              Navigator.of(context)
-                .push(
-                    MaterialPageRoute(
-                        builder: (context) => const InformationPage()),
-                );
+          return SafeArea(
+            child: Scaffold(
+                appBar: AppBar(
+                  centerTitle: true,
+                  title: const Text(
+            'Veículos',
+                  ),
+                  leading: IconButton(
+            onPressed: () {
+              Navigator.of(context).pop();
             },
-            height: 130,
-            width: MediaQuery.of(context).size.width * 0.7,
-            text: vehicleController.filteredVehicleList[index].carPlate.toString(),
-            secondText: vehicleController.filteredVehicleList[index].modelName.toString(),
-            thirdText: vehicleController.filteredVehicleList[index].brandName.toString(),
-            vagaCounter: (index + 1).toString(),
+            icon: const Icon(
+              Icons.arrow_back,
+              color: Colors.black,
+            ),
+                  ),
+                ),
+                body: Consumer<VehicleController>(
+                  builder: (context, value, child) {
+            return ListView.builder(
+                  itemCount: vehicleController.filteredVehicleList.length,
+                  itemBuilder: (context, index) {
+            return ButtonList(
+              callback: () {
+                vehicleController.setDataToModel(vehicleController.filteredVehicleList[index]);
+                Navigator.of(context)
+                  .push(
+                      MaterialPageRoute(
+                          builder: (context) => const InformationPage()),
+                  );
+              },
+              height: 130,
+              width: MediaQuery.of(context).size.width * 0.7,
+              text: vehicleController.filteredVehicleList[index].carPlate.toString(),
+              secondText: vehicleController.filteredVehicleList[index].modelName.toString(),
+              thirdText: vehicleController.filteredVehicleList[index].brandName.toString(),
+              vagaCounter: (index + 1).toString(),
+            );
+                  },
+                );
+          
+                  },
+                ),
+              ),
           );
-        },
-      );
-
-        },
-      ),
-    );
         } else {
-          return const Scaffold(
-            body: Center(
-              child: Text('Sem veículos para exibir'),
+          return const SafeArea(
+            child: Scaffold(
+              body: Center(
+                child: Text('Sem veículos para exibir'),
+              ),
             ),
           );
         }

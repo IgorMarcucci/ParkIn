@@ -20,7 +20,7 @@ class RemoveVeiculo extends StatelessWidget {
     VehicleController vehicleController = context.read<VehicleController>();
     return AlertDialog(
       title: Text(
-        'Adicionar veículo',
+        'Remover veículo',
         style: tema.textstylesTitle,
       ),
       content: SingleChildScrollView(

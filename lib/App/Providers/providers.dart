@@ -1,4 +1,5 @@
 import 'package:flutter_app/App/Providers/fields.provider.dart';
+import 'package:flutter_app/App/Providers/map.provider.dart';
 import 'package:flutter_app/App/Providers/park.provider.dart';
 import 'package:flutter_app/App/Providers/user.provider.dart';
 import 'package:flutter_app/App/Providers/vehicle.provider.dart';
@@ -9,4 +10,5 @@ List<SingleChildWidget> appProviders = [
   userProvider,
   vehicleProvider,
   fieldsProvider,
+  mapProvider,
 ];
