@@ -46,3 +46,4 @@
 
 # Prototipação do aplicativo
 
+**FIGMA:** <https://www.figma.com/file/ELxrrwHuzMQo56W5xSVEIO/Parkin?type=design&node-id=0%3A1&mode=design&t=mzDiIAe9U0U40sal-1>
