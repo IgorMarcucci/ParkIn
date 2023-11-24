@@ -1,32 +1,48 @@
 # ParkIn
 
-Desenvolvimento de aplicativo mobile que visa a reserva de vagas e pagamento voltados para estacionamento.
+# Requisitos do aplicativo
 
-INSTRUÇÕES
+**Requisitos Funcionais:**
 
-- As interfaces de login e registro contam com validators, ou seja, só conseguirá prosseguir para outras telas se colocar no formato de dados correto;
-- O CPF só recebe números, ou seja, não conseguirá adicionar letras na inserção de CPF;
-- Para remover algum veículo, basta arrastar o veículo para o lado lá na lista de remoção de veículos.
-- Só conseguirá adicionar veículos depois de adicionar uma quantidade de veículos totais para o estacionamento;
-- Só conseguirá remover veículos depois de adicionar algum veículo;
+**RF01 - Autenticação de Funcionários:** Deve ser possível para os colaboradores acessarem o aplicativo inserindo seu endereço de e-mail juntamente com sua senha.
 
-Bibliotecas que estão sendo e serão utilizadas:
+**RF02 - Cadastro de Funcionários:** O cadastro no sistema deve estar disponível para os novos funcionários informarem seu CPF, endereço de e-mail e senha.
 
-- cupertino_icons: ^1.0.2
-- google_fonts: ^3.0.1
-- font_awesome_flutter: ^10.1.0
-- url_launcher: ^6.1.5
-- auto_size_text: ^3.0.0
-- flutter_multi_formatter: ^2.6.0
-- flutter_speed_dial: ^6.0.0
-- provider: ^6.0.3
-- graphql_flutter: ^5.1.0
-- wc_form_validators: ^1.0.0
-- shared_preferences: ^2.0.15
-- jwt_decoder: ^2.0.1
-- mask_text_input_formatter: ^2.4.0
-- brasil_fields: ^1.6.0
-- google_maps_flutter: ^2.2.1
-- flutter_verification_code: ^1.1.6
+**RF03 - Adição Manual de Veículo:** No menu principal do funcionário, é importante que haja uma opção para adicionar veículos às vagas de estacionamento manualmente. Essa função pedirá os dados da placa, marca e modelo.
 
-Algumas Bibliotecas ainda estão sem uso, no entanto serão usadas já nas próximas etapas do app.
+**RF04 - Remoção de Veículo:** Através da tela principal, é viável para os colaboradores realizar a retirada dos automóveis no estacionamento ao deslizarem na região delimitada para cada carro selecionado.
+
+**RF05 - Lista de Vagas em Tempo Real:** A lista dos veículos presentes no estacionamento precisa ser mostrada ao vivo na tela inicial do funcionário.
+
+**RF06 - Alteração do Número de Vagas:** É fundamental que a tela principal possua um recurso que permita alterar o número de vagas registradas para o estacionamento.
+
+**RF07 - Histórico de Veículos:** Deve ser possível para os funcionários acessarem uma página com o registro completo dos veículos, apresentando dados detalhados sobre todos aqueles que já frequentaram o estacionamento.
+
+**RF08 - Relatórios de Receita e Quantidade de Veículos:** Para obter dados sobre a receita arrecadada e o volume de tráfego no estacionamento, é necessário acessar uma tela específica dentro do sistema. Essas informações referem-se aos períodos dos últimos 7 e 30 dias.
+
+**RF09 - Visualização de Estacionamentos para Clientes:** Na tela do cliente é necessário apresentar todos os estacionamentos que estão cadastrados no aplicativo. Deve ser informado o nome, endereço e a quantidade atualizada de vagas em tempo real.
+
+**RF10 - Rota para Estacionamento:** No display do cliente, é necessário que os usuários tenham a opção de traçar um caminho desde onde estão até o estacionamento de interesse.
+
+**Requisitos Não Funcionais:**
+
+**RNF01 - Desempenho em Tempo Real:** É possível acompanhar facilmente as vagas livres e os veículos disponíveis em tempo real, o que torna todo o processo altamente eficiente e com pouca latência.
+
+**RNF02 - Usabilidade Intuitiva:** Para proporcionar uma experiência simplificada tanto aos funcionários quanto aos clientes durante o uso, é essencial contar com um design de tela intuitivo.
+
+**RNF03 - Escalabilidade do Banco de Dados:** Garantir a capacidade de crescimento do sistema requer uma configuração adequada no Firebase Firestore ao lidar com um alto volume de dados.
+
+**RNF04 - Compatibilidade com Dispositivos Móveis:** O aplicativo deve ter um design responsivo e funcionar bem em diversos dispositivos móveis.
+
+**RNF05 - Backup e Recuperação de Dados:** Para garantir a possibilidade de recuperar os dados em cenários desafiadores, é imprescindível definir e realizar periodicamente as práticas corretas necessárias, como efetuar backups.
+
+**RNF06 - Sincronização Offline:** Mesmo sem acesso à internet, existe viabilidade em executar as funções fundamentais do aplicativo. Ao restabelecer a conexão com a rede, ocorrerá uma sincronização automática dos dados.
+
+**RNF07 - Privacidade dos Dados:** O Firebase garante a privacidade e segurança das informações pessoais armazenadas ao seguir todas as regulamentações relacionadas com a proteção de dados.
+
+**RNF08 - Documentação do Sistema:** Ter acesso a uma documentação precisa é fundamental tanto para os desenvolvedores quanto para os administradores do sistema.
+
+**RNF09 - Manutenibilidade do Código:** Uma forma crucial de facilitar as próximas atualizações do aplicativo é ter uma codificação modular e criar um documento abrangente.
+
+# Prototipação do aplicativo
+
